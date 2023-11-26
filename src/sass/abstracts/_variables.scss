@@ -9,4 +9,23 @@
     --grey-300: hsl(0, 0%, 96%);
     --grey-400: hsl(0, 0%, 94%);
     --black: hsl(0, 0%, 0%);
+
+    --space-1: 0.3125rem;
+    --space-2: 0.625rem;
+    --space-3: 1rem;
+    --space-4: 2rem;
+    --space-5: 4rem;
+    --space-50: 50%;
+
+    --padding: 0.5em 1em;
+    --animation-duration: 500ms;
+
+    --hundred: 100%;
+    --minus-hundred: -100%;
+
+    --menu-position: 32px;
+    --logo-size: 150px;
+    @include respond(tab-port) {
+        --logo-size: 250px;
+    }
 }

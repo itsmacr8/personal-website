@@ -14,3 +14,27 @@
         }
     }
 }
+
+@mixin translate($direction: original, $value: 0) {
+    @if $direction == horizontal {
+        transform: translate3d($value, 0, 0);
+    } @else if $direction == vertical {
+        transform: translate3d(0, $value, 0);
+    } @else if $direction == original {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@mixin transitionEaseInOut($property: transform) {
+    transition: $property var(--animation-duration) ease-in-out;
+}
+
+@mixin transitionEaseInOutMul($property1: transform, $property2: color) {
+    transition: $property1 var(--animation-duration) ease-in-out,
+        $property2 var(--animation-duration) ease-in-out;
+}
+
+@mixin linkStyle {
+    text-decoration: none;
+    text-transform: uppercase;
+}

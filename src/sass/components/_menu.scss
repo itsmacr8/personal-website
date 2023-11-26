@@ -1,0 +1,158 @@
+// Hamburger menu icon
+.menu-btn {
+    position: absolute;
+    right: var(--menu-position);
+    top: var(--menu-position);
+    cursor: pointer;
+    @include transitionEaseInOut;
+    z-index: 3;
+
+    &__line {
+        width: 28px;
+        height: 3px;
+        background-color: var(--secondary);
+        @include transitionEaseInOut;
+    }
+
+    &__line:not(:last-child) {
+        margin-block-end: var(--space-1);
+    }
+
+    // Rotating the menu lines into X
+    &.close {
+        transform: rotate(180deg);
+        .menu-btn__line {
+            &:nth-child(1) {
+                transform: rotate(45deg)
+                    translate(var(--space-1), var(--space-1));
+            }
+            &:nth-child(2) {
+                opacity: 0;
+            }
+            &:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+        }
+    }
+}
+
+// Navigation menu
+.menu {
+    @include flexColumn(null);
+    height: 100dvh;
+    width: 100dvw;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    &.show {
+        z-index: 0;
+    }
+
+    &__branding {
+        flex-basis: 35%;
+        background-color: var(--grey-300);
+
+        &__logo {
+            width: var(--logo-size);
+            height: var(--logo-size);
+            border-radius: var(--space-50);
+            background: url('../img/brand-logo.png') no-repeat center /
+                cover;
+            border: solid 5px var(--primary-400);
+        }
+    }
+
+    &__branding,
+    &__nav {
+        @include flexCenter;
+        @include translate(horizontal, calc(var(--minus-hundred) * 2));
+        @include transitionEaseInOut;
+
+        &.show {
+            @include translate;
+        }
+    }
+
+    &__nav {
+        flex-basis: 65%;
+        flex-direction: column;
+        animation: slide-right-menu var(--animation-duration);
+        background-color: var(--grey-400);
+
+        &.show {
+            animation: slide-left-menu var(--animation-duration);
+        }
+
+        &__item {
+            @include translate(horizontal, var(--hundred));
+            @include transitionEaseInOut;
+            &.show {
+                @include translate;
+            }
+
+            &:nth-child(2) {
+                margin-block: 1rem;
+            }
+
+            // Delay each nav item slide by 0.2s
+            @for $x from 1 through 4 {
+                &:nth-child(#{$x}) {
+                    transition-delay: $x * 0.2s;
+                }
+            }
+        }
+
+        &__link {
+            @include linkStyle;
+            display: block;
+            color: var(--black);
+            font-size: 2rem;
+            @include transitionEaseInOutMul();
+            &:hover {
+                transform: scale(1.5);
+            }
+            &:hover,
+            &--active {
+                color: var(--primary-400);
+            }
+        }
+    }
+}
+
+// Media queries
+.menu {
+    @include respond(tab-port) {
+        flex-direction: row;
+    }
+
+    &__branding,
+    &__nav {
+        @include respond(tab-port) {
+            flex-basis: var(--space-50);
+            height: var(--hundred);
+        }
+    }
+
+    &__branding {
+        @include respond(tab-port) {
+            animation: slide-down-branding var(--animation-duration);
+            &.show {
+                animation: slide-up-branding var(--animation-duration);
+            }
+        }
+    }
+
+    &__nav {
+        @include respond(tab-port) {
+            animation: none;
+            @include translate(vertical, var(--minus-hundred));
+            &.show {
+                animation: none;
+            }
+        }
+
+        &__link {
+            font-size: 1.5rem;
+        }
+    }
+}

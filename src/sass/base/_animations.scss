@@ -1,0 +1,36 @@
+@keyframes slide-up-branding {
+    0% {
+        @include translate(vertical, var(--hundred));
+    }
+    100% {
+        @include translate;
+    }
+}
+
+@keyframes slide-down-branding {
+    0% {
+        @include translate;
+    }
+    100% {
+        @include translate(vertical, var(--hundred));
+    }
+}
+
+
+@keyframes slide-left-menu {
+    0% {
+        @include translate(horizontal, var(--hundred));
+    }
+    100% {
+        @include translate;
+    }
+}
+
+@keyframes slide-right-menu {
+    0% {
+        @include translate;
+    }
+    100% {
+        @include translate(horizontal, var(--hundred));
+    }
+}
