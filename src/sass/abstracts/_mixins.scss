@@ -1,0 +1,16 @@
+// Media Query Mixins
+@mixin respond($breakpoint) {
+    @if $breakpoint == tab-port {
+        @media only screen and (min-width: 768px) {
+            @content;
+        }
+    } @else if $breakpoint == tab-land {
+        @media only screen and (min-width: 1200px) {
+            @content;
+        }
+    } @else if $breakpoint == big-desktop {
+        @media only screen and (min-width: 1800px) {
+            @content;
+        }
+    }
+}
