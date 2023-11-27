@@ -1,0 +1,24 @@
+.footer {
+    padding: var(--space-3);
+    background-color: var(--grey-400);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.developer-link {
+    @include linkStyle;
+    color: var(--secondary);
+    @include transitionEaseInOut(color);
+}
+.social{
+    @include flexWrap(var(--space-2));
+    &__icon{
+        color: var(--black);
+        @include transitionEaseInOut(color);
+        &:hover {
+            color: var(--primary-400);
+        }
+    }
+}
+
+
