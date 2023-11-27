@@ -1,0 +1,23 @@
+.btn {
+    display: block;
+    width: fit-content;
+    padding: var(--padding);
+    background-color: var(--primary-400);
+    color: var(--white);
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    @include transitionEaseInOut(background-color);
+
+    &:hover {
+        background-color: var(--primary-300);
+    }
+
+    &:active {
+        background-color: var(--primary-500);
+    }
+
+    &:focus {
+        outline: none;
+    }
+}

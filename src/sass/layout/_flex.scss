@@ -11,3 +11,11 @@
         gap: $gap;
     }
 }
+
+@mixin flexWrap($gap) {
+    display: flex;
+    flex-wrap: wrap;
+    @if type-of($gap) != 'null' {
+        gap: $gap;
+    }
+}

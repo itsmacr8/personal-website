@@ -10,6 +10,9 @@
     --grey-400: hsl(0, 0%, 94%);
     --black: hsl(0, 0%, 0%);
 
+    --fs-1: clamp(2rem, 0.625rem + 3.8636vw, 3rem);
+    --fs-2: clamp(1rem, 0.625rem + 2vw, 1.5rem);
+
     --space-1: 0.3125rem;
     --space-2: 0.625rem;
     --space-3: 1rem;

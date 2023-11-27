@@ -3,5 +3,8 @@
 @import 'layout/flex';
 @import './abstracts/mixins';
 @import './abstracts/variables';
+@import './base/typography';
+@import './base/utilities';
 @import 'components/menu';
+@import 'components/button';
 @import './base/animations';
