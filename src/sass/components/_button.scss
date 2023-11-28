@@ -20,4 +20,13 @@
     &:focus {
         outline: none;
     }
+
+    &--submit {
+        margin-top: var(--space-3);
+        width: var(--hundred);
+    }
+
+    &--submit[disabled] {
+        background-color: var(--grey-400);
+    }
 }
