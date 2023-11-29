@@ -1,0 +1,38 @@
+.projects {
+    @include flexColumn(var(--space-4));
+}
+
+.project {
+    @include flexWrap(var(--space-2));
+    justify-content: space-between;
+    &__name {
+        color: var(--primary-400);
+    }
+    &__details {
+        @include flexColumn(var(--space-2));
+    }
+    &__tag {
+        padding: 0.4rem 0.8rem;
+        background-color: var(--grey-300);
+        border-radius: 3px;
+
+        &-list {
+            @include flexWrap(var(--space-2));
+        }
+    }
+    &__cta-btn {
+        @include flexWrap(var(--space-1));
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .projects {
+        gap: var(--space-5);
+    }
+    .project {
+        &__details,
+        &__thumbnail {
+            flex-basis: 49%;
+        }
+    }
+}

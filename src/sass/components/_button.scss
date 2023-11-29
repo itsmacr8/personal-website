@@ -29,4 +29,15 @@
     &--submit[disabled] {
         background-color: var(--grey-400);
     }
+
+    &--outline {
+        background-color: transparent;
+        color: var(--black);
+        border: 1px solid var(--black);
+        &:hover {
+            border-color: var(--primary-400);
+            background-color: var(--primary-400);
+            color: var(--white);
+        }
+    }
 }
