@@ -1,36 +1,11 @@
-@keyframes slide-up-branding {
+@keyframes ui-icon-fade-out {
     0% {
-        @include translate(vertical, var(--hundred));
+        opacity: 0
+    }
+    50% {
+        opacity: .5
     }
     100% {
-        @include translate;
-    }
-}
-
-@keyframes slide-down-branding {
-    0% {
-        @include translate;
-    }
-    100% {
-        @include translate(vertical, var(--hundred));
-    }
-}
-
-
-@keyframes slide-left-menu {
-    0% {
-        @include translate(horizontal, var(--hundred));
-    }
-    100% {
-        @include translate;
-    }
-}
-
-@keyframes slide-right-menu {
-    0% {
-        @include translate;
-    }
-    100% {
-        @include translate(horizontal, var(--hundred));
+        opacity: 1;
     }
 }

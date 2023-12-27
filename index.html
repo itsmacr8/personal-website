@@ -4,48 +4,38 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 	<title>Welcome To My Portfolio | ITS MAC</title>
 </head>
 
-<body class="page-layout">
+<body>
 	<header>
-		<div class="menu-btn">
-			<div class="menu-btn__line"></div>
-			<div class="menu-btn__line"></div>
-			<div class="menu-btn__line"></div>
-		</div>
-		<nav class="menu">
-			<div class="menu__branding">
-				<div class="menu__branding__logo"></div>
+		<nav class="nav-bar container">
+			<i class="bx bx-menu hamburger-icon"></i>
+			<div class="brand">
+				<a href="index.html" class="brand__logo">ITS MAC</a>
 			</div>
-			<ul class="menu__nav">
-				<li class="menu__nav__item"><a href="index.html" class="menu__nav__link menu__nav__link--active">Home</a></li>
-				<li class="menu__nav__item"><a href="work.html" class="menu__nav__link">My Work</a></li>
-				<li class="menu__nav__item"><a href="contact.html" class="menu__nav__link">Contact</a></li>
-			</ul>
+			<div class="menu">
+				<div class="align-close-icon">
+					<i class="bx bx-x menu__close"></i>
+				</div>
+				<ul class="menu__nav">
+					<!--
+					Remember to update menu transitions when
+					updating nav item.
+					-->
+					<li class="menu__nav__item"><a href="#" class="menu__nav__link">About Me</a></li>
+					<li class="menu__nav__item"><a href="#" class="menu__nav__link">Skills</a></li>
+					<li class="menu__nav__item"><a href="#" class="menu__nav__link">Portfolio</a></li>
+					<li class="menu__nav__item"><a href="#" class="menu__nav__link">Contact</a></li>
+				</ul>
+			</div>
+			<div class="ui-icon">
+				<i class="bx bx-moon ui-icon__moon"></i>
+				<i class="bx bx-sun ui-icon__sun"></i>
+			</div>
 		</nav>
 	</header>
-	<main class="container layout-margin">
-		<header itemscope itemtype="http://schema.org/Person">
-			<h1 class="primary-heading"><span itemprop="name">ITS <span class="text-primary">MAC</span></span></h1>
-			<h2 class="sub-heading"><span itemprop="jobTitle">Web Developer</span></h2>
-			<p itemprop="description">I am a self-taught front-end web developer. Currently, I'm pursuing a Bachelor of Business Administration (Honours) in Finance and Banking.</p>
-			<p itemprop="description" class="my-1">I learned web development from freeCodeCamp, where I learned how to create websites that are fast, user-friendly, and mobile-optimized using various web technologies. Some of the skills I have acquired include HTML, CSS, JavaScript, React.js, responsive web design, and more.</p>
-			<p itemprop="description">I specialize in creating websites that excel on mobile devices, as I believe that mobile-first design is the future of web development. I am always eager to learn new things and expand my skills in web and app development.</p>
-		</header>
-		<div class="my-1">
-			<a class="btn" href="">Resume</a>
-		</div>
-	</main>
-	<footer class="footer">
-		<p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> <a class="developer-link" href="https://itsmac.netlify.app/">its mac</a></p>
-		<ul class="social">
-			<li><a class="social__icon" href="https://t.me/itsmacr8/"><i class="fab fa-telegram fa-2x"></i></a></li>
-			<li><a class="social__icon" href="https://www.linkedin.com/in/itsmacr8/"><i class="fab fa-linkedin fa-2x"></i></a></li>
-			<li><a class="social__icon" href="https://github.com/itsmacr8"><i class="fab fa-github fa-2x"></i></a></li>
-		</ul>
-    </footer>
 	<script type="module" src="/src/main.ts"></script>
 </body>
 
