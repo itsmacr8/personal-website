@@ -10,7 +10,7 @@ header {
 
     .hamburger-icon {
         color: var(--black);
-        font-size: var(--space-4);
+        font-size: var(--fs-4);
         cursor: pointer;
 
         @include respond(tab-port) {
@@ -18,7 +18,7 @@ header {
         }
     }
     .brand__logo {
-        font-size: var(--space-4);
+        font-size: var(--fs-3);
         color: var(--black);
         text-decoration: none;
     }
@@ -49,15 +49,15 @@ header {
     .align-close-icon {
         display: flex;
         justify-content: end;
+        @include respond(tab-port) {
+            display: none;
+        }
     }
 
     &__close {
         color: var(--white);
-        font-size: var(--space-4);
+        font-size: var(--fs-4);
         cursor: pointer;
-        @include respond(tab-port) {
-            display: none;
-        }
     }
 
     &--active-js {
@@ -69,12 +69,14 @@ header {
 }
 
 .menu__nav {
-    @include flex(var(--space-3));
+    @include flexColumn(var(--space-3));
+    justify-content: center;
     height: calc(100% - 15rem);
 
     @include respond(tab-port) {
         flex-direction: row;
         gap: var(--space-4);
+        height: auto;
     }
 
     &__item {
@@ -98,6 +100,7 @@ header {
         @include transitionEaseInOutMul();
         display: block;
         color: var(--white);
+        text-align: center;
         @include respond(tab-port) {
             color: var(--black);
         }
@@ -116,7 +119,7 @@ header {
     &__sun,
     &__moon {
         color: var(--black);
-        font-size: var(--space-4);
+        font-size: var(--fs-3);
         cursor: pointer;
         display: none;
     }
