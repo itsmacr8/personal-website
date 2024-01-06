@@ -1,0 +1,11 @@
+#hero-section {
+    background-color: antiquewhite;
+}
+
+.hero {
+    min-height: calc(100dvh - 68px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+}
