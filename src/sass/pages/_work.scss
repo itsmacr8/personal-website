@@ -1,5 +1,8 @@
 .projects {
     @include flexColumn(var(--space-4));
+    @include respond(tab-port) {
+        gap: var(--space-6);
+    }
 }
 
 .project {
@@ -23,15 +26,10 @@
     &__cta-btn {
         @include flexWrap(var(--space-1));
     }
-}
 
-@media screen and (min-width: 1000px) {
-    .projects {
-        gap: var(--space-5);
-    }
-    .project {
-        &__details,
-        &__thumbnail {
+    &__details,
+    &__thumbnail {
+        @include respond(tab-port) {
             flex-basis: 49%;
         }
     }
