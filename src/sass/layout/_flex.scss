@@ -1,3 +1,13 @@
+@mixin flex($gap) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    @if type-of($gap) != 'null' {
+        gap: $gap;
+    }
+}
+
 @mixin flexCenter {
     display: flex;
     justify-content: center;

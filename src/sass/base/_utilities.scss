@@ -8,12 +8,24 @@
     text-align: center;
 }
 
+.mb-1 {
+    margin-bottom: var(--space-3);
+}
+
 .mb-2 {
     margin-bottom: var(--space-4);
 }
 
+.mb-3 {
+    margin-bottom: var(--space-5);
+}
+
 .my-1 {
     margin-block: var(--space-3);
+}
+
+.mx-auto {
+    margin-inline: auto;
 }
 
 .layout-margin {

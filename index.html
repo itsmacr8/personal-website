@@ -4,48 +4,184 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 	<title>Welcome To My Portfolio | ITS MAC</title>
 </head>
 
-<body class="page-layout">
+<body>
 	<header>
-		<div class="menu-btn">
-			<div class="menu-btn__line"></div>
-			<div class="menu-btn__line"></div>
-			<div class="menu-btn__line"></div>
-		</div>
-		<nav class="menu">
-			<div class="menu__branding">
-				<div class="menu__branding__logo"></div>
+		<nav class="nav-bar container">
+			<i class="bx bx-menu hamburger-icon"></i>
+			<div class="brand">
+				<a href="index.html" class="brand__logo">ITS MAC</a>
 			</div>
-			<ul class="menu__nav">
-				<li class="menu__nav__item"><a href="index.html" class="menu__nav__link menu__nav__link--active">Home</a></li>
-				<li class="menu__nav__item"><a href="work.html" class="menu__nav__link">My Work</a></li>
-				<li class="menu__nav__item"><a href="contact.html" class="menu__nav__link">Contact</a></li>
-			</ul>
+			<div class="menu">
+				<div class="align-close-icon">
+					<i class="bx bx-x menu__close"></i>
+				</div>
+				<ul class="menu__nav">
+					<!--
+					Remember to update menu transitions when
+					updating nav item.
+					-->
+					<li class="menu__nav__item"><a href="#" class="menu__nav__link">About Me</a></li>
+					<li class="menu__nav__item"><a href="#" class="menu__nav__link">Skills</a></li>
+					<li class="menu__nav__item"><a href="#" class="menu__nav__link">Portfolio</a></li>
+					<li class="menu__nav__item"><a href="#" class="menu__nav__link">Contact</a></li>
+				</ul>
+			</div>
+			<div class="ui-icon">
+				<i class="bx bx-moon ui-icon__moon"></i>
+				<i class="bx bx-sun ui-icon__sun"></i>
+			</div>
 		</nav>
 	</header>
-	<main class="container layout-margin">
-		<header itemscope itemtype="http://schema.org/Person">
-			<h1 class="primary-heading"><span itemprop="name">ITS <span class="text-primary">MAC</span></span></h1>
-			<h2 class="sub-heading"><span itemprop="jobTitle">Web Developer</span></h2>
-			<p itemprop="description">I am a self-taught front-end web developer. Currently, I'm pursuing a Bachelor of Business Administration (Honours) in Finance and Banking.</p>
-			<p itemprop="description" class="my-1">I learned web development from freeCodeCamp, where I learned how to create websites that are fast, user-friendly, and mobile-optimized using various web technologies. Some of the skills I have acquired include HTML, CSS, JavaScript, React.js, responsive web design, and more.</p>
-			<p itemprop="description">I specialize in creating websites that excel on mobile devices, as I believe that mobile-first design is the future of web development. I am always eager to learn new things and expand my skills in web and app development.</p>
-		</header>
-		<div class="my-1">
-			<a class="btn" href="">Resume</a>
-		</div>
+	<main>
+		<section id="hero-section">
+			<div class="hero container">
+				<h1 class="primary-heading">Hi there, I'm <span class="text-primary">MAC</span> <br> a front-end developer.</h1>
+				<a href="#about-section" class="btn btn--outline">About me</a>
+			</div>
+		</section>
+		<section id="about-section">
+			<h2 class="text-center mb-3">About Me</h2>
+			<div class="container about">
+				<div class="about__description">
+					<p>I am a self-taught front-end web developer. Currently, I'm pursuing a Bachelor of Business Administration (Honours) in Finance and Banking.</p>
+					<p class="my-1">I learned web development from freeCodeCamp, where I learned how to create websites that are fast, user-friendly, and mobile-optimized using various web technologies. Some of the skills I have acquired include HTML, CSS, JavaScript, React.js, responsive web design, and more.</p>
+					<p class="mb-1">I specialize in creating websites that excel on mobile devices, as I believe that mobile-first design is the future of web development. I am always eager to learn new things and expand my skills in web and app development.</p>
+					<a href="#" class="btn btn--outline">Resume</a>
+				</div>
+				<div>
+					<img class="about__avatar" src="https://this-person-does-not-exist.com/img/avatar-gen61f9bced4577bf13622cb12cf60c6fb8.jpg" alt="Demo avatar from person does not exist">
+				</div>
+			</div>
+		</section>
+		<section id="portfolio-section">
+			<h2 class="text-center mb-3">Portfolio</h2>
+			<div class="container">
+				<div class="projects mb-2">
+					<div class="project">
+						<div class="project__details">
+						<h2 class="project__name">Learn Magic</h2>
+						<p class="project__description">This project is a landing page for a website that offers magic online courses. I used CSS flexbox to create a responsive layout that adapts to different screen sizes and before and after pseudo classes to add some visual effects to the website.</p>
+						<ul class="project__tag-list">
+							<li class="project__tag">HTML</li>
+							<li class="project__tag">CSS</li>
+							<li class="project__tag">Flexbox</li>
+						</ul>
+						<div class="project__cta-btn">
+							<a href="https://learn-magic.netlify.app/"
+							class="btn">
+							<i class="fas fa-eye"></i> Live View
+							</a>
+						</div>
+						</div>
+						<div class="project__thumbnail">
+						<img src="./src/img/projects/learn_magic.png" title="Learn magic thumbnail"
+							alt="Learn magic thumbnail">
+						</div>
+					</div>
+					<div class="project">
+						<div class="project__details">
+						<h2 class="project__name">Acme Blog</h2>
+						<p class="project__description">This is a blog website. This is the final project of the CSS course I completed. It demonstrates how I can use CSS flexbox and grid to achieve a flexible and responsive layout that adapts to different screen sizes and how I can use the shadow property to add some depth to the website to enhance the website's appearance.</p>
+						<ul class="project__tag-list">
+							<li class="project__tag">HTML</li>
+							<li class="project__tag">CSS</li>
+							<li class="project__tag">Grid</li>
+						</ul>
+						<div class="project__cta-btn">
+							<a href="https://blog-acme.netlify.app/"
+							class="btn">
+							<i class="fas fa-eye"></i> Live View
+							</a>
+						</div>
+						</div>
+						<div class="project__thumbnail">
+						<img src="./src/img/projects/acme_blog.png" title="Acme blog thumbnail"
+							alt="Acme blog thumbnail">
+						</div>
+					</div>
+					<div class="project">
+						<div class="project__details">
+						<h2 class="project__name">Dice Game</h2>
+						<p class="project__description">This is a dice game with a twist. You can roll as many times as you want or pass the dice to the other player. But if you roll a 1, you lose your turn automatically and your accumulated points. The first player to score more than 50 wins. I made this game with vanilla JavaScript, CSS with BEM methodology, and netlify to host it.</p>
+						<ul class="project__tag-list">
+							<li class="project__tag">HTML</li>
+							<li class="project__tag">CSS</li>
+							<li class="project__tag">JavaScript</li>
+							<li class="project__tag">BEM</li>
+						</ul>
+						<div class="project__cta-btn">
+							<a href="https://github.com/itsmacr8/javascript_projects/tree/main/07-Pig-Game"
+							class="btn">
+							<i class="fas fa-eye"></i> Live View
+							</a>
+							<a href="https://github.com/itsmacr8/javascript_projects/tree/main/07-Pig-Game"
+							class="btn btn--outline">
+							<i class="fas fa-code"></i> Source Code
+							</a>
+						</div>
+						</div>
+						<div class="project__thumbnail">
+						<img src="./src/img/projects/dice_game.png" title="Dice game thumbnail"
+							alt="Dice game thumbnail">
+						</div>
+					</div>
+					<div class="project">
+						<div class="project__details">
+						<h2 class="project__name">NU Bot</h2>
+						<p class="project__description">This bot checks the NU website every day for new exam news. It scrapes the news section and compares it with the old ones in a database. If there are new updates related to exam news, it emails me; otherwise, it does not send me other notifications. I used requests and BeautifulSoup to scrape the website. I used Flask to show the bot status on a webpage. I used Heroku to host it.</p>
+						<ul class="project__tag-list">
+							<li class="project__tag">Python</li>
+							<li class="project__tag">Flask</li>
+							<li class="project__tag">BeautifulSoup</li>
+							<li class="project__tag">API</li>
+						</ul>
+						<div class="project__cta-btn">
+							<a href="https://github.com/itsmacr8/online-schedule-scripts" class="btn">
+							<i class="fas fa-eye"></i> Live View
+							</a>
+							<a href="https://github.com/itsmacr8/online-schedule-scripts" class="btn btn--outline">
+							<i class="fas fa-code"></i> Source Code
+							</a>
+						</div>
+						</div>
+						<div class="project__thumbnail">
+						<img src="./src/img/projects/nu_bot.png" title="National University bot thumbnail"
+							alt="National University bot thumbnail">
+						</div>
+					</div>
+				</div>
+				<div><a href="./work.html" class="btn mx-auto">More projects</a></div>
+			</div>
+		</section>
+		<section id="contact-section">
+			<h2 class="text-center mb-3">Contact me</h2>
+			<form class="form container" name="contact" method="POST" data-netlify="true">
+				<div class="form__group">
+					<label for="name">Name</label>
+					<input type="text" id="name" name="name" placeholder="Enter your name" required>
+				</div>
+				<div class="form__group">
+					<label for="email">Email</label>
+					<input type="email" id="email" name="email" placeholder="Enter your email" required>
+				</div>
+				<div class="form__group">
+					<label for="subject">Subject</label>
+					<input type="text" id="subject" name="subject" placeholder="Enter the subject of your message" required>
+				</div>
+				<div class="form__group">
+					<label for="message">Message</label>
+					<textarea id="message" name="message" placeholder="Enter your message" rows="5" required></textarea>
+				</div>
+				<div class="form__group">
+					<button class="btn btn--submit" type="submit">Send</button>
+				</div>
+			</form>
+		</section>
 	</main>
-	<footer class="footer">
-		<p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> <a class="developer-link" href="https://itsmac.netlify.app/">its mac</a></p>
-		<ul class="social">
-			<li><a class="social__icon" href="https://t.me/itsmacr8/"><i class="fab fa-telegram fa-2x"></i></a></li>
-			<li><a class="social__icon" href="https://www.linkedin.com/in/itsmacr8/"><i class="fab fa-linkedin fa-2x"></i></a></li>
-			<li><a class="social__icon" href="https://github.com/itsmacr8"><i class="fab fa-github fa-2x"></i></a></li>
-		</ul>
-    </footer>
 	<script type="module" src="/src/main.ts"></script>
 </body>
 

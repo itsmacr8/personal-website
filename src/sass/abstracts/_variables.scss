@@ -10,14 +10,17 @@
     --grey-400: hsl(0, 0%, 94%);
     --black: hsl(0, 0%, 0%);
 
-    --fs-1: clamp(2rem, 0.625rem + 3.8636vw, 3rem);
+    --fs-1: clamp(1.5rem, 0.625rem + 3.8636vw, 3rem);
     --fs-2: clamp(1rem, 0.625rem + 2vw, 1.5rem);
+    --fs-3: 1.5rem;
+    --fs-4: 2rem;
 
     --space-1: 0.3125rem;
     --space-2: 0.625rem;
     --space-3: 1rem;
     --space-4: 2rem;
-    --space-5: 4rem;
+    --space-5: 3rem;
+    --space-6: 4rem;
     --space-50: 50%;
 
     --padding: 0.5em 1em;
@@ -25,6 +28,7 @@
 
     --hundred: 100%;
     --minus-hundred: -100%;
+    --minus-two-hundred: -200%;
 
     --menu-position: 32px;
     --logo-size: 150px;
