@@ -157,6 +157,30 @@
 				<div><a href="./work.html" class="btn mx-auto">More projects</a></div>
 			</div>
 		</section>
+		<section id="contact-section">
+			<h2 class="text-center mb-3">Contact me</h2>
+			<form class="form container" name="contact" method="POST" data-netlify="true">
+				<div class="form__group">
+					<label for="name">Name</label>
+					<input type="text" id="name" name="name" placeholder="Enter your name" required>
+				</div>
+				<div class="form__group">
+					<label for="email">Email</label>
+					<input type="email" id="email" name="email" placeholder="Enter your email" required>
+				</div>
+				<div class="form__group">
+					<label for="subject">Subject</label>
+					<input type="text" id="subject" name="subject" placeholder="Enter the subject of your message" required>
+				</div>
+				<div class="form__group">
+					<label for="message">Message</label>
+					<textarea id="message" name="message" placeholder="Enter your message" rows="5" required></textarea>
+				</div>
+				<div class="form__group">
+					<button class="btn btn--submit" type="submit">Send</button>
+				</div>
+			</form>
+		</section>
 	</main>
 	<script type="module" src="/src/main.ts"></script>
 </body>
