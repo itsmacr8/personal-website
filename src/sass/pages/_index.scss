@@ -1,3 +1,7 @@
+section {
+    padding-block: var(--space-4);
+}
+
 #hero-section {
     background-color: antiquewhite;
 }
@@ -8,4 +12,40 @@
     flex-direction: column;
     justify-content: center;
     gap: 1rem;
+}
+
+#about-section {
+    background-color: bisque;
+}
+
+.about {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;
+    @include respond(tab-port) {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    & > div {
+        @include respond(tab-port) {
+            flex-basis: 47%;
+        }
+    }
+
+    &__description {
+        order: 1;
+        @include respond(tab-port) {
+            order: 0;
+        }
+    }
+
+    &__avatar {
+        border-radius: 50%;
+        @include custom-respond(400) {
+            height: 325px;
+            width: 325px;
+        }
+    }
 }

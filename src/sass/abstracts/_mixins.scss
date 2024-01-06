@@ -15,6 +15,14 @@
     }
 }
 
+@mixin custom-respond($breakpoint) {
+    @if $breakpoint == 400 {
+        @media only screen and (min-width: 400px) {
+            @content;
+        }
+    }
+}
+
 @mixin translate($direction: original, $value: 0) {
     @if $direction == horizontal {
         transform: translate3d($value, 0, 0);
