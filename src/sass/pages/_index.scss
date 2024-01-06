@@ -7,7 +7,7 @@ section {
 }
 
 .hero {
-    min-height: calc(100dvh - 68px);
+    min-height: calc(100dvh - ((var(--space-4) * 2) + 68px));
     display: flex;
     flex-direction: column;
     justify-content: center;
