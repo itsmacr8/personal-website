@@ -1,9 +1,13 @@
 .footer {
     padding: var(--space-3);
     background-color: var(--grey-400);
-    display: flex;
+    @include flexColumn(var(--space-3));
     justify-content: space-between;
     align-items: center;
+
+    @include respond(tab-port) {
+        flex-direction: row;
+    }
 }
 .developer-link {
     @include linkStyle;

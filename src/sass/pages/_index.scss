@@ -8,10 +8,8 @@ section {
 
 .hero {
     min-height: calc(100dvh - ((var(--space-4) * 2) + 68px));
-    display: flex;
-    flex-direction: column;
+    @include flexColumn(var(--space-3));
     justify-content: center;
-    gap: 1rem;
 }
 
 #about-section {
@@ -19,9 +17,7 @@ section {
 }
 
 .about {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
+    @include flexColumn(var(--space-5));
     align-items: center;
     @include respond(tab-port) {
         flex-direction: row;
