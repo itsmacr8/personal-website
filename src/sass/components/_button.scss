@@ -2,19 +2,19 @@
     display: block;
     width: fit-content;
     padding: var(--padding);
-    background-color: var(--primary-400);
-    color: var(--white);
+    background-color: var(--background, var(--primary-500));
+    color: var(--color-btn, var(--white));
     border: none;
     text-decoration: none;
     cursor: pointer;
     @include transitionEaseInOut(background-color);
 
     &:hover {
-        background-color: var(--primary-300);
+        background-color: var(--background, var(--primary-400));
     }
 
     &:active {
-        background-color: var(--primary-500);
+        background-color: var(--primary-400);
     }
 
     &:focus {
@@ -28,16 +28,17 @@
 
     &--submit[disabled] {
         background-color: var(--grey-400);
+        cursor: default;
     }
 
     &--outline {
         background-color: transparent;
-        color: var(--black);
-        border: 1px solid var(--black);
+        color: var(--color-btn, var(--white));
+        border: var(--border, 1px solid var(--black));
         &:hover {
-            border-color: var(--primary-400);
-            background-color: var(--primary-400);
-            color: var(--white);
+            border: var(--border, 1px solid var(--primary-400));
+            background-color: var(--background, var(--primary-400));
+            color: var(--color-btn, var(--white));
         }
     }
 }
