@@ -1,5 +1,5 @@
 header {
-    background-color: var(--white);
+    background-color: var(--secondary-400);
     padding-block: var(--space-3);
 }
 
@@ -9,7 +9,7 @@ header {
     align-items: center;
 
     .hamburger-icon {
-        color: var(--black);
+        color: var(--white);
         font-size: var(--fs-4);
         cursor: pointer;
 
@@ -19,7 +19,7 @@ header {
     }
     .brand__logo {
         font-size: var(--fs-3);
-        color: var(--black);
+        color: var(--white);
         text-decoration: none;
     }
     .brand__logo-js {
@@ -101,15 +101,12 @@ header {
         display: block;
         color: var(--white);
         text-align: center;
-        @include respond(tab-port) {
-            color: var(--black);
-        }
         &:hover {
             transform: scale(1.3);
         }
         &:hover,
         &--active {
-            color: var(--primary-400);
+            color: var(--tertiary-400);
         }
     }
 }
@@ -118,7 +115,7 @@ header {
     @include flexCenter;
     &__sun,
     &__moon {
-        color: var(--black);
+        color: var(--white);
         font-size: var(--fs-3);
         cursor: pointer;
         display: none;

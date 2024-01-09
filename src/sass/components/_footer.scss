@@ -11,7 +11,7 @@
 }
 .developer-link {
     @include linkStyle;
-    color: var(--secondary);
+    color: var(--secondary-400);
     @include transitionEaseInOut(color);
 }
 .social{
@@ -20,7 +20,7 @@
         color: var(--black);
         @include transitionEaseInOut(color);
         &:hover {
-            color: var(--primary-400);
+            color: var(--primary-500);
         }
     }
 }

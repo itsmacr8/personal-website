@@ -1,9 +1,14 @@
 // 400 is the base color. After that it depends on the lightness of hsl.
 :root {
-    --primary-300: hsl(261, 51%, 41%);
-    --primary-400: hsl(261, 51%, 51%);
-    --primary-500: hsl(261, 51%, 61%);
-    --secondary: hsl(27, 98%, 54%);
+    --primary-400: hsl(259, 73%, 40%);
+    --primary-500: hsl(260, 73%, 48%);
+    --secondary-400: hsl(243, 76%, 59%);
+    --tertiary-300: hsl(50, 100%, 46%);
+    --tertiary-400: hsl(50, 100%, 60%);
+
+    --gradient-300: hsla(260, 73%, 48%, 0.35);
+    --gradient-400: hsla(243, 76%, 59%, 0.35);
+    --gradient-500: hsla(205, 100%, 72%, 0.75);
 
     --white: hsl(0, 0%, 100%);
     --grey-300: hsl(0, 0%, 96%);
