@@ -51,3 +51,14 @@ section:nth-child(even){
         }
     }
 }
+
+.skill-icons {
+    @include flexWrap(var(--space-3));
+}
+
+.skill-icon {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
