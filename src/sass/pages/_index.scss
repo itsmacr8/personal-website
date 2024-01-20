@@ -13,7 +13,7 @@ section:nth-child(even){
 #hero-section {
     // Image will not display if you use solid color.
     // You must use color with alpha value.
-    background: linear-gradient(145deg, var(--gradient-300) 25%, var(--gradient-400) 100%) no-repeat center/cover, url("../../../src/img/hero.jpg") no-repeat center/cover;
+    background: linear-gradient(145deg, var(--gradient-300) 25%, var(--gradient-400) 100%) no-repeat center/cover, url("../../../assets/hero.jpg") no-repeat center/cover;
 }
 
 .hero {
