@@ -26,18 +26,10 @@
     --space-4: 2rem;
     --space-5: 3rem;
     --space-6: 4rem;
-    --space-50: 50%;
 
     --padding: 0.5em 1em;
     --animation-duration: 500ms;
 
     --hundred: 100%;
-    --minus-hundred: -100%;
     --minus-two-hundred: -200%;
-
-    --menu-position: 32px;
-    --logo-size: 150px;
-    @include respond(tab-port) {
-        --logo-size: 250px;
-    }
 }

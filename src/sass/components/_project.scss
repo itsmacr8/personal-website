@@ -1,0 +1,54 @@
+.projects {
+    @include flexColumn(var(--space-4));
+    @include respond(tab-port) {
+        gap: var(--space-6);
+    }
+}
+
+.project {
+    @include flexWrap(var(--space-2));
+    justify-content: space-between;
+
+    &__details {
+        @include flexColumn(var(--space-2));
+
+        &--order {
+            --color: var(--tertiary-400);
+            --background: var(--tertiary-300);
+            --border: 1px solid var(--tertiary-400);
+            --color-btn: var(--black);
+
+            & .btn:hover, & .btn--outline:hover {
+                --background: var(--tertiary-400);
+            }
+            @include respond(tab-port) {
+                order: 1;
+            }
+        }
+    }
+
+    &__name {
+        color: var(--color, var(--primary-400));
+    }
+
+    &__tag {
+        padding: 0.4rem 0.8rem;
+        background-color: var(--grey-300);
+        border-radius: 3px;
+
+        &-list {
+            @include flexWrap(var(--space-2));
+        }
+    }
+
+    &__cta-btn {
+        @include flexWrap(var(--space-1));
+    }
+
+    &__details,
+    &__thumbnail {
+        @include respond(tab-port) {
+            flex-basis: 49%;
+        }
+    }
+}

@@ -1,5 +1,4 @@
 @import './base/reset';
-@import 'layout/grid';
 @import 'layout/flex';
 @import './abstracts/mixins';
 @import './abstracts/variables';
@@ -9,6 +8,7 @@
 @import 'components/footer';
 @import 'components/button';
 @import 'components/form';
+@import 'components/project';
 @import './base/animations';
 @import 'pages/index';
 @import 'pages/work';
