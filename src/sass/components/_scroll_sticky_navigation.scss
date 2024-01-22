@@ -1,0 +1,24 @@
+.scroll-sticky-navigation {
+    position: sticky;
+    top: 0;
+    @include transitionEaseInOut;
+
+    // Remove below rules if scrolling sticky navigation
+    // feature is not needed. Sticky navigation will still
+    // work without scrolling sticky effect.
+    &.scroll-up,
+    &:focus-within {
+        @include translate();
+    }
+
+    &.scroll-down {
+        @include translate(vertical, var(--minus-hundred));
+    }
+}
+
+// To add padding when user clicks on a link to scroll to a specific section.
+html {
+    // scroll-padding-top is a built-in CSS property like
+    // scroll-behavior property for a better scroll experience.
+    scroll-padding-top: var(--scroll-padding, 50px);
+}
