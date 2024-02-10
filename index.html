@@ -224,7 +224,7 @@
 		</section>
 		<section id="contact-section">
 			<h2 class="section-heading text-center mb-3">Contact me</h2>
-			<form class="form container" name="contact" method="POST" data-netlify="true">
+			<form class="form container" name="contact" method="POST" data-netlify="true" data-netlify-recaptcha="true">
 				<div class="form__group">
 					<label for="name">Name</label>
 					<input type="text" id="name" name="name" placeholder="Enter your name" required>
@@ -241,6 +241,7 @@
 					<label for="message">Message</label>
 					<textarea id="message" name="message" placeholder="Enter your message" rows="5" required></textarea>
 				</div>
+				<div data-netlify-recaptcha="true"></div>
 				<div class="form__group">
 					<button class="btn btn--submit" type="submit">Send</button>
 				</div>
