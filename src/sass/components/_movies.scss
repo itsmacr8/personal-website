@@ -1,0 +1,26 @@
+.card-body {
+    padding: 10px;
+}
+
+.movie-cards {
+    color: var(--black);
+    display: flex;
+    flex-wrap: wrap;
+    text-align: left;
+    gap: 1rem;
+}
+
+.movie-card {
+    max-width: 300px;
+    background-color: var(--grey-300);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.movie-card img {
+    object-fit: cover;
+}
+
+.movie-title {
+    font-size: 1rem;
+    font-weight: bold;
+}
