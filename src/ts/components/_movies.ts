@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Movies } from '../interfaces/_movies_interfaces';
+import { Movies, MovieDetails } from '../interfaces/_movies_interfaces';
 
 const movieCards = document.querySelector('#movie-cards') as HTMLButtonElement
 const movieGen = document.querySelector('#movie-gen') as HTMLButtonElement
@@ -24,6 +24,37 @@ async function searchMovies(movieName: string) {
     });
 }
 
+async function getMovieDetails(movieName: string) {
+    const response = await axios.get(`https://www.omdbapi.com/?i=${movieName}&apikey=${API_KEY}&plot=full&y=`);
+    const data = response.data;
+    renderMovie(data);
+}
+
+function renderMovie(movie:MovieDetails) {
+    movieCards.insertAdjacentHTML('beforeend', `
+    <div class="movie-card">
+        <div><img src="${movie.Poster}" alt="Movie Poster"></div>
+        <div class="card-body">
+            <h2 class="movie-title">${movie.Title} (${movie.Year})</h2>
+            <p>${movie.Type} - ${movie.Runtime}</p>
+            <p>Genre: ${movie.Genre}</p>
+            <p class="movie-text">${movie.Plot}</p>
+            <p class="imdb-rating">IMDB: <span class="rating-text">${movie.Ratings[0]?.Value || 'N/A'}</span> | Rotten: <span class="rating-text">${movie.Ratings[1]?.Value || 'N/A'}</span></p>
+            <p class="country">Country: <span class="country-text">${movie.Country}</span></p>
+            <p class="language">Language: <span class="language-text">${movie.Language}</span></p>
+            <p class="box-office">Box Office: ${movie.BoxOffice}</p>
+        </div>
+    </div>`);
+}
+
 movieGen.addEventListener('click', () => {
     searchMovies('')
 })
+
+movieCards.addEventListener('click', (event) => {
+    const target = event.target as HTMLElement;
+    if (target.classList.contains('btn--movie-details')) {
+        const movieID = target.dataset.imdbid;
+        movieID && getMovieDetails(movieID)
+    }
+});
