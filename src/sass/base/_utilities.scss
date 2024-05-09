@@ -36,6 +36,10 @@ section:nth-child(even){
     margin-block: var(--space-3);
 }
 
+.my-2 {
+    margin-block: var(--space-4);
+}
+
 .mx-auto {
     margin-inline: auto;
 }

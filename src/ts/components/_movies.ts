@@ -1,9 +1,12 @@
 import axios from 'axios';
 import { Movies, MovieDetails } from '../interfaces/_movies_interfaces';
 
+const searchMovie = document.getElementById('search-movie') as HTMLInputElement;
+const delay = 1500;
 const movieCards = document.querySelector('#movie-cards') as HTMLButtonElement
-const movieGen = document.querySelector('#movie-gen') as HTMLButtonElement
 const API_KEY = import.meta.env.VITE_API_KEY;
+
+let typingTimer: ReturnType<typeof setTimeout>;
 
 async function searchMovies(movieName: string) {
     const response = await axios.get(`https://www.omdbapi.com/?s=${movieName}&apikey=${API_KEY}&plot=full&y=`);
@@ -47,14 +50,18 @@ function renderMovie(movie:MovieDetails) {
     </div>`);
 }
 
-movieGen.addEventListener('click', () => {
-    searchMovies('')
-})
-
 movieCards.addEventListener('click', (event) => {
     const target = event.target as HTMLElement;
     if (target.classList.contains('btn--movie-details')) {
         const movieID = target.dataset.imdbid;
         movieID && getMovieDetails(movieID)
     }
+});
+
+searchMovie.addEventListener('input', () => {
+    clearTimeout(typingTimer);  // Clear the previous timer
+    // Start a new timer that code will execute after the specified delay
+    typingTimer = setTimeout(() => {
+        (searchMovie.value.length > 2) && searchMovies(searchMovie.value);
+    }, delay);
 });
