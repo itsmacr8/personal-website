@@ -9,6 +9,10 @@
     cursor: pointer;
     @include transitionEaseInOut(background-color);
 
+    &-group {
+        @include flexWrap(var(--space-1));
+    }
+
     &:hover {
         background-color: var(--background, var(--primary-400));
     }

@@ -32,6 +32,10 @@ section:nth-child(even){
     margin-bottom: var(--space-5);
 }
 
+.my-xs {
+    margin-block: var(--space-1);
+}
+
 .my-1 {
     margin-block: var(--space-3);
 }

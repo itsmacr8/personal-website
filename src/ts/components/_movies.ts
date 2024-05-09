@@ -18,10 +18,12 @@ async function searchMovies(movieName: string) {
             <div><img src="${movie.Poster}" alt="Movie Poster"></div>
             <div class="card-body">
                 <h2 class="movie-title">${movie.Title}<span class="title-text"> (${movie.Year})</span></h2>
-                <p class="movie-text">Type: ${movie.Type}</p>
-                <button class="btn btn--movie-details" data-imdbid=${movie.imdbID}>Details</button>
-                <button class="btn">Watched</button>
-                <a href="https://www.imdb.com/title/${movie.imdbID}/" class="btn" target="_blank" rel="noopener noreferrer">IMDB</a>
+                <p class="movie-text my-xs">Type: ${movie.Type}</p>
+                <div class="btn-group">
+                    <button class="btn btn--movie-details" data-imdbid=${movie.imdbID}>Details</button>
+                    <button class="btn">Watched</button>
+                    <a href="https://www.imdb.com/title/${movie.imdbID}/" class="btn" target="_blank" rel="noopener noreferrer">IMDB</a>
+                </div>
             </div>
         </div>`);
     });
