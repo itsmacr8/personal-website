@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Movies, MovieDetails } from '../interfaces/_movies_interfaces';
+import { Movie, MovieDetails } from '../interfaces/_movies_interfaces';
 
 const searchMovie = document.getElementById('search-movie') as HTMLInputElement;
 const delay = 1500;
@@ -10,10 +10,12 @@ let typingTimer: ReturnType<typeof setTimeout>;
 
 async function searchMovies(movieName: string) {
     const response = await axios.get(`https://www.omdbapi.com/?s=${movieName}&apikey=${API_KEY}&plot=full&y=`);
-    const movies = response.data.Search;
+    renderMovies(response.data.Search);
+}
 
-    movies.forEach((movie:Movies, index: number) => {
-        movieCards.insertAdjacentHTML('beforeend',`
+function renderMovies(movies: Movie[]) {
+    movies.forEach((movie: Movie, index: number) => {
+        movieCards.insertAdjacentHTML('beforeend', `
         <div class="movie-card" id=${index}>
             <div><img src="${movie.Poster}" alt="Movie Poster"></div>
             <div class="card-body">

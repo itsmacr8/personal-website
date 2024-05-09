@@ -1,4 +1,4 @@
-interface Movies {
+interface Movie {
     [key:string]: string,
 }
 
@@ -19,4 +19,4 @@ interface MovieDetails {
     BoxOffice?: string;
 }
 
-export type { Movies, MovieDetails }
+export type { Movie, MovieDetails }
