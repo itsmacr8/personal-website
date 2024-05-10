@@ -10,10 +10,15 @@ let typingTimer: ReturnType<typeof setTimeout>;
 
 async function searchMovies(movieName: string) {
     const response = await axios.get(`https://www.omdbapi.com/?s=${movieName}&apikey=${API_KEY}&plot=full&y=`);
-    renderMovies(response.data.Search);
+    renderMovies(movieName, response.data.Search);
 }
 
-function renderMovies(movies: Movie[]) {
+function renderMovies(movieName: string, movies: Movie[]) {
+    if(!movies) {
+        movieCards.innerHTML = `<h3 class="text-center">No movies found with <span class="text-primary">${movieName}</span> name</h3>`
+        return
+    }
+    movieCards.innerHTML = ''
     movies.forEach((movie: Movie, index: number) => {
         movieCards.insertAdjacentHTML('beforeend', `
         <div class="movie-card" id=${index}>
