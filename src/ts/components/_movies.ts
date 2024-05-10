@@ -71,6 +71,10 @@ searchMovie.addEventListener('input', () => {
     clearTimeout(typingTimer);  // Clear the previous timer
     // Start a new timer that code will execute after the specified delay
     typingTimer = setTimeout(() => {
-        (searchMovie.value.length > 2) && searchMovies(searchMovie.value);
+        if (searchMovie.value.length < 3) {
+            movieCards.innerHTML = '<h3 class="text-center">Type at least 3 characters to search for a movie!</h3>'
+            return
+        }
+        searchMovies(searchMovie.value);
     }, delay);
 });
