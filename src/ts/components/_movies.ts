@@ -23,9 +23,9 @@ function renderMovies(movieName: string, movies: Movie[]) {
     movies.forEach((movie: Movie, index: number) => {
         movieCards.insertAdjacentHTML('beforeend', `
         <div class="movie-card" id=${index}>
-            <div><img src="${movie.Poster}" alt="Movie Poster"></div>
-            <div class="card-body">
-                <h2 class="movie-title">${movie.Title}<span class="title-text"> (${movie.Year})</span></h2>
+            <div><img class="poster" src="${movie.Poster}" alt="Movie Poster"></div>
+            <div class="movie-card__body">
+                <h2 class="movie-card__title">${movie.Title}<span class="title-text"> (${movie.Year})</span></h2>
                 <p class="movie-text my-xs">Type: ${movie.Type}</p>
                 <div class="btn-group">
                     <button class="btn btn--movie-details" data-imdbid=${movie.imdbID}>Details</button>
@@ -48,18 +48,18 @@ function renderMovie(movie:MovieDetails) {
     modal.insertAdjacentHTML('beforeend', `
     <div class="modal__content">
         <button class="modal__close">&times;</button>
-        <div class="modal--thumbnail">
-            <img src="${movie.Poster}" alt="Movie Poster">
-            <h2 class="movie-title mt-s">${movie.Title} (${movie.Year})</h2>
+        <div class="modal__primary-details">
+            <img class="poster" src="${movie.Poster}" alt="Movie Poster">
+            <h2 class="mt-s">${movie.Title} (${movie.Year})</h2>
             <p>${movie.Type} - ${movie.Runtime}</p>
         </div>
-        <div class="modal--details">
+        <div class="modal__secondary-details">
             <p class="movie-text mb-s">${movie.Plot}</p>
             <p>Genre: ${movie.Genre}</p>
-            <p class="imdb-rating my-xs">IMDB: <span class="rating-text">${movie.Ratings[0]?.Value || 'N/A'}</span> | Rotten: <span class="rating-text">${movie.Ratings[1]?.Value || 'N/A'}</span></p>
-            <p class="country">Country: <span class="country-text">${movie.Country}</span></p>
-            <p class="language my-xs">Language: <span class="language-text">${movie.Language}</span></p>
-            <p class="box-office">Box Office: ${movie.BoxOffice}</p>
+            <p class="my-xs">IMDB: ${movie.Ratings[0]?.Value || 'N/A'} | Rotten: ${movie.Ratings[1]?.Value || 'N/A'}</p>
+            <p>Country: ${movie.Country}</p>
+            <p class="my-xs">Language: ${movie.Language}</p>
+            <p>Box Office: ${movie.BoxOffice}</p>
         </div>
     </div>
     `);

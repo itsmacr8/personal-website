@@ -65,3 +65,8 @@ section:nth-child(even){
 	display: grid;
 	grid-template-rows: max-content auto max-content;
 }
+
+.poster {
+    object-fit: cover;
+    width: 100%;
+}

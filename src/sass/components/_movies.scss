@@ -1,7 +1,3 @@
-.card-body {
-    padding: 10px;
-}
-
 .movie-cards {
     color: var(--black);
     display: flex;
@@ -15,14 +11,13 @@
     max-width: var(--movie-card-width);
     background-color: var(--grey-300);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
 
-.movie-card img, .modal img {
-    object-fit: cover;
-    width: 100%;
-}
+    &__body {
+        padding: 10px;
+    }
 
-.movie-title {
-    font-size: 1rem;
-    font-weight: bold;
+    &__title {
+        font-size: 1rem;
+        font-weight: bold;
+    }
 }

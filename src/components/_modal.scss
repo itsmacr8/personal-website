@@ -47,18 +47,18 @@
       }
     }
 
-    :is(.modal--thumbnail :is(h2, p), .modal--details) {
+    :is(.modal__primary-details :is(h2, p), .modal__secondary-details) {
       padding-inline: var(--space-3);
       @include respond(tab-port) {
         padding-inline: initial;
       }
     }
 
-    .modal--thumbnail {
+    .modal__primary-details {
       flex-basis: 40%;
     }
 
-    .modal--details {
+    .modal__secondary-details {
       flex-basis: 56%;
     }
   }
