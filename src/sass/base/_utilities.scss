@@ -20,6 +20,14 @@ section:nth-child(even){
     text-align: center;
 }
 
+.mt-s {
+    margin-top: var(--space-2);
+}
+
+.mb-s {
+    margin-bottom: var(--space-2);
+}
+
 .mb-1 {
     margin-bottom: var(--space-3);
 }

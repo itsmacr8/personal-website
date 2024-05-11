@@ -37,9 +37,18 @@
     transition: $property var(--animation-duration) ease-in-out;
 }
 
+@mixin transitionEaseInOutWithDelay($property: transform, $duration: var(--animation-duration), $delay: var(--animation-delay)) {
+    transition: $property $duration $delay ease-in-out;
+}
+
 @mixin transitionEaseInOutMul($property1: transform, $property2: color) {
     transition: $property1 var(--animation-duration) ease-in-out,
         $property2 var(--animation-duration) ease-in-out;
+}
+
+@mixin transitionEaseInOutMulWithDelay($property1: transform, $property2: color, $duration: var(--animation-duration), $delay: var(--animation-delay)) {
+    transition: $property1 $duration $delay ease-in-out,
+        $property2 $duration $delay ease-in-out;
 }
 
 @mixin linkStyle {
