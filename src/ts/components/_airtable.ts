@@ -1,5 +1,5 @@
 import Airtable, { Base } from "airtable";
-import { Movie } from "../interfaces/_movies_interfaces";
+import { Movie, MovieDetails } from "../interfaces/_movies_interfaces";
 import { renderMovies } from "./_movies";
 
 
@@ -36,6 +36,38 @@ class AirTable {
     } catch (error) {
         console.error(error);
     }
+  }
+
+  addMovie(tableName: string, movie: MovieDetails) {
+    // It capitalize the first letter, eg. movie to Movie
+    const type = movie.Type.charAt(0).toUpperCase() + movie.Type.slice(1)
+    this.base(tableName).create([
+      {
+        "fields": {
+        "IMDB_ID": movie.imdbID,
+        "Poster": movie.Poster,
+        "Title": movie.Title,
+        "Year": Number(movie.Year),
+        "Genre": movie.Genre,
+        "Type": type,
+        "Runtime": movie.Runtime,
+        "Plot": movie.Plot,
+        "IMDBRatings": movie.Ratings[0]?.Value || 'N/A',
+        "RottenRatings": movie.Ratings[1]?.Value || 'N/A',
+        "Country": movie.Country,
+        "Language": movie.Language,
+        "BoxOffice": movie.BoxOffice,
+        }
+      },],
+    function(err, records) {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      records?.forEach(function (record) {
+        console.log(record.getId());
+      });
+    });
   }
 }
 

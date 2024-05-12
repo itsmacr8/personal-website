@@ -31,7 +31,7 @@ function renderMovies(movies: Movie[], movieName: string = '') {
                 <p class="movie-text my-xs">Type: ${movie.Type}</p>
                 <div class="btn-group">
                     <button class="btn btn--movie-details" data-imdbid=${movie.imdbID || movie.IMDB_ID}>Details</button>
-                    <button class="btn">Watched</button>
+                    <button class="btn btn--movie-add" data-imdbid=${movie.imdbID || movie.IMDB_ID}>Add</button>
                     <a href="https://www.imdb.com/title/${movie.imdbID || movie.IMDB_ID}/" class="btn" target="_blank" rel="noopener noreferrer">IMDB</a>
                 </div>
             </div>
@@ -41,8 +41,7 @@ function renderMovies(movies: Movie[], movieName: string = '') {
 
 async function getMovieDetails(movieName: string) {
     const response = await axios.get(`https://www.omdbapi.com/?i=${movieName}&apikey=${API_KEY}&plot=full&y=`);
-    const data = response.data;
-    renderMovie(data);
+    return response.data;
 }
 
 function renderMovie(movie:MovieDetails) {
@@ -70,13 +69,24 @@ function renderMovie(movie:MovieDetails) {
     showModal(modal)
 }
 
-movieCards.addEventListener('click', (event) => {
+movieCards.addEventListener('click', async (event) => {
     const target = event.target as HTMLElement;
     if (target.classList.contains('btn--movie-details')) {
         const movieID = target.dataset.imdbid;
-        movieID && getMovieDetails(movieID)
+        movieID && renderMovie(await getMovieDetails(movieID))
+        return
+    } else if (target.classList.contains('btn--movie-add')) {
+        const movieID = target.dataset.imdbid;
+        movieID && addMovie(movieID)
+        return
     }
 });
+
+async function addMovie(movieID:string) {
+    const movieDetails = await getMovieDetails(movieID)
+    const country:string = movieDetails.Country.split(',').shift()?.trim()
+    AirTableDB.addMovie(country, movieDetails)
+}
 
 searchMovie.addEventListener('input', () => {
     clearTimeout(typingTimer);  // Clear the previous timer

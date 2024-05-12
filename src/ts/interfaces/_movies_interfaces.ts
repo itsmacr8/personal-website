@@ -3,6 +3,7 @@ interface Movie {
 }
 
 interface MovieDetails {
+    imdbID: string;
     Poster?: string;
     Title: string;
     Year: string;
