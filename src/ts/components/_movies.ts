@@ -1,20 +1,22 @@
 import axios from 'axios';
 import { Movie, MovieDetails } from '../interfaces/_movies_interfaces';
 import { modal, showModal } from "../../components/_modal";
+import { AirTable } from './_airtable';
 
 const searchMovie = document.getElementById('search-movie') as HTMLInputElement;
 const delay = 1500;
 const movieCards = document.querySelector('#movie-cards') as HTMLButtonElement
 const API_KEY = import.meta.env.VITE_API_KEY;
+const AirTableDB = new AirTable()
 
 let typingTimer: ReturnType<typeof setTimeout>;
 
 async function searchMovies(movieName: string) {
     const response = await axios.get(`https://www.omdbapi.com/?s=${movieName}&apikey=${API_KEY}&plot=full&y=`);
-    renderMovies(movieName, response.data.Search);
+    renderMovies(response.data.Search, movieName);
 }
 
-function renderMovies(movieName: string, movies: Movie[]) {
+function renderMovies(movies: Movie[], movieName: string = '') {
     if(!movies) {
         movieCards.innerHTML = `<h3 class="text-center">No movies found with <span class="text-primary">${movieName}</span> name</h3>`
         return
@@ -28,9 +30,9 @@ function renderMovies(movieName: string, movies: Movie[]) {
                 <h2 class="movie-card__title">${movie.Title}<span class="title-text"> (${movie.Year})</span></h2>
                 <p class="movie-text my-xs">Type: ${movie.Type}</p>
                 <div class="btn-group">
-                    <button class="btn btn--movie-details" data-imdbid=${movie.imdbID}>Details</button>
+                    <button class="btn btn--movie-details" data-imdbid=${movie.imdbID || movie.IMDB_ID}>Details</button>
                     <button class="btn">Watched</button>
-                    <a href="https://www.imdb.com/title/${movie.imdbID}/" class="btn" target="_blank" rel="noopener noreferrer">IMDB</a>
+                    <a href="https://www.imdb.com/title/${movie.imdbID || movie.IMDB_ID}/" class="btn" target="_blank" rel="noopener noreferrer">IMDB</a>
                 </div>
             </div>
         </div>`);
@@ -44,6 +46,8 @@ async function getMovieDetails(movieName: string) {
 }
 
 function renderMovie(movie:MovieDetails) {
+    // We have to use movie.imdbID || movie.IMDB_ID because
+    // imdbID is the property of OMDB and IMDB_ID is airtable
     modal.innerHTML = '';
     modal.insertAdjacentHTML('beforeend', `
     <div class="modal__content">
@@ -85,3 +89,7 @@ searchMovie.addEventListener('input', () => {
         searchMovies(searchMovie.value);
     }, delay);
 });
+
+// AirTableDB.showMovies('')
+
+export { renderMovies }

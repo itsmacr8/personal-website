@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "airtable": "^0.12.2",
     "axios": "^1.6.8"
   },
   "devDependencies": {

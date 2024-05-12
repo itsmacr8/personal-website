@@ -1,5 +1,5 @@
 interface Movie {
-    [key:string]: string,
+    [key:string]: any,
 }
 
 interface MovieDetails {
