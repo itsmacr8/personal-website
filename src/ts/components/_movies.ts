@@ -2,6 +2,7 @@ import axios from 'axios';
 import { Movie, MovieDetails } from '../interfaces/_movies_interfaces';
 import { modal, showModal } from "../../components/_modal";
 import { AirTable } from './_airtable';
+import { searchMoviesMarkup, showMoviesMarkup } from './_movies_markup';
 
 const searchMovie = document.getElementById('search-movie') as HTMLInputElement;
 const delay = 1500;
@@ -23,19 +24,8 @@ function renderMovies(movies: Movie[], movieName: string = '') {
     }
     movieCards.innerHTML = ''
     movies.forEach((movie: Movie, index: number) => {
-        movieCards.insertAdjacentHTML('beforeend', `
-        <div class="movie-card" id=${index}>
-            <div><img class="poster" src="${movie.Poster}" alt="Movie Poster"></div>
-            <div class="movie-card__body">
-                <h2 class="movie-card__title">${movie.Title}<span class="title-text"> (${movie.Year})</span></h2>
-                <p class="movie-text my-xs">Type: ${movie.Type}</p>
-                <div class="btn-group">
-                    <button class="btn btn--movie-details" data-imdbid=${movie.imdbID || movie.IMDB_ID}>Details</button>
-                    <button class="btn btn--movie-add" data-imdbid=${movie.imdbID || movie.IMDB_ID}>Add</button>
-                    <a href="https://www.imdb.com/title/${movie.imdbID || movie.IMDB_ID}/" class="btn" target="_blank" rel="noopener noreferrer">IMDB</a>
-                </div>
-            </div>
-        </div>`);
+        movieName && movieCards.insertAdjacentHTML('beforeend', searchMoviesMarkup(movie, index))
+        !movieName && movieCards.insertAdjacentHTML('beforeend', showMoviesMarkup(movie, index))
     });
 }
 
