@@ -35,5 +35,11 @@
     --minus-hundred: -100%;
     --minus-two-hundred: -200%;
 
-    --movie-card-width: 26rem;
+    --movie-card-width: 22rem;
+    @include respond(tab-land) {
+        --movie-card-width: 23rem;
+    }
+    @include respond(big-desktop) {
+        --movie-card-width: 24rem;
+    }
 }

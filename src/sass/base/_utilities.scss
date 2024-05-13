@@ -14,6 +14,9 @@ section:nth-child(even){
     margin-inline: auto;
     width: 90%;
     max-width: 1600px;
+    @include respond(tab-port) {
+        width: 95%;
+    }
 }
 
 .text-center {

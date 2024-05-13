@@ -3,7 +3,7 @@
     display: flex;
     flex-wrap: wrap;
     text-align: left;
-    gap: 1.5rem;
+    gap: var(--space-3);
 }
 
 .movie-card {
