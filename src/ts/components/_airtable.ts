@@ -1,6 +1,7 @@
 import Airtable, { Base } from "airtable";
 import { Movie, MovieDetails } from "../interfaces/_movies_interfaces";
 import { renderMovies } from "./_movies";
+import { capitalize } from "../_utils";
 
 
 class AirTable {
@@ -39,8 +40,6 @@ class AirTable {
   }
 
   addMovie(tableName: string, movie: MovieDetails) {
-    // It capitalize the first letter, eg. movie to Movie
-    const type = movie.Type.charAt(0).toUpperCase() + movie.Type.slice(1)
     this.base(tableName).create([
       {
         "fields": {
@@ -49,7 +48,7 @@ class AirTable {
         "Title": movie.Title,
         "Year": Number(movie.Year),
         "Genre": movie.Genre,
-        "Type": type,
+        "Type": capitalize(movie.Type),
         "Runtime": movie.Runtime,
         "Plot": movie.Plot,
         "IMDBRatings": movie.Ratings[0]?.Value || 'N/A',
