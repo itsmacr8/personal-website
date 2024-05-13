@@ -7,7 +7,7 @@ function searchMoviesMarkup(movie:Movie, index:number) {
         <div><img class="poster" src="${movie.Poster}" alt="Movie Poster"></div>
         <div class="movie-card__body">
             <h2 class="movie-card__title">${movie.Title}<span class="title-text"> (${movie.Year})</span></h2>
-            <p class="movie-text my-xs">Type: ${capitalize(movie.Type)}</p>
+            <p class="movie-text my-xs"><span class="point-name">Type:</span> ${capitalize(movie.Type)}</p>
             <div class="btn-group">
                 <button class="btn btn--movie-details" data-imdbid=${movie.imdbID || movie.IMDB_ID}>Details</button>
                 <button class="btn btn--movie-add" data-imdbid=${movie.imdbID || movie.IMDB_ID}>Watch List</button>
