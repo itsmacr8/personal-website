@@ -8,6 +8,7 @@ class AirTable {
   private api_key: string = import.meta.env.VITE_AIRTABLE_KEY;
   private api_base: string = import.meta.env.VITE_AIRTABLE_BASE;
   private base: Base = new Airtable({ apiKey: this.api_key }).base(this.api_base);
+  private airTableName: string = import.meta.env.VITE_AIRTABLE_TABLE_NAME;
 
   async getMoviesList(tableName:string) {
     // Table name to show data from the table
@@ -67,6 +68,20 @@ class AirTable {
         console.log(record.getId());
       });
     });
+  }
+
+  async getCountryList() {
+    const countries: any[] = [];
+    try {
+      const records = await this.base(this.airTableName).select().firstPage();
+      records?.forEach((record) => {
+        countries.push(record.get(this.airTableName));
+      });
+      return countries;
+    } catch (err) {
+      console.error(err);
+      return [];
+    }
   }
 }
 

@@ -8,6 +8,7 @@ const searchMovie = document.getElementById('search-movie') as HTMLInputElement;
 const delay = 1500;
 const movieCards = document.querySelector('#movie-cards') as HTMLButtonElement
 const API_KEY = import.meta.env.VITE_API_KEY;
+const airTableRecord = import.meta.env.VITE_AIRTABLE_RECORD;
 const AirTableDB = new AirTable()
 
 let typingTimer: ReturnType<typeof setTimeout>;
@@ -75,7 +76,12 @@ movieCards.addEventListener('click', async (event) => {
 async function addMovie(movieID:string) {
     const movieDetails = await getMovieDetails(movieID)
     const country:string = movieDetails.Country.split(',').shift()?.trim()
-    AirTableDB.addMovie(country, movieDetails)
+    const countries = await AirTableDB.getCountryList()
+    if (countries.includes(country)) {
+        AirTableDB.addMovie(country, movieDetails)
+    } else {
+        AirTableDB.addMovie(airTableRecord, movieDetails)
+    }
 }
 
 searchMovie.addEventListener('input', () => {
