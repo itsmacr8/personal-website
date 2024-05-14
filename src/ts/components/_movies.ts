@@ -10,6 +10,7 @@ const movieCards = document.querySelector('#movie-cards') as HTMLButtonElement
 const API_KEY = import.meta.env.VITE_API_KEY;
 const airTableRecord = import.meta.env.VITE_AIRTABLE_RECORD;
 const AirTableDB = new AirTable()
+const moviesButton = document.getElementById('btn-movies') as HTMLDivElement;
 
 let typingTimer: ReturnType<typeof setTimeout>;
 
@@ -72,6 +73,15 @@ movieCards.addEventListener('click', async (event) => {
         return
     }
 });
+
+async function createCountryButtons() {
+    const countries = await AirTableDB.getCountryList()
+    for (const country of countries) {
+        moviesButton.insertAdjacentHTML('beforeend', `<button class="btn" data-country="${country}">${country} Movies</button>`)
+    }
+}
+
+createCountryButtons()
 
 async function addMovie(movieID:string) {
     const movieDetails = await getMovieDetails(movieID)
