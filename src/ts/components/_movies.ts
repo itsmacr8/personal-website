@@ -83,6 +83,15 @@ async function createCountryButtons() {
 
 createCountryButtons()
 
+moviesButton.addEventListener('click', async (event) => {
+    const target = event.target as HTMLElement;
+    if (target.classList.contains('btn')) {
+        const country = target.dataset.country;
+        country && AirTableDB.showMovies(country)
+        return
+    }
+});
+
 async function addMovie(movieID:string) {
     const movieDetails = await getMovieDetails(movieID)
     const country:string = movieDetails.Country.split(',').shift()?.trim()
