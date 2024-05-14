@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Movie, MovieDetails } from '../interfaces/_movies_interfaces';
 import { modal, showModal } from "../../components/_modal";
 import { AirTable } from './_airtable';
-import { searchMoviesMarkup, showMoviesMarkup } from './_movies_markup';
+import { searchMoviesMarkup, showMoviesMarkup, detailsMovieMarkup } from './_movies_markup';
 
 const searchMovie = document.getElementById('search-movie') as HTMLInputElement;
 const delay = 1500;
@@ -40,24 +40,7 @@ function renderMovie(movie:MovieDetails) {
     // We have to use movie.imdbID || movie.IMDB_ID because
     // imdbID is the property of OMDB and IMDB_ID is airtable
     modal.innerHTML = '';
-    modal.insertAdjacentHTML('beforeend', `
-    <div class="modal__content">
-        <button class="modal__close">&times;</button>
-        <div class="modal__primary-details">
-            <img class="poster" src="${movie.Poster}" alt="Movie Poster">
-            <h2 class="mt-s">${movie.Title} (${movie.Year})</h2>
-            <p>${movie.Type} - ${movie.Runtime}</p>
-        </div>
-        <div class="modal__secondary-details">
-            <p class="movie-text mb-s">${movie.Plot}</p>
-            <p>Genre: ${movie.Genre}</p>
-            <p class="my-xs">IMDB: ${movie.Ratings[0]?.Value || 'N/A'} | Rotten: ${movie.Ratings[1]?.Value || 'N/A'}</p>
-            <p>Country: ${movie.Country}</p>
-            <p class="my-xs">Language: ${movie.Language}</p>
-            <p>Box Office: ${movie.BoxOffice}</p>
-        </div>
-    </div>
-    `);
+    modal.insertAdjacentHTML('beforeend', detailsMovieMarkup(movie));
     showModal(modal)
 }
 

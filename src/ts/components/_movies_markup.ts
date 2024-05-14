@@ -1,4 +1,4 @@
-import { Movie } from "../interfaces/_movies_interfaces"
+import { Movie, MovieDetails } from "../interfaces/_movies_interfaces"
 import { capitalize } from "../_utils"
 
 function searchMoviesMarkup(movie:Movie, index:number) {
@@ -35,4 +35,24 @@ function showMoviesMarkup(movie:Movie, index:number) {
     </div>`
 }
 
-export { searchMoviesMarkup, showMoviesMarkup }
+function detailsMovieMarkup(movie:MovieDetails) {
+    return`
+    <div class="modal__content">
+        <button class="modal__close">&times;</button>
+        <div class="modal__primary-details">
+            <img class="poster" src="${movie.Poster}" alt="Movie Poster">
+            <h2 class="mt-s">${movie.Title} (${movie.Year})</h2>
+            <p>${capitalize(movie.Type)} - ${movie.Runtime}</p>
+        </div>
+        <div class="modal__secondary-details">
+            <p class="movie-text mb-s">${movie.Plot}</p>
+            <p>Genre: ${movie.Genre}</p>
+            <p class="my-xs">IMDB: ${movie.Ratings[0]?.Value || 'N/A'} | Rotten: ${movie.Ratings[1]?.Value || 'N/A'}</p>
+            <p>Country: ${movie.Country}</p>
+            <p class="my-xs">Language: ${movie.Language}</p>
+            <p>Box Office: ${movie.BoxOffice}</p>
+        </div>
+    </div>`
+}
+
+export { searchMoviesMarkup, showMoviesMarkup, detailsMovieMarkup }
