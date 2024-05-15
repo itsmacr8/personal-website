@@ -3,6 +3,7 @@ import { Movie, MovieDetails } from '../interfaces/_movies_interfaces';
 import { modal, showModal } from "../../components/_modal";
 import { AirTable } from './_airtable';
 import { searchMoviesMarkup, showMoviesMarkup, detailsMovieMarkup } from './_movies_markup';
+import { loader } from '../../components/Loader/Loader';
 
 const searchMovie = document.getElementById('search-movie') as HTMLInputElement;
 const delay = 1500;
@@ -76,6 +77,7 @@ moviesButton.addEventListener('click', async (event) => {
 });
 
 async function addMovie(movieID:string) {
+    loader.classList.remove('loader-container--hide')
     const movieDetails = await getMovieDetails(movieID)
     const country:string = movieDetails.Country.split(',').shift()?.trim()
     const countries = await AirTableDB.getCountryList()

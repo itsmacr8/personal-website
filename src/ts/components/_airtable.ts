@@ -4,6 +4,7 @@ import { renderMovies } from "./_movies";
 import { capitalize } from "../_utils";
 import { modal, showModal, autoCloseModal } from "../../components/_modal";
 import { movieDBSaveMarkup, movieDBErrorMarkup } from "./_movies_markup";
+import { loader } from "../../components/Loader/Loader";
 
 
 class AirTable {
@@ -76,6 +77,7 @@ class AirTable {
   cleanAndShowModal(movieDBMarkup: Function, name: string, countryOrErr: string) {
     modal.innerHTML = '';
     modal.insertAdjacentHTML('beforeend', movieDBMarkup(name, countryOrErr))
+    loader.classList.add('loader-container--hide')
     showModal(modal)
   }
 
