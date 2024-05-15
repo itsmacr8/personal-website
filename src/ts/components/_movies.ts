@@ -3,7 +3,7 @@ import { Movie, MovieDetails } from '../interfaces/_movies_interfaces';
 import { modal, showModal } from "../../components/_modal";
 import { AirTable } from './_airtable';
 import { searchMoviesMarkup, showMoviesMarkup, detailsMovieMarkup } from './_movies_markup';
-import { loader } from '../../components/Loader/Loader';
+import { showLoader, hideLoader } from '../_utils';
 
 const searchMovie = document.getElementById('search-movie') as HTMLInputElement;
 const delay = 1500;
@@ -23,11 +23,11 @@ async function searchMovies(movieName: string) {
 function renderMovies(movies: Movie[], movieName: string = '') {
     if(!movies) {
         movieCards.innerHTML = `<h3 class="text-center">No movies found with <span class="text-primary">${movieName}</span> name</h3>`
-        loader.classList.add('loader-container--hide')
+        hideLoader()
         return
     }
     movieCards.innerHTML = ''
-    loader.classList.add('loader-container--hide')
+    hideLoader()
     movies.forEach((movie: Movie, index: number) => {
         movieName && movieCards.insertAdjacentHTML('beforeend', searchMoviesMarkup(movie, index))
         !movieName && movieCards.insertAdjacentHTML('beforeend', showMoviesMarkup(movie, index))
@@ -79,7 +79,7 @@ moviesButton.addEventListener('click', async (event) => {
 });
 
 async function addMovie(movieID:string) {
-    loader.classList.remove('loader-container--hide')
+    showLoader()
     const movieDetails = await getMovieDetails(movieID)
     const country:string = movieDetails.Country.split(',').shift()?.trim()
     const countries = await AirTableDB.getCountryList()
@@ -98,7 +98,7 @@ searchMovie.addEventListener('input', () => {
             movieCards.innerHTML = '<h3 class="text-center">Type at least 3 characters to search for a movie!</h3>'
             return
         }
-        loader.classList.remove('loader-container--hide')
+        showLoader()
         searchMovies(searchMovie.value);
     }, delay);
 });

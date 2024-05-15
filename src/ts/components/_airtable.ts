@@ -1,7 +1,7 @@
 import Airtable, { Base } from "airtable";
 import { Movie, MovieDetails } from "../interfaces/_movies_interfaces";
 import { renderMovies } from "./_movies";
-import { capitalize } from "../_utils";
+import { capitalize, hideLoader } from "../_utils";
 import { modal, showModal, autoCloseModal } from "../../components/_modal";
 import { movieDBSaveMarkup, movieDBErrorMarkup } from "./_movies_markup";
 import { loader } from "../../components/Loader/Loader";
@@ -78,7 +78,7 @@ class AirTable {
     modal.innerHTML = '';
     modal.insertAdjacentHTML('beforeend', movieDBMarkup(name, countryOrErr))
     modal.classList.add('modal--db-mess')
-    loader.classList.add('loader-container--hide')
+    hideLoader()
     showModal(modal)
   }
 
