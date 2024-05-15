@@ -55,4 +55,20 @@ function detailsMovieMarkup(movie:MovieDetails) {
     </div>`
 }
 
-export { searchMoviesMarkup, showMoviesMarkup, detailsMovieMarkup }
+function movieDBSaveMarkup(movieName:string, countryName:string) {
+    return`
+    <div class="modal__content movie-db movie-db--saved">
+        <p><strong>${movieName}</strong> saved to the <strong>${countryName}</strong> database successfully!</p>
+        <button class="modal__close" aria-label="Close">&times;</button>
+    </div>`;
+}
+
+function movieDBErrorMarkup(movieName:string, errMess:string) {
+    return`
+    <div class="modal__content movie-db movie-db--error">
+        <p>Error! Could not save <strong>${movieName}</strong> to the database. ${errMess}.</p>
+        <button class="modal__close" aria-label="Close">&times;</button>
+    </div>`;
+}
+
+export { searchMoviesMarkup, showMoviesMarkup, detailsMovieMarkup, movieDBSaveMarkup, movieDBErrorMarkup }

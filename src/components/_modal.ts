@@ -18,6 +18,11 @@ async function closeModal(modal:HTMLDivElement) {
     modal.classList.add('modal--hide')
 }
 
+async function autoCloseModal(modal:HTMLDivElement) {
+    await waitFor(5000);
+    closeModal(modal)
+}
+
 // close modal window with click on close button or outside of the modal
 modal.addEventListener("click", function (e) {
     const target = e.target as HTMLElement
@@ -31,4 +36,4 @@ document.addEventListener('keydown', function (e) {
         closeModal(modal);
 });
 
-export { modal, showModal }
+export { modal, showModal, autoCloseModal }

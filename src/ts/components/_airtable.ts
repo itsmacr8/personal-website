@@ -2,6 +2,8 @@ import Airtable, { Base } from "airtable";
 import { Movie, MovieDetails } from "../interfaces/_movies_interfaces";
 import { renderMovies } from "./_movies";
 import { capitalize } from "../_utils";
+import { modal, showModal, autoCloseModal } from "../../components/_modal";
+import { movieDBSaveMarkup, movieDBErrorMarkup } from "./_movies_markup";
 
 
 class AirTable {
@@ -59,15 +61,22 @@ class AirTable {
         "BoxOffice": movie.BoxOffice,
         }
       },],
-    function(err, records) {
+    (err, records) => {
       if (err) {
-        console.error(err);
+        this.cleanAndShowModal(movieDBErrorMarkup, movie.Title, err.message)
         return;
       }
-      records?.forEach(function (record) {
-        console.log(record.getId());
+      records?.forEach( () => {
+        this.cleanAndShowModal(movieDBSaveMarkup, movie.Title, movie.Country)
+        autoCloseModal(modal)
       });
     });
+  }
+
+  cleanAndShowModal(movieDBMarkup: Function, name: string, countryOrErr: string) {
+    modal.innerHTML = '';
+    modal.insertAdjacentHTML('beforeend', movieDBMarkup(name, countryOrErr))
+    showModal(modal)
   }
 
   async getCountryList() {

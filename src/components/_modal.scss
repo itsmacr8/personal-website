@@ -63,6 +63,25 @@
     }
   }
 
+  .movie-db {
+    &--error {
+      --bg: var(--warning-500);
+      --fg: var(--warning-400);
+    }
+    background-color: var(--bg, var(--success-500));
+
+    p {
+      width: 100%;
+      text-align: center;
+      font-size: 1.3125rem;
+      color: var(--fg, var(--success-400));
+    }
+
+    button {
+      color: var(--fg, var(--success-400));
+    }
+  }
+
   &__close {
     position: absolute;
     bottom: 5px;
