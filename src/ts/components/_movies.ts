@@ -23,9 +23,11 @@ async function searchMovies(movieName: string) {
 function renderMovies(movies: Movie[], movieName: string = '') {
     if(!movies) {
         movieCards.innerHTML = `<h3 class="text-center">No movies found with <span class="text-primary">${movieName}</span> name</h3>`
+        loader.classList.add('loader-container--hide')
         return
     }
     movieCards.innerHTML = ''
+    loader.classList.add('loader-container--hide')
     movies.forEach((movie: Movie, index: number) => {
         movieName && movieCards.insertAdjacentHTML('beforeend', searchMoviesMarkup(movie, index))
         !movieName && movieCards.insertAdjacentHTML('beforeend', showMoviesMarkup(movie, index))
@@ -96,6 +98,7 @@ searchMovie.addEventListener('input', () => {
             movieCards.innerHTML = '<h3 class="text-center">Type at least 3 characters to search for a movie!</h3>'
             return
         }
+        loader.classList.remove('loader-container--hide')
         searchMovies(searchMovie.value);
     }, delay);
 });
