@@ -77,6 +77,7 @@ class AirTable {
   cleanAndShowModal(movieDBMarkup: Function, name: string, countryOrErr: string) {
     modal.innerHTML = '';
     modal.insertAdjacentHTML('beforeend', movieDBMarkup(name, countryOrErr))
+    modal.classList.add('modal--db-mess')
     loader.classList.add('loader-container--hide')
     showModal(modal)
   }

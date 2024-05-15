@@ -1,4 +1,5 @@
 @import "../sass/abstracts/mixins";
+@import "../sass/layout/flex";
 
 .modal {
   position: fixed;
@@ -11,12 +12,35 @@
   opacity: 0;
   @include transitionEaseInOutWithDelay(opacity, 250ms, 500ms);
   @include respond(tab-port) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flexCenter;
   }
 
-  .modal__content {
+  &--db-mess {
+    @include flexCenter;
+
+    .movie-db {
+      &--error {
+        --bg: var(--warning-500);
+        --fg: var(--warning-400);
+      }
+      background-color: var(--bg, var(--success-500));
+      padding: clamp(1rem, 2vw, 3rem);
+
+      p {
+        width: 90%;
+        text-align: center;
+        font-size: 1.3125rem;
+        color: var(--fg, var(--success-400));
+      }
+
+      button {
+        color: var(--fg, var(--success-400));
+        line-height: 1;
+      }
+    }
+  }
+
+  &__content {
     width: calc(100% - 2.5rem);
     max-width: 60rem;
     margin-inline: auto;
@@ -60,25 +84,6 @@
 
     .modal__secondary-details {
       flex-basis: 56%;
-    }
-  }
-
-  .movie-db {
-    &--error {
-      --bg: var(--warning-500);
-      --fg: var(--warning-400);
-    }
-    background-color: var(--bg, var(--success-500));
-
-    p {
-      width: 100%;
-      text-align: center;
-      font-size: 1.3125rem;
-      color: var(--fg, var(--success-400));
-    }
-
-    button {
-      color: var(--fg, var(--success-400));
     }
   }
 

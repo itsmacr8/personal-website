@@ -13,6 +13,7 @@ async function showModal(modal:HTMLDivElement) {
 }
 
 async function closeModal(modal:HTMLDivElement) {
+    modal.classList.remove('modal--db-mess')
     modal.classList.remove('modal--show')
     await waitFor(850);
     modal.classList.add('modal--hide')
