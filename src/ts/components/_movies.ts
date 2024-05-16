@@ -90,15 +90,25 @@ async function addMovie(movieID:string) {
     }
 }
 
+function checkInputLength(length: number) {
+    if (length >= 3) {
+        return false
+    }
+    else if (length == 0) {
+        movieCards.innerHTML = '<button class="btn mx-auto">Watched movies list</button>'
+        return true
+    }
+    movieCards.innerHTML = '<h3 class="text-center mx-auto custom-line-height">Type at least 3 characters to search for a movie or clear the search field to see the watched movies list.</h3>'
+    return true
+}
+
 searchMovie.addEventListener('input', () => {
     clearTimeout(typingTimer);  // Clear the previous timer
     // Start a new timer that code will execute after the specified delay
     typingTimer = setTimeout(() => {
-        if (searchMovie.value.length < 3) {
-            movieCards.innerHTML = '<h3 class="text-center">Type at least 3 characters to search for a movie!</h3>'
-            return
-        }
+        if (checkInputLength(searchMovie.value.length)) return
         showLoader()
+        moviesButton.classList.add('hide-element')
         searchMovies(searchMovie.value);
     }, delay);
 });
