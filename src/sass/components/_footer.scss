@@ -11,7 +11,7 @@
 }
 .developer-link {
     @include linkStyle;
-    color: var(--secondary-400);
+    color: var(--tertiary-400);
     @include transitionEaseInOut(color);
 }
 .social{

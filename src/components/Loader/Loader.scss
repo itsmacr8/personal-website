@@ -23,7 +23,7 @@
     bottom: 0;
     width: 10px;
     height: 50%;
-    background-color: var(--tertiary-300);
+    background-color: var(--accent-400);
     transform-origin: center bottom;
     box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
 
@@ -42,7 +42,7 @@
     left: 0;
     width: 10px;
     height: 10px;
-    background-color: var(--tertiary-400);
+    background-color: var(--accent-500);
     border-radius: 50%;
     animation: ball 4s infinite;
   }

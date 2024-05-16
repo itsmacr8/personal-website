@@ -2,12 +2,8 @@ section {
     padding-block: var(--space-6);
 }
 
-section:nth-child(odd){
-    background: linear-gradient(265.21deg, var(--gradient-300) -16.97%, var(--gradient-400) 56.66%) no-repeat center/cover, linear-gradient(90.34deg, var(--gradient-500) -73.79%, var(--gradient-300) 87.88%) no-repeat center/cover, linear-gradient(0deg, var(--gradient-500), var(--gradient-400)) no-repeat center/cover;
-}
-
 section:nth-child(even){
-    background: linear-gradient(265.21deg, var(--gradient-500) -16.97%, var(--gradient-400) 56.66%) no-repeat center/cover, linear-gradient(90.34deg, var(--gradient-500) -73.79%, var(--gradient-300) 87.88%) no-repeat center/cover, linear-gradient(0deg, var(--gradient-500), var(--secondary-400)) no-repeat center/cover;
+    background-color: var(--grey-300);
 }
 
 .container {
@@ -70,6 +66,7 @@ section:nth-child(even){
 .section-heading {
     text-transform: uppercase;
     letter-spacing: 2px;
+    color: var(--tertiary-400);
 }
 
 .page-layout {
