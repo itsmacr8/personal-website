@@ -2,22 +2,37 @@ section {
     padding-block: var(--space-6);
 }
 
-section:nth-child(odd){
-    background: linear-gradient(265.21deg, var(--gradient-300) -16.97%, var(--gradient-400) 56.66%) no-repeat center/cover, linear-gradient(90.34deg, var(--gradient-500) -73.79%, var(--gradient-300) 87.88%) no-repeat center/cover, linear-gradient(0deg, var(--gradient-500), var(--gradient-400)) no-repeat center/cover;
-}
-
 section:nth-child(even){
-    background: linear-gradient(265.21deg, var(--gradient-500) -16.97%, var(--gradient-400) 56.66%) no-repeat center/cover, linear-gradient(90.34deg, var(--gradient-500) -73.79%, var(--gradient-300) 87.88%) no-repeat center/cover, linear-gradient(0deg, var(--gradient-500), var(--secondary-400)) no-repeat center/cover;
+    background-color: var(--grey-300);
 }
 
 .container {
     margin-inline: auto;
     width: 90%;
     max-width: 1600px;
+    @include respond(tab-port) {
+        width: 95%;
+    }
 }
 
 .text-center {
     text-align: center;
+}
+
+.mt-s {
+    margin-top: var(--space-2);
+}
+
+.mt-1 {
+    margin-top: var(--space-3);
+}
+
+.mt-2 {
+    margin-top: var(--space-4);
+}
+
+.mb-s {
+    margin-bottom: var(--space-2);
 }
 
 .mb-1 {
@@ -32,8 +47,16 @@ section:nth-child(even){
     margin-bottom: var(--space-5);
 }
 
+.my-xs {
+    margin-block: var(--space-1);
+}
+
 .my-1 {
     margin-block: var(--space-3);
+}
+
+.my-2 {
+    margin-block: var(--space-4);
 }
 
 .mx-auto {
@@ -43,4 +66,19 @@ section:nth-child(even){
 .section-heading {
     text-transform: uppercase;
     letter-spacing: 2px;
+    color: var(--tertiary-400);
+}
+
+.page-layout {
+	display: grid;
+	grid-template-rows: max-content auto max-content;
+}
+
+.poster {
+    object-fit: cover;
+    width: 100%;
+}
+
+.point-name {
+    font-weight: bold;
 }

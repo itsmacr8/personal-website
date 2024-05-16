@@ -9,17 +9,23 @@
     @include flexWrap(var(--space-2));
     justify-content: space-between;
 
+    .btn--outline {
+        --color-btn: var(--black);
+        &:hover {
+            --color-btn: var(--white);
+        }
+    }
+
     &__details {
         @include flexColumn(var(--space-2));
 
         &--order {
-            --color: var(--tertiary-400);
-            --background: var(--tertiary-300);
-            --border: 1px solid var(--tertiary-400);
-            --color-btn: var(--black);
+            --color: var(--secondary-400);
+            --background: var(--secondary-500);
+            --border: 1px solid var(--secondary-500);
 
             & .btn:hover, & .btn--outline:hover {
-                --background: var(--tertiary-400);
+                --background: var(--secondary-400);
             }
             @include respond(tab-port) {
                 order: 1;
@@ -33,7 +39,7 @@
 
     &__tag {
         padding: 0.4rem 0.8rem;
-        background-color: var(--grey-300);
+        background-color: var(--accent-500);
         border-radius: 3px;
 
         &-list {

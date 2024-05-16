@@ -1,10 +1,18 @@
 // 400 is the base color. After that it depends on the lightness of hsl.
 :root {
-    --primary-400: hsl(259, 73%, 40%);
-    --primary-500: hsl(260, 73%, 48%);
-    --secondary-400: hsl(243, 76%, 59%);
-    --tertiary-300: hsl(50, 100%, 46%);
-    --tertiary-400: hsl(50, 100%, 60%);
+    --primary-400: hsl(262, 82%, 45%);
+    --primary-500: hsl(262, 82%, 55%);
+    --secondary-400: hsl(204, 82%, 45%);
+    --secondary-500: hsl(204, 82%, 55%);
+    --tertiary-400: hsl(235, 80%, 50%);
+    --tertiary-500: hsl(235, 80%, 60%);
+    --accent-400: hsl(50, 100%, 50%);
+    --accent-500: hsl(50, 100%, 60%);
+
+    --success-400: hsl(134, 61%, 30%);
+    --success-500: hsl(134, 61%, 90%);
+    --warning-400: hsl(355, 70%, 30%);
+    --warning-500: hsl(355, 70%, 90%);
 
     --gradient-300: hsla(260, 73%, 48%, 0.35);
     --gradient-400: hsla(243, 76%, 59%, 0.35);
@@ -29,8 +37,17 @@
 
     --padding: 0.5em 1em;
     --animation-duration: 500ms;
+    --animation-delay: 250ms;
 
     --hundred: 100%;
     --minus-hundred: -100%;
     --minus-two-hundred: -200%;
+
+    --movie-card-width: 22rem;
+    @include respond(tab-land) {
+        --movie-card-width: 23rem;
+    }
+    @include respond(big-desktop) {
+        --movie-card-width: 24rem;
+    }
 }

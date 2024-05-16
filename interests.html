@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	<title>Interests | ITS MAC</title>
+</head>
+
+<body class="page-layout">
+	<div class="loader-container" id="loader-container">
+		<div class="loader">
+			<div class="loader__bar"></div>
+			<div class="loader__bar"></div>
+			<div class="loader__bar"></div>
+			<div class="loader__bar"></div>
+			<div class="loader__bar"></div>
+			<div class="loader__ball"></div>
+		</div>
+	</div>
+	<div class="modal modal--hide"></div>
+	<header class="scroll-sticky-navigation">
+		<nav class="nav-bar container">
+			<i class="bx bx-menu hamburger-icon"></i>
+			<div class="brand">
+				<a href="index.html" class="brand__logo">ITS MAC</a>
+			</div>
+			<div class="menu">
+				<div class="align-close-icon">
+					<i class="bx bx-x menu__close"></i>
+				</div>
+				<ul class="menu__nav">
+					<li class="menu__nav__item"><a href="./#about-section" class="menu__nav__link">About Me</a></li>
+					<li class="menu__nav__item"><a href="./#skills-section" class="menu__nav__link">Skills</a></li>
+					<li class="menu__nav__item"><a href="./#portfolio-section" class="menu__nav__link">Portfolio</a></li>
+					<li class="menu__nav__item"><a href="./#contact-section" class="menu__nav__link">Contact</a></li>
+				</ul>
+			</div>
+			<div class="ui-icon">
+				<i class="bx bx-moon ui-icon__moon"></i>
+				<i class="bx bx-sun ui-icon__sun"></i>
+			</div>
+		</nav>
+	</header>
+	<main>
+		<section id="hero-work-section">
+			<div class="hero-work container">
+				<h1 class="primary-heading text-center">Interests</h1>
+			</div>
+		</section>
+		<section>
+			<div class="container">
+				<h2 class="section-heading text-center">Movies</h2>
+				<div class="my-2">
+					<label for="search-movie">Search movies/shows by name</label>
+					<input type="text" id="search-movie" name="search-movie" placeholder="Search ...">
+				</div>
+				<div class="movie-cards" id="movie-cards"></div>
+				<div class="btn-group mt-2" id="btn-movies"></div>
+			</div>
+		</section>
+	</main>
+	<footer class="footer">
+		<div class="container footer__content">
+			<p>Copyright &copy; 2023-<script>document.write(new Date().getFullYear())</script> <a class="developer-link" href="https://itsmac.netlify.app/">its mac</a> - Front-end and React Developer</p>
+			<ul class="social">
+				<li><a class="social__icon" href="https://t.me/itsmacr8/" aria-label="Click here to get in touch with me via telegram"><i class="fab fa-telegram fa-2x"></i></a></li>
+				<li><a class="social__icon" href="https://www.linkedin.com/in/itsmacr8/" aria-label="Click here to get in touch with me via LinkedIn"><i class="fab fa-linkedin fa-2x"></i></a></li>
+				<li><a class="social__icon" href="https://github.com/itsmacr8" aria-label="Click here to get in touch with me via GitHub"><i class="fab fa-github fa-2x"></i></a></li>
+				<li><a class="social__icon" href="https://twitter.com/itsmacr8" aria-label="Click here to get in touch with me via X"><i class="fab fa-x-twitter fa-2x"></i></a></li>
+			</ul>
+		</div>
+    </footer>
+	<script type="module" src="/src/main.ts"></script>
+	<script type="module" src="/src/interests.ts"></script>
+</body>
+
+</html>
