@@ -4,7 +4,6 @@ import { renderMovies } from "./_movies";
 import { capitalize, hideLoader } from "../_utils";
 import { modal, showModal, autoCloseModal } from "../../components/_modal";
 import { movieDBSaveMarkup, movieDBErrorMarkup } from "./_movies_markup";
-import { loader } from "../../components/Loader/Loader";
 
 
 class AirTable {
