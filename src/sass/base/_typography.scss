@@ -22,7 +22,11 @@ h3 {
 }
 
 .text-primary {
-    color: var(--accent-500);
+    color: var(--primary-400);
+}
+
+.text-secondary {
+    color: var(--tertiary-400);
 }
 
 .custom-line-height {

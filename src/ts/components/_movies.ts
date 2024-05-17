@@ -22,7 +22,7 @@ async function searchMovies(movieName: string) {
 
 function renderMovies(movies: Movie[], movieName: string = '') {
     if(!movies) {
-        movieCards.innerHTML = `<h3 class="text-center">No movies found with <span class="text-primary">${movieName}</span> name</h3>`
+        movieCards.innerHTML = `<h3 class="text-center">No movies found with <span class="text-primary">${movieName}</span> name. Have a look at my top <span class="text-secondary cursor-pointer" data-top="watched-movies">watched movies</span></h3>`
         hideLoader()
         return
     }
@@ -94,11 +94,7 @@ function checkInputLength(length: number) {
     if (length >= 3) {
         return false
     }
-    else if (length == 0) {
-        movieCards.innerHTML = '<button class="btn mx-auto">Watched movies list</button>'
-        return true
-    }
-    movieCards.innerHTML = '<h3 class="text-center mx-auto custom-line-height">Type at least 3 characters to search for a movie or clear the search field to see the watched movies list.</h3>'
+    movieCards.innerHTML = '<h3 class="text-center mx-auto custom-line-height">Type at least 3 characters to search for a movie or have a look at my top <span class="text-secondary cursor-pointer" data-movies="top-watched">watched movies</span></h3>'
     return true
 }
 
