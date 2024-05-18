@@ -4,7 +4,7 @@ import { capitalize } from "../_utils"
 function searchMoviesMarkup(movie:Movie, index:number) {
     return`
     <div class="movie-card" id=${index}>
-        <div><img class="poster" src="${movie.Poster}" alt="Movie Poster"></div>
+        <div><img class="poster" src="${movie.Poster}" alt="${movie.Title} ${capitalize(movie.Type)} (${movie.Year}) Poster" title="${movie.Title} ${capitalize(movie.Type)} (${movie.Year}) Poster"></div>
         <div class="movie-card__body">
             <h2 class="movie-card__title">${movie.Title}<span class="title-text"> (${movie.Year})</span></h2>
             <p class="movie-text my-xs"><span class="point-name">Type:</span> ${capitalize(movie.Type)}</p>
@@ -18,9 +18,9 @@ function searchMoviesMarkup(movie:Movie, index:number) {
 }
 
 function showMoviesMarkup(movie:Movie, index:number) {
-    return `
+    return`
     <div class="movie-card" id=${index}>
-        <div><img class="poster" src="${movie.Poster}" alt="Movie Poster"></div>
+        <div><img class="poster" src="${movie.Poster}" alt="${movie.Title} ${capitalize(movie.Type)} (${movie.Year}) Poster" title="${movie.Title} ${capitalize(movie.Type)} (${movie.Year}) Poster"></div>
         <div class="movie-card__body">
             <h2 class="movie-card__title">${movie.Title}<span class="title-text"> (${movie.Year})</span></h2>
             <p class="movie-text my-xs"><span class="point-name">Type:</span> ${capitalize(movie.Type)} - ${movie.Runtime}</p>
@@ -40,7 +40,7 @@ function detailsMovieMarkup(movie:MovieDetails) {
     <div class="modal__content">
         <button class="modal__close">&times;</button>
         <div class="modal__primary-details">
-            <img class="poster" src="${movie.Poster}" alt="Movie Poster">
+            <img class="poster" src="${movie.Poster}" alt="${movie.Title} ${capitalize(movie.Type)} (${movie.Year}) Poster" title="${movie.Title} ${capitalize(movie.Type)} (${movie.Year}) Poster">
             <h2 class="mt-s">${movie.Title} (${movie.Year})</h2>
             <p>${capitalize(movie.Type)} - ${movie.Runtime}</p>
         </div>
