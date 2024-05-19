@@ -18,6 +18,8 @@ function searchMoviesMarkup(movie:Movie, index:number) {
 }
 
 function showMoviesMarkup(movie:Movie, index:number) {
+    // We have to use movie.imdbID || movie.IMDB_ID because
+    // imdbID is the property of OMDB and IMDB_ID is airtable
     return`
     <div class="movie-card" id=${index}>
         <div><img class="poster" src="${movie.Poster}" alt="${movie.Title} ${capitalize(movie.Type)} (${movie.Year}) Poster" title="${movie.Title} ${capitalize(movie.Type)} (${movie.Year}) Poster"></div>

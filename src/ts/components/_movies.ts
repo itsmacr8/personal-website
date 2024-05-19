@@ -40,8 +40,6 @@ async function getMovieDetails(movieName: string) {
 }
 
 function renderMovie(movie:MovieDetails) {
-    // We have to use movie.imdbID || movie.IMDB_ID because
-    // imdbID is the property of OMDB and IMDB_ID is airtable
     modal.innerHTML = '';
     modal.insertAdjacentHTML('beforeend', detailsMovieMarkup(movie));
     showModal(modal)
