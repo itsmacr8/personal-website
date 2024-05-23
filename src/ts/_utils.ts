@@ -1,4 +1,4 @@
-import { FieldSet } from "airtable";
+import Airtable, { Base, FieldSet } from "airtable";
 import { loader } from "../components/Loader/Loader";
 
 function capitalize(string: string) {
@@ -12,6 +12,10 @@ function showLoader() {
 
 function hideLoader() {
   loader.classList.add('loader-container--hide')
+}
+
+function getAirTableBase(api_key: string, api_base: string): Base {
+  return new Airtable({ apiKey: api_key }).base(api_base)
 }
 
 function sortFieldsByNumericOrder(fields: FieldSet) {
@@ -30,4 +34,4 @@ function sortedArray(fieldNames: string[], fields: FieldSet) {
   return fieldNames.map((fieldName) => fields[fieldName]);
 }
 
-export { capitalize, showLoader, hideLoader, sortFieldsByNumericOrder, sortedArray };
+export { capitalize, showLoader, hideLoader, getAirTableBase, sortFieldsByNumericOrder, sortedArray };

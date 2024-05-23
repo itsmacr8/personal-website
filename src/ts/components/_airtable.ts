@@ -1,7 +1,7 @@
-import Airtable, { Base } from "airtable";
+import { Base } from "airtable";
 import { Movie, MovieDetails } from "../interfaces/_movies_interfaces";
 import { renderMovies } from "./_movies";
-import { capitalize, hideLoader } from "../_utils";
+import { capitalize, hideLoader, getAirTableBase } from "../_utils";
 import { modal, showModal, autoCloseModal } from "../../components/_modal";
 import { movieDBSaveMarkup, movieDBErrorMarkup } from "./_movies_markup";
 
@@ -9,7 +9,7 @@ import { movieDBSaveMarkup, movieDBErrorMarkup } from "./_movies_markup";
 class AirTable {
   private api_key: string = import.meta.env.VITE_AIRTABLE_KEY;
   private api_base: string = import.meta.env.VITE_AIRTABLE_BASE;
-  private base: Base = new Airtable({ apiKey: this.api_key }).base(this.api_base);
+  private base: Base = getAirTableBase(this.api_key, this.api_base);
   private airTableName: string = import.meta.env.VITE_AIRTABLE_TABLE_NAME;
 
   async getMoviesList(tableName:string) {

@@ -1,5 +1,4 @@
-import Airtable from "airtable";
-import { sortedArray, sortFieldsByNumericOrder } from "../_utils";
+import { getAirTableBase, sortedArray, sortFieldsByNumericOrder } from "../_utils";
 
 const api_key: string = import.meta.env.VITE_AIRTABLE_PWK;
 const api_base: string = import.meta.env.VITE_AIRTABLE_PWB;
@@ -9,7 +8,7 @@ const aboutTextRecord: string = import.meta.env.VITE_AIRTABLE_PW_ATR;
 
 async function getDBContent(recordID: string) {
   try {
-    const base = new Airtable({ apiKey: api_key }).base(api_base)
+    const base = getAirTableBase(api_key, api_base)
     const record = await base(HTextTableName).find(recordID);
     return sortedArray(sortFieldsByNumericOrder(record.fields), record.fields);
   } catch (err) {
