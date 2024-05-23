@@ -1,27 +1,27 @@
 import { getAirTableBase } from "../../ts/_utils";
 import { showProjectsMarkup } from "./_project_markup";
 import { DatabaseRecord } from "../_utils"
+import {
+  pw_key,
+  pw_base,
+  projectsContainer,
+} from "../_variables";
 
-
-const projectsContainer = document.querySelector('.projects') as HTMLDivElement
-const api_key: string = import.meta.env.VITE_AIRTABLE_PWK;
-const api_base: string = import.meta.env.VITE_AIRTABLE_PWB;
-const projectDescriptionTable: string = import.meta.env.VITE_AIRTABLE_PW_PDTN;
-
-
-async function getProjectList(tableName:string) {
+async function getProjects(tableName: string) {
   // Table name to show data from the table
   const projects:DatabaseRecord[] = [];
   try {
-    const base = getAirTableBase(api_key, api_base)
-    await base(tableName).select({
-      maxRecords: 3,
-    }).eachPage((records, fetchNextPage) => {
-      records.forEach(function(record) {
-        projects.push(record.fields);
+    const base = getAirTableBase(pw_key, pw_base);
+    await base(tableName)
+      .select({
+        maxRecords: 3,
+      })
+      .eachPage((records, fetchNextPage) => {
+        records.forEach(function (record) {
+          projects.push(record.fields);
+        });
+        fetchNextPage();
       });
-      fetchNextPage();
-    });
     return projects;
   } catch (err) {
     console.error(err);
@@ -31,9 +31,11 @@ async function getProjectList(tableName:string) {
 
 function renderProjects(projects: DatabaseRecord[]) {
   projects.forEach((project: DatabaseRecord, index: number) => {
-    projectsContainer.insertAdjacentHTML('beforeend', showProjectsMarkup(project, index))
+    projectsContainer.insertAdjacentHTML(
+      "beforeend",
+      showProjectsMarkup(project, index)
+    );
   });
 }
 
-const projects = await getProjectList(projectDescriptionTable)
-renderProjects(projects)
+export { renderProjects, getProjects };
