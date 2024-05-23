@@ -1,3 +1,4 @@
+import '../../components/project/Project'
 import { getAirTableBase, sortedArray, sortFieldsByNumericOrder } from "../_utils";
 
 const api_key: string = import.meta.env.VITE_AIRTABLE_PWK;
