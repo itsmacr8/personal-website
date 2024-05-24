@@ -1,4 +1,5 @@
-import { createArray, listTags, DatabaseRecord } from "../_utils"
+import { createArray, listTags } from "../_utils"
+import { DatabaseRecord } from "../../types/DatabaseRecord.interface"
 
 function showProjectsMarkup(project:DatabaseRecord, index:number) {
   return`<div class="project" id="project-${index+1}">

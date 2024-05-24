@@ -1,7 +1,3 @@
-interface DatabaseRecord {
-  [key: string]: any
-}
-
 function createArray(string:string) {
   // Receive a comma separated string and convert them to an array.
   // For example, 'Hello, World' to ['Hello', 'World']
@@ -17,4 +13,3 @@ function listTags(tags: string[]) {
 }
 
 export { createArray, listTags }
-export type { DatabaseRecord }

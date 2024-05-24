@@ -1,3 +1,7 @@
+@import '../../sass/abstracts/mixins';
+@import '../../sass/layout/flex';
+@import '../../sass/abstracts/variables';
+
 .projects {
     @include flexColumn(var(--space-4));
     @include respond(tab-port) {

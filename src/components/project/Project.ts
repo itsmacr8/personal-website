@@ -1,6 +1,8 @@
+import './Project.scss'
+
 import { getAirTableBase } from "../../ts/_utils";
 import { showProjectsMarkup } from "./_project_markup";
-import { DatabaseRecord } from "../_utils"
+import { DatabaseRecord } from "../../types/DatabaseRecord.interface";
 import {
   pw_key,
   pw_base,
