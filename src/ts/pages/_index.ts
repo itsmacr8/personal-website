@@ -4,8 +4,11 @@ import {
   heroTextRecord,
   aboutTextRecord,
   projectDescriptionTable,
+  toolsTable
 } from "../../components/_variables";
+import { getTools, renderTools } from "../../components/Tool/Tool";
 
-renderText(".hero", heroTextRecord);
-renderText(".about__description", aboutTextRecord);
-renderProjects(await getProjects(projectDescriptionTable));
+// renderText(".hero", heroTextRecord);
+// renderText(".about__description", aboutTextRecord);
+// renderProjects(await getProjects(projectDescriptionTable));
+// renderTools(await getTools(toolsTable));

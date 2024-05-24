@@ -1,0 +1,26 @@
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: left;
+  gap: var(--space-3);
+}
+
+.card {
+  width: 100%;
+  max-width: var(--card-width);
+  background-color: var(--grey-300);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  &__thumbnail {
+    object-fit: cover;
+    width: 100%;
+  }
+  &__title {
+    font-weight: bold;
+  }
+  &__body {
+    padding: var(--space-2);
+  }
+}
+
+
