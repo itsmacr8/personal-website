@@ -2,12 +2,15 @@ import { createArray, listTags } from "../_utils"
 import { DatabaseRecord } from "../../types/DatabaseRecord.interface"
 
 function showProjectsMarkup(project:DatabaseRecord, index:number) {
+  const tagListArray =
+    typeof project.TagList === "string" ? createArray(project.TagList) : [];
+
   return`<div class="project" id="project-${index+1}">
     <div class="${project.Order}">
       <h2 class="project__name">${project.Name}</h2>
       <p class="project__description">${project.Description}</p>
       <ul class="project__tag-list">
-        ${listTags(createArray(project.TagList))}
+        ${listTags(tagListArray)}
       </ul>
       <div class="project__cta-btn">
         <a href="${project.LiveView}"
