@@ -4,12 +4,10 @@
 @import './abstracts/variables';
 @import './base/typography';
 @import './base/utilities';
-@import 'components/menu';
+@import './base/animations';
 @import 'components/footer';
 @import 'components/button';
 @import 'components/form';
-@import 'components/scroll_sticky_navigation';
 @import 'components/card';
-@import './base/animations';
 @import 'pages/index';
 @import 'pages/work';

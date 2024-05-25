@@ -1,3 +1,7 @@
+@import '../../sass/abstracts/mixins';
+@import '../../sass/abstracts/variables';
+@import '../../sass/layout/flex';
+
 header {
     background-color: var(--primary-400);
     padding-block: var(--space-3);
@@ -108,20 +112,5 @@ header {
         &--active {
             color: var(--accent-500);
         }
-    }
-}
-
-.ui-icon {
-    @include flexCenter;
-    &__sun,
-    &__moon {
-        color: var(--white);
-        font-size: var(--fs-3);
-        cursor: pointer;
-        display: none;
-    }
-    .active-ui {
-        display: inline-block;
-        animation: ui-icon-fade-out var(--animation-duration) ease-in-out;
     }
 }

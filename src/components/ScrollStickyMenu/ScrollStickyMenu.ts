@@ -1,3 +1,5 @@
+import './ScrollStickyMenu.scss'
+
 const scrollStickyNav: HTMLElement = document.querySelector('.scroll-sticky-navigation') as HTMLElement;
 // Initialize the previous scroll position to zero
 let previousScrollPosition: number = 0;

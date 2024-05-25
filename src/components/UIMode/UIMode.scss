@@ -1,0 +1,16 @@
+@import '../../sass/layout/flex';
+
+.ui-icon {
+    @include flexCenter;
+    &__sun,
+    &__moon {
+        color: var(--white);
+        font-size: var(--fs-3);
+        cursor: pointer;
+        display: none;
+    }
+    .active-ui {
+        display: inline-block;
+        animation: ui-icon-fade-out var(--animation-duration) ease-in-out;
+    }
+}
