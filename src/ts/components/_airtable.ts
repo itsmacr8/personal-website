@@ -1,5 +1,5 @@
 import { Base } from "airtable";
-import { DatabaseRecord } from "../../types/DatabaseRecord.interface";
+import { getDatabaseRecords } from "../../components/_utils";
 import { MovieDetails } from "../../components/Movie/Movie.interface";
 import { renderMovies } from "../../components/Movie/Movie";
 import { capitalize, hideLoader, getAirTableBase } from "../_utils";
@@ -15,32 +15,10 @@ class AirTable {
   private base: Base = getAirTableBase(this.api_key, this.api_base);
   private airTableName: string = import.meta.env.VITE_AIRTABLE_TABLE_NAME;
 
-  async getMoviesList(tableName: string) {
-    // Table name to show data from the table
-    const movies: DatabaseRecord[] = [];
-    try {
-      await this.base(tableName)
-        .select({
-          maxRecords: 3,
-          view: "Grid view",
-        })
-        .eachPage((records, fetchNextPage) => {
-          records.forEach(function (record) {
-            movies.push(record.fields);
-          });
-          fetchNextPage();
-        });
-      return movies;
-    } catch (err) {
-      console.error(err);
-      throw err;
-    }
-  }
-
   async showMovies(tableName: string) {
     // Table name to show data from the table
     try {
-      const moviesList = await this.getMoviesList(tableName);
+      const moviesList = await getDatabaseRecords(tableName, this.api_key, this.api_base);
       renderMovies(moviesList);
     } catch (error) {
       console.error(error);
