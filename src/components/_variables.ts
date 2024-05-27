@@ -5,6 +5,7 @@ const heroTextRecord: string = import.meta.env.VITE_AIRTABLE_PW_HTR;
 const aboutTextRecord: string = import.meta.env.VITE_AIRTABLE_PW_ATR;
 const projectDescriptionTable: string = import.meta.env.VITE_AIRTABLE_PW_PDTN;
 const toolsTable: string = import.meta.env.VITE_AIRTABLE_PW_TTN;
+const experienceTable: string = import.meta.env.VITE_AIRTABLE_PW_ETN;
 
 export {
   pw_key,
@@ -13,5 +14,6 @@ export {
   heroTextRecord,
   aboutTextRecord,
   projectDescriptionTable,
-  toolsTable
+  toolsTable,
+  experienceTable,
 };
