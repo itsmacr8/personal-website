@@ -3,7 +3,7 @@ import { getDatabaseRecords } from "../../components/_utils";
 import { MovieDetails } from "../../components/Movie/Movie.interface";
 import { renderMovies } from "../../components/Movie/Movie";
 import { capitalize, hideLoader, getAirTableBase } from "../_utils";
-import { modal, showModal, autoCloseModal } from "../../components/_modal";
+import { modal, showModal, autoCloseModal } from "../../components/Modal/Modal";
 import {
   movieDBSaveMarkup,
   movieDBErrorMarkup,

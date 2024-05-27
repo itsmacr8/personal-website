@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { MovieDetails } from "./Movie.interface";
 import { DatabaseRecord } from "../../types/DatabaseRecord.interface";
-import { modal, showModal } from "../../components/_modal";
+import { modal, showModal } from "../Modal/Modal";
 import { AirTable } from "../../ts/components/_airtable";
 import { showLoader, hideLoader } from "../../ts/_utils";
 import {
