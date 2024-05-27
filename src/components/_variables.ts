@@ -6,6 +6,7 @@ const aboutTextRecord: string = import.meta.env.VITE_AIRTABLE_PW_ATR;
 const projectDescriptionTable: string = import.meta.env.VITE_AIRTABLE_PW_PDTN;
 const toolsTable: string = import.meta.env.VITE_AIRTABLE_PW_TTN;
 const experienceTable: string = import.meta.env.VITE_AIRTABLE_PW_ETN;
+const articleTable: string = import.meta.env.VITE_AIRTABLE_PW_ATN;
 
 export {
   pw_key,
@@ -16,4 +17,5 @@ export {
   projectDescriptionTable,
   toolsTable,
   experienceTable,
+  articleTable,
 };

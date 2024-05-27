@@ -66,6 +66,17 @@ function renderDatabaseRecords(
   });
 }
 
+function cardMarkup(card: DatabaseRecord, index: number) {
+  return `<div class="card" id="card-${index}">
+    <div><img class="card__thumbnail" src="${card.Thumbnail}" alt="${card.Title} thumbnail" title="${card.Title} thumbnail"></div>
+    <div class="card__body">
+      <h3 class="card__title">${card.Title}</h3>
+      <p class="card__description my-s">${card.Description}</p>
+      <a href="${card.LiveView}" class="btn" target="_blank">${card.ButtonText}</a>
+    </div>
+  </div>`;
+}
+
 export {
   createArray,
   listTags,
@@ -73,4 +84,5 @@ export {
   renderDatabaseRecord,
   getDatabaseRecords,
   renderDatabaseRecords,
+  cardMarkup,
 };
