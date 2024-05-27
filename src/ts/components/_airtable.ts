@@ -16,10 +16,10 @@ class AirTable {
   private base: Base = getAirTableBase(this.api_key, this.api_base);
   private airTableName: string = import.meta.env.VITE_AIRTABLE_TABLE_NAME;
 
-  async showMovies(tableName: string) {
+  async showMovies(tableName: string, maxRecords :number = 3) {
     // Table name to show data from the table
     try {
-      const moviesList = await getDatabaseRecords(tableName, this.api_key, this.api_base);
+      const moviesList = await getDatabaseRecords(tableName, maxRecords, this.api_key, this.api_base);
       renderMovies(moviesList);
     } catch (error) {
       console.error(error);

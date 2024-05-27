@@ -33,23 +33,19 @@ async function renderDatabaseRecord(selector: string, records: DatabaseRecordTyp
   }
 }
 
-async function getDatabaseRecords(tableName: string, dbKey: string = pw_key, dbBase:string = pw_base) {
+async function getDatabaseRecords(tableName: string, maxRecords: number = 3, dbKey: string = pw_key, dbBase:string = pw_base) {
   // Table name to show data from the table
   const dbRecords:DatabaseRecord[] = [];
   try {
     const base = getAirTableBase(dbKey, dbBase);
-    await base(tableName)
-      .select({
-        maxRecords: 3,
-        // It returns data in ascending order; otherwise random order
-        view: "Grid view",
-      })
-      .eachPage((records, fetchNextPage) => {
-        records.forEach(function (record) {
-          dbRecords.push(record.fields);
-        });
-        fetchNextPage();
-      });
+    const records = await base(tableName).select({
+      maxRecords: maxRecords,
+      // It returns data in ascending order; otherwise random order
+      view: "Grid view",
+    }).firstPage();
+    records.forEach((record) => {
+      dbRecords.push(record.fields);
+    });
     return dbRecords;
   } catch (err) {
     console.error(err);
