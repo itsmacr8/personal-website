@@ -4,7 +4,7 @@ import { MovieDetails } from "./Movie.interface";
 import { DatabaseRecord } from "../../types/DatabaseRecord.interface";
 import { modal, showModal } from "../Modal/Modal";
 import { AirTable } from "../../ts/components/_airtable";
-import { showLoader, hideLoader } from "../../ts/_utils";
+import { showLoader, hideLoader } from "../Loader/Loader";
 import {
   searchMoviesMarkup,
   showMoviesMarkup,

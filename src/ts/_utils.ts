@@ -1,17 +1,8 @@
 import Airtable, { Base, FieldSet } from "airtable";
-import { loader } from "../components/Loader/Loader";
 
 function capitalize(string: string) {
   // Capitalize the word, eg. movie to Movie
   return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-function showLoader() {
-  loader.classList.remove('loader-container--hide')
-}
-
-function hideLoader() {
-  loader.classList.add('loader-container--hide')
 }
 
 function getAirTableBase(api_key: string, api_base: string): Base {
@@ -34,4 +25,4 @@ function sortedArray(fieldNames: string[], fields: FieldSet) {
   return fieldNames.map((fieldName) => fields[fieldName]);
 }
 
-export { capitalize, showLoader, hideLoader, getAirTableBase, sortFieldsByNumericOrder, sortedArray };
+export { capitalize, getAirTableBase, sortFieldsByNumericOrder, sortedArray };
