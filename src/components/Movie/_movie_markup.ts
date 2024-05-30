@@ -97,7 +97,7 @@ function detailsMovieMarkup(movie: MovieDetails) {
 function movieDBSaveMarkup(movieName: string, countryName: string) {
   return `
     <div class="modal__content movie-db movie-db--saved">
-        <p><strong>${movieName}</strong> saved to the <strong>${countryName}</strong> database successfully!</p>
+        <p><strong>${movieName}</strong> saved to the <strong>${countryName}</strong> movies database successfully!</p>
         <button class="modal__close" aria-label="Close">&times;</button>
     </div>`;
 }
