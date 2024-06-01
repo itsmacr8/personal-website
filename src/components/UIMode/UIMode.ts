@@ -1,12 +1,9 @@
-// Select DOM Items
+import './UIMode.scss'
+
 const body = document.querySelector('body')! as HTMLBodyElement,
-    menu = document.querySelector('.menu')! as HTMLDivElement,
     UIIcon = document.querySelector('.ui-icon')! as HTMLDivElement,
-    brandLogo = document.querySelector('.brand__logo')! as HTMLAnchorElement,
     sunIcon = document.querySelector('.ui-icon__sun')! as HTMLElement,
-    moonIcon = document.querySelector('.ui-icon__moon')! as HTMLElement,
-    menuOpen = document.querySelector('.hamburger-icon')! as HTMLElement,
-    menuClose = document.querySelector('.menu__close')! as HTMLElement;
+    moonIcon = document.querySelector('.ui-icon__moon')! as HTMLElement;
 
 
 function getUIMode() {
@@ -52,18 +49,6 @@ UIIcon.addEventListener('click', () => {
     body.classList.toggle('dark');
     UpdateUIMode()
     updateIcon()
-});
-
-//  Open mobile menu
-menuOpen.addEventListener('click', () => {
-    menu.classList.add('menu--active-js');
-    brandLogo.classList.add('brand__logo-js');
-});
-
-//  Close mobile menu
-menuClose.addEventListener('click', () => {
-    menu.classList.remove('menu--active-js');
-    brandLogo.classList.remove('brand__logo-js');
 });
 
 InitUIMode()

@@ -9,6 +9,11 @@ h3 {
     line-height: 1;
 }
 
+p {
+    font-size: var(--fs-0);
+    max-width: 75ch;
+}
+
 .primary-heading {
     font-size: var(--fs-1);
     color: var(--white)
@@ -27,6 +32,14 @@ h3 {
 
 .text-secondary {
     color: var(--tertiary-400);
+}
+
+.text-accent {
+    color: var(--accent-500)
+}
+
+.hero__text {
+    color: var(--white);
 }
 
 .custom-line-height {

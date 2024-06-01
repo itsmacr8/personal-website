@@ -1,3 +1,2 @@
-import './ts/components/_movies';
-import './sass/components/_movies.scss';
+import './components/Movie/Movie';
 import './ts/components/_airtable';
