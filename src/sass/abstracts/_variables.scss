@@ -14,6 +14,7 @@
     --warning-400: hsl(355, 70%, 30%);
     --warning-500: hsl(355, 70%, 90%);
 
+    --gradient-100: hsla(0, 0%, 0%, 0.50);
     --gradient-300: hsla(260, 73%, 48%, 0.35);
     --gradient-400: hsla(243, 76%, 59%, 0.35);
     --gradient-500: hsla(205, 100%, 72%, 0.75);
@@ -23,6 +24,7 @@
     --grey-400: hsl(0, 0%, 94%);
     --black: hsl(0, 0%, 0%);
 
+    --fs-0: clamp(1rem, 0.625rem + 1vw, 1.3125rem);
     --fs-1: clamp(1.5rem, 0.625rem + 3.8636vw, 3rem);
     --fs-2: clamp(1rem, 0.625rem + 2vw, 1.5rem);
     --fs-3: 1.5rem;
@@ -39,15 +41,18 @@
     --animation-duration: 500ms;
     --animation-delay: 250ms;
 
+    --fifty: 50%;
     --hundred: 100%;
     --minus-hundred: -100%;
     --minus-two-hundred: -200%;
 
     --movie-card-width: 22rem;
+    --card-width: 22.8rem;
     @include respond(tab-land) {
         --movie-card-width: 23rem;
     }
     @include respond(big-desktop) {
         --movie-card-width: 24rem;
+        --card-width: 32.5rem;
     }
 }

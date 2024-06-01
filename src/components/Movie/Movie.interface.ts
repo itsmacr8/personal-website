@@ -1,7 +1,3 @@
-interface Movie {
-    [key:string]: any,
-}
-
 interface MovieDetails {
     imdbID: string;
     Poster?: string;
@@ -20,4 +16,4 @@ interface MovieDetails {
     BoxOffice?: string;
 }
 
-export type { Movie, MovieDetails }
+export type { MovieDetails }

@@ -1,4 +1,4 @@
-import './_modal.scss';
+import './Modal.scss'
 
 const modal = document.querySelector('.modal') as HTMLDivElement;
 

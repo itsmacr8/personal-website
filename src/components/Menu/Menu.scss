@@ -1,3 +1,7 @@
+@import '../../sass/abstracts/mixins';
+@import '../../sass/abstracts/variables';
+@import '../../sass/layout/flex';
+
 header {
     background-color: var(--primary-400);
     padding-block: var(--space-3);
@@ -13,7 +17,7 @@ header {
         font-size: var(--fs-4);
         cursor: pointer;
 
-        @include respond(tab-port) {
+        @include respond(tab-land) {
             display: none;
         }
     }
@@ -38,7 +42,7 @@ header {
     padding: 1.5rem 1.5rem 0 0;
     background-color: var(--primary-500);
     @include transitionEaseInOut(left);
-    @include respond(tab-port) {
+    @include respond(tab-land) {
         position: static;
         width: auto;
         height: auto;
@@ -49,7 +53,7 @@ header {
     .align-close-icon {
         display: flex;
         justify-content: end;
-        @include respond(tab-port) {
+        @include respond(tab-land) {
             display: none;
         }
     }
@@ -73,7 +77,7 @@ header {
     justify-content: center;
     height: calc(100% - 15rem);
 
-    @include respond(tab-port) {
+    @include respond(tab-land) {
         flex-direction: row;
         gap: var(--space-4);
         height: auto;
@@ -84,13 +88,13 @@ header {
         @include transitionEaseInOut;
 
         // Delay each nav item slide by 0.2s
-        @for $x from 1 through 4 {
+        @for $x from 1 through 7 {
             &:nth-child(#{$x}) {
                 transition-delay: $x * 0.2s;
             }
         }
 
-        @include respond(tab-port) {
+        @include respond(tab-land) {
             @include translate;
         }
     }
@@ -108,20 +112,5 @@ header {
         &--active {
             color: var(--accent-500);
         }
-    }
-}
-
-.ui-icon {
-    @include flexCenter;
-    &__sun,
-    &__moon {
-        color: var(--white);
-        font-size: var(--fs-3);
-        cursor: pointer;
-        display: none;
-    }
-    .active-ui {
-        display: inline-block;
-        animation: ui-icon-fade-out var(--animation-duration) ease-in-out;
     }
 }
