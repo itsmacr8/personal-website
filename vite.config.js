@@ -10,5 +10,6 @@ export default defineConfig({
                 interests: resolve(__dirname, 'interests.html'),
             },
         },
+        target: 'ES2022'
     },
 });
