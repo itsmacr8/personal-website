@@ -93,6 +93,15 @@ async function createCountryButtons() {
 
 createCountryButtons();
 
+function showCountryButtons() {
+  moviesButton.classList.remove('btn-movies--hide')
+
+}
+
+function hideCountryButtons() {
+  moviesButton.classList.add('btn-movies--hide');
+}
+
 moviesButton.addEventListener("click", async (event) => {
   const target = event.target as HTMLElement;
   if (target.classList.contains("btn")) {
@@ -129,7 +138,7 @@ searchMovie.addEventListener("input", () => {
   typingTimer = setTimeout(() => {
     if (checkInputLength(searchMovie.value.length)) return;
     showLoader();
-    moviesButton.classList.add("hide-element");
+    hideCountryButtons()
     searchMovies(searchMovie.value);
   }, delay);
 });
