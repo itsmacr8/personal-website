@@ -78,6 +78,14 @@ function cardMarkup(card: DatabaseRecord, index: number) {
   </div>`;
 }
 
+function removeClassFrom(element: HTMLElement, className: string = "hide") {
+  element.classList.remove(className);
+}
+
+function addClassTo(element: HTMLElement, className: string = "hide") {
+  element.classList.add(className);
+}
+
 export {
   createArray,
   listTags,
@@ -86,4 +94,6 @@ export {
   getDatabaseRecords,
   renderDatabaseRecords,
   cardMarkup,
+  addClassTo,
+  removeClassFrom,
 };

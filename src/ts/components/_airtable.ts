@@ -3,7 +3,8 @@ import { getDatabaseRecords } from "../../components/_utils";
 import { MovieDetails } from "../../components/Movie/Movie.interface";
 import { renderMovies } from "../../components/Movie/Movie";
 import { capitalize, getAirTableBase } from "../_utils";
-import { hideLoader } from "../../components/Loader/Loader";
+import { addClassTo } from "../../components/_utils";
+import { loader } from "../../components/_variables";
 import { modal, showModal, autoCloseModal } from "../../components/Modal/Modal";
 import {
   movieDBSaveMarkup,
@@ -16,10 +17,15 @@ class AirTable {
   private base: Base = getAirTableBase(this.api_key, this.api_base);
   private airTableName: string = import.meta.env.VITE_AIRTABLE_TABLE_NAME;
 
-  async showMovies(tableName: string, maxRecords :number = 3) {
+  async showMovies(tableName: string, maxRecords: number = 3) {
     // Table name to show data from the table
     try {
-      const moviesList = await getDatabaseRecords(tableName, maxRecords, this.api_key, this.api_base);
+      const moviesList = await getDatabaseRecords(
+        tableName,
+        maxRecords,
+        this.api_key,
+        this.api_base
+      );
       renderMovies(moviesList);
     } catch (error) {
       console.error(error);
@@ -67,8 +73,8 @@ class AirTable {
   ) {
     modal.innerHTML = "";
     modal.insertAdjacentHTML("beforeend", movieDBMarkup(name, countryOrErr));
-    modal.classList.add("modal--db-mess");
-    hideLoader();
+    addClassTo(modal, 'modal--db-mess');
+    addClassTo(loader);
     showModal(modal);
   }
 

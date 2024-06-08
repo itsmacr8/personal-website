@@ -4,7 +4,8 @@ import { MovieDetails } from "./Movie.interface";
 import { DatabaseRecord } from "../../types/DatabaseRecord.interface";
 import { modal, showModal } from "../Modal/Modal";
 import { AirTable } from "../../ts/components/_airtable";
-import { showLoader, hideLoader } from "../Loader/Loader";
+import { loader } from '../_variables';
+import { removeClassFrom, addClassTo } from '../_utils';
 import {
   searchMoviesMarkup,
   showMoviesMarkup,
@@ -12,7 +13,6 @@ import {
 } from "./_movie_markup";
 
 import "./Movie.scss";
-
 
 const searchMovie = document.getElementById("search-movie") as HTMLInputElement;
 const delay = 1500;
@@ -34,11 +34,11 @@ async function searchMovies(movieName: string) {
 function renderMovies(movies: DatabaseRecord[], movieName: string = "") {
   if (!movies) {
     movieCards.innerHTML = `<h3 class="text-center">No movies found with <span class="text-primary">${movieName}</span> name. Have a look at my top <span class="text-secondary cursor-pointer" data-top="watched-movies">watched movies</span></h3>`;
-    hideLoader();
+    addClassTo(loader);
     return;
   }
   movieCards.innerHTML = "";
-  hideLoader();
+  addClassTo(loader);
   movies.forEach((movie: DatabaseRecord, index: number) => {
     movieName &&
       movieCards.insertAdjacentHTML(
@@ -91,16 +91,7 @@ async function createCountryButtons() {
   }
 }
 
-createCountryButtons();
-
-function showCountryButtons() {
-  moviesButton.classList.remove('btn-movies--hide')
-
-}
-
-function hideCountryButtons() {
-  moviesButton.classList.add('btn-movies--hide');
-}
+// createCountryButtons();
 
 moviesButton.addEventListener("click", async (event) => {
   const target = event.target as HTMLElement;
@@ -112,7 +103,7 @@ moviesButton.addEventListener("click", async (event) => {
 });
 
 async function addMovie(movieID: string) {
-  showLoader();
+  removeClassFrom(loader);
   const movieDetails = await getMovieDetails(movieID);
   const country: string = movieDetails.Country.split(",").shift()?.trim();
   const countries = await AirTableDB.getCountryList();
@@ -137,8 +128,8 @@ searchMovie.addEventListener("input", () => {
   // Start a new timer that code will execute after the specified delay
   typingTimer = setTimeout(() => {
     if (checkInputLength(searchMovie.value.length)) return;
-    showLoader();
-    hideCountryButtons()
+    removeClassFrom(loader);
+    addClassTo(moviesButton);
     searchMovies(searchMovie.value);
   }, delay);
 });
