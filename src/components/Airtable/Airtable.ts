@@ -1,15 +1,11 @@
-import { Base } from "airtable";
-import { getDatabaseRecords } from "../../components/_utils";
-import { MovieDetails } from "../../components/Movie/Movie.interface";
-import { renderMovies } from "../../components/Movie/Movie";
-import { capitalize, getAirTableBase } from "../_utils";
-import { addClassTo } from "../../components/_utils";
-import { loader } from "../../components/_variables";
-import { modal, showModal, autoCloseModal } from "../../components/Modal/Modal";
-import {
-  movieDBSaveMarkup,
-  movieDBErrorMarkup,
-} from "../../components/Movie/_movie_markup";
+import { Base } from 'airtable';
+import { capitalize, getAirTableBase, getDatabaseRecords } from '../_utils';
+import { MovieDetails } from '../Movie/Movie.interface';
+import { renderMovies } from '../Movie/Movie';
+import { addClassTo } from '../_utils';
+import { loader } from '../_variables';
+import { modal, showModal, autoCloseModal } from '../Modal/Modal';
+import { movieDBSaveMarkup, movieDBErrorMarkup } from '../Movie/_movie_markup';
 
 class AirTable {
   private api_key: string = import.meta.env.VITE_AIRTABLE_KEY;
@@ -45,8 +41,8 @@ class AirTable {
             Type: capitalize(movie.Type),
             Runtime: movie.Runtime,
             Plot: movie.Plot,
-            IMDBRatings: movie.Ratings[0]?.Value || "N/A",
-            RottenRatings: movie.Ratings[1]?.Value || "N/A",
+            IMDBRatings: movie.Ratings[0]?.Value || 'N/A',
+            RottenRatings: movie.Ratings[1]?.Value || 'N/A',
             Country: movie.Country,
             Language: movie.Language,
             BoxOffice: movie.BoxOffice,
@@ -71,8 +67,8 @@ class AirTable {
     name: string,
     countryOrErr: string
   ) {
-    modal.innerHTML = "";
-    modal.insertAdjacentHTML("beforeend", movieDBMarkup(name, countryOrErr));
+    modal.innerHTML = '';
+    modal.insertAdjacentHTML('beforeend', movieDBMarkup(name, countryOrErr));
     addClassTo(modal, 'modal--db-mess');
     addClassTo(loader);
     showModal(modal);
@@ -93,4 +89,4 @@ class AirTable {
   }
 }
 
-export { AirTable }
+export { AirTable };

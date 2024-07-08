@@ -3,7 +3,7 @@ import axios from "axios";
 import { MovieDetails } from "./Movie.interface";
 import { DatabaseRecord } from "../../types/DatabaseRecord.interface";
 import { modal, showModal } from "../Modal/Modal";
-import { AirTable } from "../../ts/components/_airtable";
+import { AirTable } from '../Airtable/Airtable';
 import { loader } from '../_variables';
 import { removeClassFrom, addClassTo } from '../_utils';
 import {

@@ -1,6 +1,6 @@
 import { MovieDetails } from "./Movie.interface";
 import { DatabaseRecord } from "../../types/DatabaseRecord.interface";
-import { capitalize } from "../../ts/_utils";
+import { capitalize } from "../_utils";
 
 function searchMoviesMarkup(movie: DatabaseRecord, index: number) {
   const capitalized = typeof movie.Type === 'string' && capitalize(movie.Type);

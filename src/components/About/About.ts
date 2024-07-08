@@ -1,6 +1,5 @@
-import { sortedArray, sortFieldsByNumericOrder } from "../../ts/_utils";
 import { HTextTableName, heroTextRecord, aboutTextRecord } from "../_variables";
-import { getDatabaseRecord, renderDatabaseRecord } from "../_utils";
+import { getDatabaseRecord, renderDatabaseRecord, sortedArray, sortFieldsByNumericOrder } from "../_utils";
 
 async function renderText(
   tableName: string,
