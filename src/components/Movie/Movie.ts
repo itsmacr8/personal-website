@@ -94,8 +94,6 @@ async function createCountryButtons() {
   }
 }
 
-// createCountryButtons();
-
 moviesButton.addEventListener("click", async (event) => {
   const target = event.target as HTMLElement;
   if (target.classList.contains("btn")) {
@@ -110,6 +108,7 @@ async function showMovies(country: string) {
   const movies = await AirTableDB.getRecords(country, 3, AirTableDB.base);
   movies && renderMovies(movies);
   renderMoviesHeading(country);
+  removeClassFrom(moviesButton);
   addClassTo(loader);
 }
 
@@ -150,9 +149,9 @@ searchMovie.addEventListener("input", () => {
   clearTimeout(typingTimer); // Clear the previous timer
   // Start a new timer that code will execute after the specified delay
   typingTimer = setTimeout(() => {
+    addClassTo(moviesButton);
     if (checkInputLength(searchMovie.value.length)) return;
     removeClassFrom(loader);
-    addClassTo(moviesButton);
     searchMovies(searchMovie.value);
   }, delay);
 });
@@ -206,6 +205,7 @@ function cleanAndShowModal(
 
 function init() {
   showMovies('Top List');
+  createCountryButtons();
 }
 
 init()
