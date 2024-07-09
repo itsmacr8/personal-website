@@ -2,14 +2,15 @@ import axios from "axios";
 
 import { MovieDetails } from "./Movie.interface";
 import { DatabaseRecord } from "../../types/DatabaseRecord.interface";
-import { modal, showModal } from "../Modal/Modal";
-import { AirTable } from '../Airtable/Airtable';
-import { loader } from '../_variables';
-import { removeClassFrom, addClassTo } from '../_utils';
+import { modal, showModal, autoCloseModal } from "../Modal/Modal";
+import { loader, AirTableDB } from '../_variables';
+import { removeClassFrom, addClassTo, capitalize } from '../_utils';
 import {
   searchMoviesMarkup,
   showMoviesMarkup,
   detailsMovieMarkup,
+  movieDBErrorMarkup,
+  movieDBSaveMarkup
 } from "./_movie_markup";
 
 import "./Movie.scss";
@@ -19,7 +20,6 @@ const delay = 1500;
 const movieCards = document.querySelector("#movie-cards") as HTMLButtonElement;
 const API_KEY = import.meta.env.VITE_API_KEY;
 const airTableRecord = import.meta.env.VITE_AIRTABLE_RECORD;
-const AirTableDB = new AirTable();
 const moviesButton = document.getElementById("btn-movies") as HTMLDivElement;
 
 let typingTimer: ReturnType<typeof setTimeout>;
@@ -97,7 +97,9 @@ moviesButton.addEventListener("click", async (event) => {
   const target = event.target as HTMLElement;
   if (target.classList.contains("btn")) {
     const country = target.dataset.country;
-    country && AirTableDB.showMovies(country);
+    const movies =
+      country && (await AirTableDB.getRecords(country, 3, AirTableDB.base));
+    movies && renderMovies(movies);
     return;
   }
 });
@@ -108,9 +110,9 @@ async function addMovie(movieID: string) {
   const country: string = movieDetails.Country.split(",").shift()?.trim();
   const countries = await AirTableDB.getCountryList();
   if (countries.includes(country)) {
-    AirTableDB.addMovie(country, movieDetails);
+    saveMovieData(country, movieDetails);
   } else {
-    AirTableDB.addMovie(airTableRecord, movieDetails);
+    saveMovieData(airTableRecord, movieDetails);
   }
 }
 
@@ -134,4 +136,49 @@ searchMovie.addEventListener("input", () => {
   }, delay);
 });
 
-export { renderMovies };
+function saveMovieData(tableName: string, movie: MovieDetails) {
+  const base = AirTableDB.base;
+  base(tableName).create(
+    [
+      {
+        fields: {
+          IMDB_ID: movie.imdbID,
+          Poster: movie.Poster,
+          Title: movie.Title,
+          Year: Number(movie.Year),
+          Genre: movie.Genre,
+          Type: capitalize(movie.Type),
+          Runtime: movie.Runtime,
+          Plot: movie.Plot,
+          IMDBRatings: movie.Ratings[0]?.Value || 'N/A',
+          RottenRatings: movie.Ratings[1]?.Value || 'N/A',
+          Country: movie.Country,
+          Language: movie.Language,
+          BoxOffice: movie.BoxOffice,
+        },
+      },
+    ],
+    (err, records) => {
+      if (err) {
+        cleanAndShowModal(movieDBErrorMarkup, movie.Title, err.message);
+        return;
+      }
+      records?.forEach(() => {
+        cleanAndShowModal(movieDBSaveMarkup, movie.Title, movie.Country);
+        autoCloseModal(modal);
+      });
+    }
+  );
+}
+
+function cleanAndShowModal(
+  movieDBMarkup: Function,
+  name: string,
+  countryOrErr: string
+) {
+  modal.innerHTML = '';
+  modal.insertAdjacentHTML('beforeend', movieDBMarkup(name, countryOrErr));
+  addClassTo(modal, 'modal--db-mess');
+  addClassTo(loader);
+  showModal(modal);
+}

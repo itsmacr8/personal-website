@@ -1,15 +1,11 @@
-import Airtable, { Base, FieldSet } from "airtable";
-import { DatabaseRecordType ,DatabaseRecord } from "../types/DatabaseRecord.interface";
-import { pw_key, pw_base } from "./_variables";
+import { FieldSet } from 'airtable';
+
+import { DatabaseRecordType, DatabaseRecord } from '../types/DatabaseRecord.interface';
 
 
 function capitalize(string: string) {
   // Capitalize the word, eg. movie to Movie
   return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-function getAirTableBase(api_key: string, api_base: string): Base {
-  return new Airtable({ apiKey: api_key }).base(api_base)
 }
 
 function createArray(string:string) {
@@ -26,40 +22,10 @@ function listTags(tags: string[]) {
   return tagsMarkup
 }
 
-async function getDatabaseRecord(tableName: string, recordID: string, dbKey: string = pw_key, dbBase:string = pw_base) {
-  try {
-    const base = getAirTableBase(dbKey, dbBase);
-    const record = await base(tableName).find(recordID);
-    return record.fields;
-  } catch (err) {
-    console.error(err);
-  }
-}
-
 async function renderDatabaseRecord(selector: string, records: DatabaseRecordType[]) {
   const selectElement = document.querySelector(selector) as HTMLDivElement;
   for (const record of records) {
     record && selectElement.insertAdjacentHTML("beforeend", `${record}`);
-  }
-}
-
-async function getDatabaseRecords(tableName: string, maxRecords: number = 3, dbKey: string = pw_key, dbBase:string = pw_base) {
-  // Table name to show data from the table
-  const dbRecords:DatabaseRecord[] = [];
-  try {
-    const base = getAirTableBase(dbKey, dbBase);
-    const records = await base(tableName).select({
-      maxRecords: maxRecords,
-      // It returns data in ascending order; otherwise random order
-      view: "Grid view",
-    }).firstPage();
-    records.forEach((record) => {
-      dbRecords.push(record.fields);
-    });
-    return dbRecords;
-  } catch (err) {
-    console.error(err);
-    throw err;
   }
 }
 
@@ -114,12 +80,9 @@ function sortedArray(fieldNames: string[], fields: FieldSet) {
 
 export {
   capitalize,
-  getAirTableBase,
   createArray,
   listTags,
-  getDatabaseRecord,
   renderDatabaseRecord,
-  getDatabaseRecords,
   renderDatabaseRecords,
   cardMarkup,
   addClassTo,

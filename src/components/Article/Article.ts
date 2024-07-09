@@ -1,8 +1,8 @@
-import { articleTable } from "../_variables";
-import { getDatabaseRecords, renderDatabaseRecords, cardMarkup } from '../_utils'
+import { articleTable, AirTableDB } from "../_variables";
+import { renderDatabaseRecords, cardMarkup } from '../_utils'
 
 renderDatabaseRecords(
-  await getDatabaseRecords(articleTable),
+  await AirTableDB.getRecords(articleTable),
   document.querySelector('.articles') as HTMLDivElement,
   cardMarkup
 );

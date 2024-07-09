@@ -1,12 +1,21 @@
-import { HTextTableName, heroTextRecord, aboutTextRecord } from "../_variables";
-import { getDatabaseRecord, renderDatabaseRecord, sortedArray, sortFieldsByNumericOrder } from "../_utils";
+import {
+  HTextTableName,
+  heroTextRecord,
+  aboutTextRecord,
+  AirTableDB,
+} from "../_variables";
+import {
+  renderDatabaseRecord,
+  sortedArray,
+  sortFieldsByNumericOrder,
+} from "../_utils";
 
 async function renderText(
   tableName: string,
   recordID: string,
   containerSelector: string
 ) {
-  const record = await getDatabaseRecord(tableName, recordID);
+  const record = await AirTableDB.getRecord(tableName, recordID);
   if (record) {
     renderDatabaseRecord(
       containerSelector,
