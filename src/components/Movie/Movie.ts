@@ -109,7 +109,20 @@ async function showMovies(country: string) {
   removeClassFrom(loader);
   const movies = await AirTableDB.getRecords(country, 3, AirTableDB.base);
   movies && renderMovies(movies);
+  renderMoviesHeading(country);
   addClassTo(loader);
+}
+
+function renderMoviesHeading(country: string) {
+  const moviesListHeading = document.getElementById('movies-list-heading') as HTMLHeadingElement;
+  if (moviesListHeading) {
+    moviesListHeading.innerHTML = `${country} movies`
+  } else {
+    movieCards.insertAdjacentHTML(
+      "beforebegin",
+      `<h3 id="movies-list-heading" class="text-center mb-2">${country} movies</h3>`
+    );
+  }
 }
 
 async function addMovie(movieID: string) {
@@ -190,3 +203,9 @@ function cleanAndShowModal(
   addClassTo(loader);
   showModal(modal);
 }
+
+function init() {
+  showMovies('Top List');
+}
+
+init()
