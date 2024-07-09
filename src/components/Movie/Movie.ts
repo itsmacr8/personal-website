@@ -21,6 +21,7 @@ const movieCards = document.querySelector("#movie-cards") as HTMLButtonElement;
 const API_KEY = import.meta.env.VITE_API_KEY;
 const airTableRecord = import.meta.env.VITE_AIRTABLE_RECORD;
 const moviesButton = document.getElementById("btn-movies") as HTMLDivElement;
+const topMoviesText = 'Want to have a look at my top <span class="text-secondary cursor-pointer" data-top-movies="Top List">watched movies!</span>'
 
 let typingTimer: ReturnType<typeof setTimeout>;
 
@@ -33,7 +34,7 @@ async function searchMovies(movieName: string) {
 
 function renderMovies(movies: DatabaseRecord[], movieName: string = "") {
   if (!movies) {
-    movieCards.innerHTML = `<h3 class="text-center">No movies found with <span class="text-primary">${movieName}</span> name. Have a look at my top <span class="text-secondary cursor-pointer" data-top="watched-movies">watched movies</span></h3>`;
+    movieCards.innerHTML = `<h3 class="text-center">No movies found with <span class="text-primary">${movieName}</span> name. ${topMoviesText}</h3>`;
     addClassTo(loader);
     return;
   }
@@ -78,6 +79,8 @@ movieCards.addEventListener("click", async (event) => {
     const movieID = target.dataset.imdbid;
     movieID && addMovie(movieID);
     return;
+  } else if (target.dataset.topMovies) {
+    showMovies(target.dataset.topMovies);
   }
 });
 
@@ -97,12 +100,17 @@ moviesButton.addEventListener("click", async (event) => {
   const target = event.target as HTMLElement;
   if (target.classList.contains("btn")) {
     const country = target.dataset.country;
-    const movies =
-      country && (await AirTableDB.getRecords(country, 3, AirTableDB.base));
-    movies && renderMovies(movies);
+    country && showMovies(country);
     return;
   }
 });
+
+async function showMovies(country: string) {
+  removeClassFrom(loader);
+  const movies = await AirTableDB.getRecords(country, 3, AirTableDB.base);
+  movies && renderMovies(movies);
+  addClassTo(loader);
+}
 
 async function addMovie(movieID: string) {
   removeClassFrom(loader);
@@ -121,7 +129,7 @@ function checkInputLength(length: number) {
     return false;
   }
   movieCards.innerHTML =
-    '<h3 class="text-center mx-auto custom-line-height">Type at least 3 characters to search for a movie or have a look at my top <span class="text-secondary cursor-pointer" data-movies="top-watched">watched movies</span></h3>';
+    `<h3 class="text-center mx-auto custom-line-height">Type at least 3 characters to search for a movie. ${topMoviesText}</h3>`;
   return true;
 }
 
