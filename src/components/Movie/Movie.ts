@@ -26,34 +26,33 @@ const moviesCardHeading = document.getElementById('movies-card-heading') as HTML
 
 let typingTimer: ReturnType<typeof setTimeout>;
 
+function clearMoviesCards() {
+  movieCards.innerHTML = '';
+}
+
+function noMoviesFound(message: string) {
+  renderMoviesCardHeading(`${message} ${topMoviesText}`);
+  clearMoviesCards();
+  addClassTo(loader);
+}
+
 async function searchMovies(movieName: string) {
   const response = await axios.get(
     `https://www.omdbapi.com/?s=${movieName}&apikey=${API_KEY}&plot=full&y=`
   );
-  renderMovies(response.data.Search, movieName);
+  const movies = response.data.Search;
+  if(!movies) {
+    noMoviesFound(`<span class="text-primary">${movieName}</span> not found.`);
+    return
+  }
+  renderMovies(movies, searchMoviesMarkup);
 }
 
-function renderMovies(movies: DatabaseRecord[], movieName: string = "") {
-  if (!movies) {
-    renderMoviesCardHeading(
-      `No movies found with <span class="text-primary">${movieName}</span> name. ${topMoviesText}`
-    );
-    addClassTo(loader);
-    return;
-  }
-  movieCards.innerHTML = "";
+function renderMovies(movies: DatabaseRecord[], markup: Function) {
+  clearMoviesCards();
   addClassTo(loader);
   movies.forEach((movie: DatabaseRecord, index: number) => {
-    movieName &&
-      movieCards.insertAdjacentHTML(
-        "beforeend",
-        searchMoviesMarkup(movie, index)
-      );
-    !movieName &&
-      movieCards.insertAdjacentHTML(
-        "beforeend",
-        showMoviesMarkup(movie, index)
-      );
+    movieCards.insertAdjacentHTML('beforeend', markup(movie, index));
   });
 }
 
@@ -109,7 +108,11 @@ moviesButton.addEventListener("click", async (event) => {
 async function showMovies(country: string) {
   removeClassFrom(loader);
   const movies = await AirTableDB.getRecords(country, 3, AirTableDB.base);
-  movies && renderMovies(movies);
+  if (movies.length == 0) {
+    noMoviesFound('There is an error and we could not retrieve the movies.');
+    return
+  }
+  renderMovies(movies, showMoviesMarkup);
   renderMoviesCardHeading(`${country} Movies`);
   removeClassFrom(moviesButton);
   addClassTo(loader);
@@ -131,24 +134,18 @@ async function addMovie(movieID: string) {
   }
 }
 
-function checkInputLength(length: number) {
-  if (length >= 3) {
-    return false;
-  }
-  renderMoviesCardHeading(
-    `Type at least 3 characters to search for a movie. ${topMoviesText}`
-  );
-  return true;
-}
-
 searchMovie.addEventListener("input", () => {
   clearTimeout(typingTimer); // Clear the previous timer
   // Start a new timer that code will execute after the specified delay
   typingTimer = setTimeout(() => {
     addClassTo(moviesButton);
-    if (checkInputLength(searchMovie.value.length)) return;
+    const searchValue = searchMovie.value;
+    if (searchValue.length < 3) {
+      noMoviesFound('Type at least 3 characters to search for a movie.');
+      return
+    }
     removeClassFrom(loader);
-    searchMovies(searchMovie.value);
+    searchMovies(searchValue);
     renderMoviesCardHeading('Search Results');
   }, delay);
 });
