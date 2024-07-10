@@ -22,6 +22,7 @@ const API_KEY = import.meta.env.VITE_API_KEY;
 const airTableRecord = import.meta.env.VITE_AIRTABLE_RECORD;
 const moviesButton = document.getElementById("btn-movies") as HTMLDivElement;
 const topMoviesText = 'Want to have a look at my top <span class="text-secondary cursor-pointer" data-top-movies="Top List">watched movies!</span>'
+const moviesCardHeading = document.getElementById('movies-card-heading') as HTMLHeadingElement;
 
 let typingTimer: ReturnType<typeof setTimeout>;
 
@@ -34,7 +35,9 @@ async function searchMovies(movieName: string) {
 
 function renderMovies(movies: DatabaseRecord[], movieName: string = "") {
   if (!movies) {
-    movieCards.innerHTML = `<h3 class="text-center">No movies found with <span class="text-primary">${movieName}</span> name. ${topMoviesText}</h3>`;
+    renderMoviesCardHeading(
+      `No movies found with <span class="text-primary">${movieName}</span> name. ${topMoviesText}`
+    );
     addClassTo(loader);
     return;
   }
@@ -107,21 +110,13 @@ async function showMovies(country: string) {
   removeClassFrom(loader);
   const movies = await AirTableDB.getRecords(country, 3, AirTableDB.base);
   movies && renderMovies(movies);
-  renderMoviesHeading(country);
+  renderMoviesCardHeading(`${country} Movies`);
   removeClassFrom(moviesButton);
   addClassTo(loader);
 }
 
-function renderMoviesHeading(country: string) {
-  const moviesListHeading = document.getElementById('movies-list-heading') as HTMLHeadingElement;
-  if (moviesListHeading) {
-    moviesListHeading.innerHTML = `${country} movies`
-  } else {
-    movieCards.insertAdjacentHTML(
-      "beforebegin",
-      `<h3 id="movies-list-heading" class="text-center mb-2">${country} movies</h3>`
-    );
-  }
+function renderMoviesCardHeading(message: string) {
+  moviesCardHeading.innerHTML = message;
 }
 
 async function addMovie(movieID: string) {
@@ -140,8 +135,9 @@ function checkInputLength(length: number) {
   if (length >= 3) {
     return false;
   }
-  movieCards.innerHTML =
-    `<h3 class="text-center mx-auto custom-line-height">Type at least 3 characters to search for a movie. ${topMoviesText}</h3>`;
+  renderMoviesCardHeading(
+    `Type at least 3 characters to search for a movie. ${topMoviesText}`
+  );
   return true;
 }
 
@@ -153,6 +149,7 @@ searchMovie.addEventListener("input", () => {
     if (checkInputLength(searchMovie.value.length)) return;
     removeClassFrom(loader);
     searchMovies(searchMovie.value);
+    renderMoviesCardHeading('Search Results');
   }, delay);
 });
 
