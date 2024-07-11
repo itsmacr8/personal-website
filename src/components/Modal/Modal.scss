@@ -99,10 +99,6 @@
   }
 
   /* JS CLASSES TO MAKE MODAL WORK */
-  &--hide {
-    display: none;
-  }
-
   &--show {
     opacity: 1;
     @include transitionEaseInOut(opacity);

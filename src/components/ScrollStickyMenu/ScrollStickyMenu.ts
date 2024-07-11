@@ -1,4 +1,5 @@
 import './ScrollStickyMenu.scss'
+import { removeClassFrom, addClassTo } from '../_utils';
 
 const scrollStickyNav: HTMLElement = document.querySelector('.scroll-sticky-navigation') as HTMLElement;
 // Initialize the previous scroll position to zero
@@ -24,11 +25,11 @@ const isScrollingDown = (): boolean => {
 
 const handleNavScroll = () => {
     if (isScrollingDown() && !scrollStickyNav?.contains(document.activeElement)) {
-        scrollStickyNav?.classList.add('scroll-down');
-        scrollStickyNav?.classList.remove('scroll-up');
+        addClassTo(scrollStickyNav, 'scroll-down')
+        removeClassFrom(scrollStickyNav, 'scroll-up')
     } else {
-        scrollStickyNav?.classList.add('scroll-up');
-        scrollStickyNav?.classList.remove('scroll-down');
+        addClassTo(scrollStickyNav, 'scroll-up')
+        removeClassFrom(scrollStickyNav, 'scroll-down')
     }
 };
 

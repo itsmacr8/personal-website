@@ -24,7 +24,7 @@ function showProjectsMarkup(project:DatabaseRecord, index:number) {
       </div>
     </div>
     <div class="project__thumbnail">
-      <img src="${project.Thumbnail}" title="Learn magic thumbnail" alt="Learn magic thumbnail">
+      <img src="${project.Thumbnail}" title="${project.Name} thumbnail" alt="${project.Name} thumbnail">
     </div>
 </div>`
 }

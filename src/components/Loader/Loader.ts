@@ -1,14 +1,5 @@
 import './Loader.scss'
+import { addClassTo } from "../_utils";
+import { loader } from "../_variables";
 
-function showLoader() {
-  loader.classList.remove('loader-container--hide');
-}
-
-function hideLoader() {
-  loader.classList.add('loader-container--hide');
-}
-
-const loader = document.getElementById('loader-container') as HTMLDivElement
-window.onload = () => hideLoader()
-
-export { loader, showLoader, hideLoader }
+window.onload = () => addClassTo(loader);

@@ -5,7 +5,6 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 	<title>Welcome To My Portfolio | ITS MAC</title>
 </head>
 
@@ -22,13 +21,13 @@
 	</div>
 	<header class="scroll-sticky-navigation">
 		<nav class="nav-bar container">
-			<i class="bx bx-menu hamburger-icon"></i>
+			<i class="fa-solid fa-bars hamburger-icon"></i>
 			<div class="brand">
 				<a href="index.html" class="brand__logo">ITS MAC</a>
 			</div>
 			<div class="menu">
 				<div class="align-close-icon">
-					<i class="bx bx-x menu__close"></i>
+					<i class="fa-solid fa-xmark menu__close"></i>
 				</div>
 				<ul class="menu__nav">
 					<!--
@@ -45,8 +44,8 @@
 				</ul>
 			</div>
 			<div class="ui-icon">
-				<i class="bx bx-moon ui-icon__moon"></i>
-				<i class="bx bx-sun ui-icon__sun"></i>
+				<i class="fa-solid fa-moon ui-icon__moon"></i>
+				<i class="fa-solid fa-sun ui-icon__sun"></i>
 			</div>
 		</nav>
 	</header>
@@ -136,7 +135,7 @@
 			<h2 class="section-heading text-center mb-3">Featured projects</h2>
 			<div class="container">
 				<div class="projects mb-2"></div>
-				<div><a href="./work.html" class="btn mx-auto">More projects</a></div>
+				<button id="load-more-projects" class="btn mx-auto">Load More</button>
 			</div>
 		</section>
 		<section id="articles-section">
@@ -183,6 +182,7 @@
 		</div>
     </footer>
 	<script type="module" src="/src/main.ts"></script>
+	<script type="module" src="/src/ts/pages/index.ts"></script>
 </body>
 
 </html>

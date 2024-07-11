@@ -1,8 +1,10 @@
-import { toolsTable } from "../_variables";
-import { getDatabaseRecords, renderDatabaseRecords, cardMarkup } from '../_utils'
+import { toolsTable, AirTableDB } from "../_variables";
+import { renderDatabaseRecords, cardMarkup } from '../_utils'
 
 renderDatabaseRecords(
-  await getDatabaseRecords(toolsTable),
+  await AirTableDB.getRecords(toolsTable),
   document.querySelector('.tools') as HTMLDivElement,
   cardMarkup
 );
+
+
