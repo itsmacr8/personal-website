@@ -82,10 +82,14 @@ movieCards.addEventListener("click", async (event) => {
     const movieID = target.dataset.imdbid;
     movieID && addMovie(movieID);
     return;
-  } else if (target.dataset.topMovies) {
-    showMovies(target.dataset.topMovies);
   }
 });
+
+moviesCardHeading.addEventListener('click', (event) => {
+  const target = event.target as HTMLElement;
+  const topMovies = target.dataset.topMovies
+  topMovies && showMovies(topMovies);
+})
 
 async function createCountryButtons() {
   const countries = await AirTableDB.getCountryList();
