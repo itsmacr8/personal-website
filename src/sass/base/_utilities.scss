@@ -94,3 +94,13 @@ section:nth-child(even){
 .hide {
     display: none !important;
 }
+
+.text-as-link {
+    text-decoration: none;
+    color: var(--tertiary-400);
+    transition: color var(--animation-duration) ease-in-out;
+    &:hover,
+    &--active {
+        color: var(--tertiary-500);
+    }
+}
