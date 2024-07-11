@@ -30,10 +30,13 @@ function clearMoviesCards() {
   movieCards.innerHTML = '';
 }
 
-function noMoviesFound(message: string) {
-  renderMoviesCardHeading(`${message} ${topMoviesText}`);
-  clearMoviesCards();
-  addClassTo(loader);
+function noMoviesFound(condition: boolean, message: string) {
+  if (condition) {
+    renderMoviesCardHeading(`${message} ${topMoviesText}`);
+    clearMoviesCards();
+    addClassTo(loader);
+    return true;
+  }
 }
 
 async function searchMovies(movieName: string) {
@@ -41,10 +44,8 @@ async function searchMovies(movieName: string) {
     `https://www.omdbapi.com/?s=${movieName}&apikey=${API_KEY}&plot=full&y=`
   );
   const movies = response.data.Search;
-  if(!movies) {
-    noMoviesFound(`<span class="text-primary">${movieName}</span> not found.`);
-    return
-  }
+  const message = `<span class="text-primary">${movieName}</span> not found.`;
+  if(noMoviesFound(!movies, message)) return;
   renderMovies(movies, searchMoviesMarkup);
 }
 
@@ -108,10 +109,8 @@ moviesButton.addEventListener("click", async (event) => {
 async function showMovies(country: string) {
   removeClassFrom(loader);
   const movies = await AirTableDB.getRecords(country, 3, AirTableDB.base);
-  if (movies.length == 0) {
-    noMoviesFound('There is an error and we could not retrieve the movies.');
-    return
-  }
+  const message = 'There is an error and we could not retrieve the movies.'
+  if(noMoviesFound(movies.length == 0, message)) return;
   renderMovies(movies, showMoviesMarkup);
   renderMoviesCardHeading(`${country} Movies`);
   removeClassFrom(moviesButton);
@@ -140,10 +139,8 @@ searchMovie.addEventListener("input", () => {
   typingTimer = setTimeout(() => {
     addClassTo(moviesButton);
     const searchValue = searchMovie.value;
-    if (searchValue.length < 3) {
-      noMoviesFound('Type at least 3 characters to search for a movie.');
-      return
-    }
+    const message = 'Type at least 3 characters to search for a movie.'
+    if(noMoviesFound(searchValue.length < 3, message)) return;
     removeClassFrom(loader);
     searchMovies(searchValue);
     renderMoviesCardHeading('Search Results');
