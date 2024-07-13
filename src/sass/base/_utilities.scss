@@ -47,6 +47,10 @@ section:nth-child(even){
     margin-bottom: var(--space-5);
 }
 
+.mb-xs {
+    margin-bottom: var(--space-1);
+}
+
 .my-xs {
     margin-block: var(--space-1);
 }
@@ -81,6 +85,7 @@ section:nth-child(even){
 .poster {
     object-fit: cover;
     width: 100%;
+    max-height: 525px;
 }
 
 .point-name {
