@@ -29,7 +29,6 @@ class Pagination {
     this.prevButton();
     for (let btn = start; btn <= end; btn++) this.buttons(btn);
     this.nextButton();
-    this.updatePagination();
   }
 
   getCurrentNumber() {
@@ -63,7 +62,7 @@ class Pagination {
     );
   }
 
-  updatePagination() {
+  addEventListener() {
     this.pagination.addEventListener('click', (event) => {
       const target = event.target as HTMLElement;
       if (target.tagName === 'BUTTON') {
