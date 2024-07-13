@@ -17,7 +17,7 @@ class Pagination {
     if (this.getPaginationWrapper()) return;
     element.insertAdjacentHTML(
       'afterend',
-      `<div class="pagination" id="pagination"></div>`
+      `<div class="pagination mt-2" id="pagination"></div>`
     );
     this.pagination = this.getPaginationWrapper();
   }
@@ -60,15 +60,6 @@ class Pagination {
       `<button class="btn btn--pagination" data-pagination="${number}"
       ${number === this.currentPage ? 'disabled' : ''}>${number}</button>`
     );
-  }
-
-  addEventListener() {
-    this.pagination.addEventListener('click', (event) => {
-      const target = event.target as HTMLElement;
-      if (target.tagName === 'BUTTON') {
-        this.show(Number(target.dataset.pagination));
-      }
-    });
   }
 }
 
