@@ -23,6 +23,7 @@ const airTableRecord = import.meta.env.VITE_AIRTABLE_RECORD;
 const moviesButton = document.getElementById("btn-movies") as HTMLDivElement;
 const topMoviesText = 'Want to have a look at my top <span class="text-secondary cursor-pointer" data-top-movies="Top List">watched movies!</span>'
 const moviesCardHeading = document.getElementById('movies-card-heading') as HTMLHeadingElement;
+const BASE_URL = `https://www.omdbapi.com/?apikey=${API_KEY}`;
 
 let typingTimer: ReturnType<typeof setTimeout>;
 
@@ -57,11 +58,8 @@ function renderMovies(movies: DatabaseRecord[], markup: Function) {
   });
 }
 
-async function getMovieDetails(movieName: string) {
-  const response = await axios.get(
-    `https://www.omdbapi.com/?i=${movieName}&apikey=${API_KEY}&plot=full&y=`
-  );
-  return response.data;
+async function getMovieDetails(movieID: string) {
+  return (await axios.get(`${BASE_URL}&i=${movieID}&plot=full`)).data;
 }
 
 function renderMovie(movie: MovieDetails) {
