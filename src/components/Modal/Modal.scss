@@ -18,6 +18,14 @@
   &--db-mess {
     @include flexCenter;
 
+    .modal__close {
+      top: 50%;
+      transform: translateY(-50%);
+      @include respond(tab-port) {
+        bottom: initial;
+      }
+    }
+
     .movie-db {
       &--error {
         --bg: var(--warning-500);
@@ -35,7 +43,6 @@
 
       button {
         color: var(--fg, var(--success-400));
-        line-height: 1;
       }
     }
   }
