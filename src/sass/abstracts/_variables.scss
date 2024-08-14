@@ -24,11 +24,14 @@
     --grey-400: hsl(0, 0%, 94%);
     --black: hsl(0, 0%, 0%);
 
-    --fs-0: clamp(1rem, 0.625rem + 1vw, 1.3125rem);
-    --fs-1: clamp(1.5rem, 0.625rem + 3.8636vw, 3rem);
-    --fs-2: clamp(1rem, 0.625rem + 2vw, 1.5rem);
-    --fs-3: 1.5rem;
-    --fs-4: 2rem;
+    --fs-1: clamp(2rem, 3vw + 1rem, 3rem);
+    --fs-2: clamp(1.5rem, 2vw + 1rem, 2.5rem);
+    --fs-3: clamp(1.3125rem, 1vw + 1rem, 2rem);
+    --fs-4: clamp(1.125rem, 1vw + .85rem, 1.625rem);
+    --fs-p: clamp(1rem, 0.625rem + 1.1vw, 1.3125rem);
+    --fs-s: clamp(.875rem, 1.5vw + .8rem, 1rem);
+    --fs-fix-1: 1.5rem;
+    --fs-fix-2: 2rem;
 
     --space-1: 0.3125rem;
     --space-2: 0.625rem;
