@@ -12,11 +12,15 @@
     }
   }
 }
-
 .experience {
-  --work-type-duration-position: -35%;
+  --work-type-duration-position: -60%;
+  --work-type-duration-position-right: -55%;
   --circle: 15px;
   --circle-position: -12.5%;
+  @include custom-respond(1500) {
+    --work-type-duration-position: -47%;
+    --work-type-duration-position-right: -43%;
+  }
   @include custom-respond(400) {
     --circle-position: -11%;
   }
@@ -56,6 +60,11 @@
   &__company, &__period {
     @include respond(tab-land) {
       position: absolute;
+    }
+  }
+
+  &--left &__company, &--left &__period {
+    @include respond(tab-land) {
       right: var(--work-type-duration-position);
     }
   }
@@ -73,7 +82,7 @@
     }
     .experience__company, .experience__period {
       @include respond(tab-land) {
-        left: var(--work-type-duration-position);
+        left: var(--work-type-duration-position-right);
       }
     }
   }
