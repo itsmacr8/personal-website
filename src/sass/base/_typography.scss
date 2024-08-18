@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;700&display=swap');
+
 body {
   font-family: 'Lato', sans-serif;
   font-weight: 400;
@@ -5,7 +7,10 @@ body {
 
 h1,
 h2,
-h3 {
+h3,
+h4 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
   line-height: 1;
 }
 
