@@ -74,7 +74,7 @@ section:nth-child(even){
 .section-heading {
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: var(--tertiary-400);
+    color: var(--secondary-400);
 }
 
 .page-layout {
@@ -102,10 +102,10 @@ section:nth-child(even){
 
 .text-as-link {
     text-decoration: none;
-    color: var(--tertiary-400);
+    color: var(--secondary-400);
     transition: color var(--animation-duration) ease-in-out;
     &:hover,
     &--active {
-        color: var(--tertiary-500);
+        color: var(--secondary-500);
     }
 }

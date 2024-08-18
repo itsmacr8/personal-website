@@ -12,7 +12,7 @@
 }
 .developer-link {
     @include linkStyle;
-    color: var(--tertiary-400);
+    color: var(--secondary-400);
     @include transitionEaseInOut(color);
 }
 .social{
