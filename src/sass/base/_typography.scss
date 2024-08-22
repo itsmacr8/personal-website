@@ -51,6 +51,26 @@ p {
   color: var(--accent-500);
 }
 
+.text-center {
+  text-align: center;
+}
+
+.section-heading {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--secondary-400);
+}
+
 .custom-line-height {
   line-height: 1.2;
+}
+
+.text-as-link {
+  text-decoration: none;
+  color: var(--secondary-400);
+  transition: color var(--animation-duration) ease-in-out;
+  &:hover,
+  &--active {
+      color: var(--secondary-500);
+  }
 }
