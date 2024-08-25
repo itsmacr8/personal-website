@@ -18,11 +18,8 @@ function searchMoviesMarkup(movie: DatabaseRecord, index: number) {
         title="${movie.Title} (${movie.Year}) ${capitalized} Poster">
       </div>
       <div class="movie-card__body">
-        <h4 class="movie-card__title">${movie.Title}
-        <span class="title-text"> (${movie.Year})</span></h4>
-        <p class="movie-text my-xs">
-          <span class="point-name">Type:</span> ${capitalized}
-        </p>
+        <h4>${movie.Title} (${movie.Year})</h4>
+        <p class="mb-xs">Type: ${capitalized}</p>
         <div class="btn-group">
           <button ${detailBtnClass} data-imdbid=${imdbID}>Details</button>
           <button ${addBtnClass} data-imdbid=${imdbID}>Recommend</button>
@@ -44,10 +41,8 @@ function showMoviesMarkup(movie: DatabaseRecord, index: number) {
         title="${movie.Title} (${movie.Year}) ${capitalized} Poster">
       </div>
       <div class="movie-card__body">
-        <h4 class="movie-card__title">
-          ${movie.Title}<span class="title-text"> (${movie.Year})</span>
-        </h4>
-        <p class="movie-text mb-xs">
+        <h4>${movie.Title} (${movie.Year})</h4>
+        <p class="mb-xs">
           ${capitalized} - ${movie.Runtime} | Ratings: ${movie.IMDBRatings}
         </p>
         <div class="btn-group">
@@ -74,13 +69,12 @@ function detailsMovieMarkup(movie: MovieDetails) {
         <p>${capitalized} - ${movie.Runtime}</p>
       </div>
       <div class="modal__secondary-details">
-          <p class="movie-text mb-s">${movie.Plot}</p>
+          <p class="mb-s">${movie.Plot}</p>
           <p>Genre: ${movie.Genre}</p>
-          <p class="my-xs">IMDB: ${
-            movie.Ratings[0]?.Value || "N/A"
-          } | Rotten: ${movie.Ratings[1]?.Value || "N/A"}</p>
+          <p>IMDB: ${movie.Ratings[0]?.Value || 'N/A'} |
+          Rotten: ${movie.Ratings[1]?.Value || 'N/A'}</p>
           <p>Country: ${movie.Country}</p>
-          <p class="my-xs">Language: ${movie.Language}</p>
+          <p>Language: ${movie.Language}</p>
           <p>Box Office: ${movie.BoxOffice}</p>
       </div>
     </div>`;

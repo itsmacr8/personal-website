@@ -1,23 +1,23 @@
 import Airtable, { Base } from "airtable";
 
-import { pw_key, pw_base } from "../_variables";
-import { DatabaseRecord } from "../../types/DatabaseRecord.interface";
+import { pwKey, pwBase } from '../_variables';
+import { DatabaseRecord } from '../../types/DatabaseRecord.interface';
 
 class AirTable {
-  private api_key: string = import.meta.env.VITE_AIRTABLE_KEY;
-  private api_base: string = import.meta.env.VITE_AIRTABLE_BASE;
-  public base: Base = this.getBase(this.api_key, this.api_base);
-  private PW_BASE: Base = this.getBase(pw_key, pw_base);
-  private airTableName: string = import.meta.env.VITE_AIRTABLE_TABLE_NAME;
+  private apiKey: string = import.meta.env.VITE_MPK;
+  private apiBase: string = import.meta.env.VITE_MPB;
+  public base: Base = this.getBase(this.apiKey, this.apiBase);
+  private pwBase: Base = this.getBase(pwKey, pwBase);
+  private airTableName: string = import.meta.env.VITE_TABLE_NAME;
 
-  getBase(api_key: string, api_base: string): Base {
-    return new Airtable({ apiKey: api_key }).base(api_base);
+  getBase(apiKey: string, apiBase: string): Base {
+    return new Airtable({ apiKey: apiKey }).base(apiBase);
   }
 
   async getRecord(
     tableName: string,
     recordID: string,
-    base: Base = this.PW_BASE,
+    base: Base = this.pwBase
   ) {
     try {
       const record = await base(tableName).find(recordID);
@@ -30,7 +30,7 @@ class AirTable {
   async getRecords(
     tableName: string,
     maxRecords: number = 3,
-    base: Base = this.PW_BASE
+    base: Base = this.pwBase
   ) {
     const dbRecords: DatabaseRecord[] = [];
     try {
@@ -38,7 +38,7 @@ class AirTable {
         .select({
           maxRecords: maxRecords,
           // Returns data in the same order we set in the view
-          view: "Grid view",
+          view: 'Grid view',
         })
         .firstPage();
       records.forEach((record) => {

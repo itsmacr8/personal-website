@@ -1,6 +1,5 @@
 import {
   HTextTableName,
-  heroTextRecord,
   aboutTextRecord,
   AirTableDB,
 } from "../_variables";
@@ -25,5 +24,4 @@ async function renderText(
   }
 }
 
-renderText(HTextTableName, heroTextRecord, ".hero");
 renderText(HTextTableName, aboutTextRecord, ".about__description");

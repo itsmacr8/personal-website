@@ -1,47 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;700&display=swap');
+
 body {
-    font-family: 'Lato', sans-serif;
-    font-weight: 400;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
 }
 
 h1,
 h2,
+h3,
+h4 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  line-height: 1;
+}
+
+h1 {
+  font-size: var(--fs-1);
+}
+
+h2 {
+  font-size: var(--fs-2);
+}
+
 h3 {
-    line-height: 1;
+  font-size: var(--fs-3);
+}
+
+h4 {
+  font-size: var(--fs-4);
 }
 
 p {
-    font-size: var(--fs-0);
-    max-width: 75ch;
+  font-size: var(--fs-p);
+  max-width: 75ch;
 }
 
-.primary-heading {
-    font-size: var(--fs-1);
-    color: var(--white)
-}
-
-.sub-heading {
-    font-size: var(--fs-2);
-    margin-bottom: var(--space-3);
-    padding: 0.5rem var(--space-2);
-    background-color: var(--grey-300)
+.text-white {
+  color: var(--white);
 }
 
 .text-primary {
-    color: var(--primary-400);
+  color: var(--primary-400);
 }
 
 .text-secondary {
-    color: var(--tertiary-400);
+  color: var(--secondary-400);
 }
 
 .text-accent {
-    color: var(--accent-500)
+  color: var(--accent-500);
 }
 
-.hero__text {
-    color: var(--white);
+.text-center {
+  text-align: center;
+}
+
+.section-heading {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--secondary-400);
 }
 
 .custom-line-height {
-    line-height: 1.2;
+  line-height: 1.2;
+}
+
+.text-as-link {
+  text-decoration: none;
+  color: var(--secondary-400);
+  transition: color var(--animation-duration) ease-in-out;
+  &:hover,
+  &--active {
+      color: var(--secondary-500);
+  }
 }

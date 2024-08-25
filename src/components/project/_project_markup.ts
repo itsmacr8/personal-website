@@ -7,7 +7,7 @@ function showProjectsMarkup(project:DatabaseRecord, index:number) {
 
   return`<div class="project" id="project-${index+1}">
     <div class="${project.Order}">
-      <h2 class="project__name">${project.Name}</h2>
+      <h3 class="project__name">${project.Name}</h3>
       <p class="project__description">${project.Description}</p>
       <ul class="project__tag-list">
         ${listTags(tagListArray)}

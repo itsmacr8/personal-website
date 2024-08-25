@@ -1,19 +1,29 @@
-import './Project.scss'
-import { showProjectsMarkup } from "./_project_markup";
+import './Project.scss';
+import { showProjectsMarkup } from './_project_markup';
 import { projectDescriptionTable, AirTableDB } from '../_variables';
-import { renderDatabaseRecords } from '../_utils'
+import { renderDatabaseRecords } from '../_utils';
 import { addClassTo, removeClassFrom } from '../_utils';
-import { loader, fetchProjectNumber, projectsContainer } from '../_variables';
+import { loader, totalProject } from '../_variables';
 
-const loadMoreProjects = document.getElementById('load-more-projects') as HTMLButtonElement;
+const projectsContainer = document.querySelector('.projects') as HTMLDivElement;
+const load = document.getElementById('load-more-projects') as HTMLButtonElement;
 
-loadMoreProjects.addEventListener('click', async () => {
+renderDatabaseRecords(
+  await AirTableDB.getRecords(projectDescriptionTable),
+  projectsContainer,
+  showProjectsMarkup
+);
+
+load.addEventListener('click', async () => {
   removeClassFrom(loader);
-  const projects = await AirTableDB.getRecords(projectDescriptionTable, fetchProjectNumber);
+  const projects = await AirTableDB.getRecords(
+    projectDescriptionTable,
+    totalProject
+  );
   renderDatabaseRecords(
-      projects.slice(3),
-      projectsContainer,
-      showProjectsMarkup
-    );
+    projects.slice(3),
+    projectsContainer,
+    showProjectsMarkup
+  );
   addClassTo(loader);
-})
+});
