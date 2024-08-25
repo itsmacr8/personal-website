@@ -5,12 +5,12 @@ import { renderDatabaseRecords } from '../_utils';
 import { addClassTo, removeClassFrom } from '../_utils';
 import { loader, totalProject } from '../_variables';
 
-const projectContainer = document.querySelector('.projects') as HTMLDivElement;
+const projectsContainer = document.querySelector('.projects') as HTMLDivElement;
 const load = document.getElementById('load-more-projects') as HTMLButtonElement;
 
 renderDatabaseRecords(
   await AirTableDB.getRecords(projectDescriptionTable),
-  projectContainer,
+  projectsContainer,
   showProjectsMarkup
 );
 
@@ -22,7 +22,7 @@ load.addEventListener('click', async () => {
   );
   renderDatabaseRecords(
     projects.slice(3),
-    projectContainer,
+    projectsContainer,
     showProjectsMarkup
   );
   addClassTo(loader);
