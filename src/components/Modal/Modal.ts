@@ -14,10 +14,10 @@ async function showModal(modal: HTMLDivElement) {
 }
 
 async function closeModal(modal: HTMLDivElement) {
-  removeClassFrom(modal, 'modal--db-mess');
   removeClassFrom(modal, 'modal--show');
   await waitFor(850);
   addClassTo(modal);
+  removeClassFrom(modal, 'modal--db-mess');
 }
 
 async function autoCloseModal(modal:HTMLDivElement) {

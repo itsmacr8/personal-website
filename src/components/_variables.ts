@@ -1,29 +1,27 @@
 import { AirTable } from "./Airtable/Airtable";
 
-const pw_key: string = import.meta.env.VITE_AIRTABLE_PWK;
-const pw_base: string = import.meta.env.VITE_AIRTABLE_PWB;
-const HTextTableName: string = import.meta.env.VITE_AIRTABLE_PW_HTTN;
-const heroTextRecord: string = import.meta.env.VITE_AIRTABLE_PW_HTR;
-const aboutTextRecord: string = import.meta.env.VITE_AIRTABLE_PW_ATR;
-const projectDescriptionTable: string = import.meta.env.VITE_AIRTABLE_PW_PDTN;
-const toolsTable: string = import.meta.env.VITE_AIRTABLE_PW_TTN;
-const experienceTable: string = import.meta.env.VITE_AIRTABLE_PW_ETN;
-const articleTable: string = import.meta.env.VITE_AIRTABLE_PW_ATN;
-const fetchProjectNumber: number = Number(import.meta.env.VITE_FETCH_PROJECT_NUMBER);
-const loader = document.getElementById('loader-container') as HTMLDivElement
+const pwKey: string = import.meta.env.VITE_PWK;
+const pwBase: string = import.meta.env.VITE_PWB;
+const HTextTableName: string = import.meta.env.VITE_PW_HTTN;
+const aboutTextRecord: string = import.meta.env.VITE_PW_ATR;
+const projectDescriptionTable: string = import.meta.env.VITE_PW_PDTN;
+const toolsTable: string = import.meta.env.VITE_PW_TTN;
+const experienceTable: string = import.meta.env.VITE_PW_ETN;
+const articleTable: string = import.meta.env.VITE_PW_ATN;
+const totalProject: number = Number(import.meta.env.VITE_TOTAL_PROJECT);
+const loader = document.getElementById('loader-container') as HTMLDivElement;
 const AirTableDB = new AirTable();
 
 export {
-  pw_key,
-  pw_base,
+  pwKey,
+  pwBase,
   HTextTableName,
-  heroTextRecord,
   aboutTextRecord,
   projectDescriptionTable,
   toolsTable,
   experienceTable,
   articleTable,
   loader,
-  fetchProjectNumber,
-  AirTableDB
+  totalProject,
+  AirTableDB,
 };

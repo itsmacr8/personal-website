@@ -19,14 +19,13 @@ import "./Movie.scss";
 const searchMovie = document.getElementById("search-movie") as HTMLInputElement;
 const delay = 1500;
 const movieCards = document.querySelector("#movie-cards") as HTMLDivElement;
-const API_KEY = import.meta.env.VITE_API_KEY;
+const OMDB_KEY = import.meta.env.VITE_OMDB_KEY;
 const airTableRecord = import.meta.env.VITE_AIRTABLE_RECORD;
 const moviesButton = document.getElementById("btn-movies") as HTMLDivElement;
 const topMoviesText = 'Want to have a look at my top <span class="text-secondary cursor-pointer" data-top-movies="Top List">watched movies!</span>'
 const moviesCardHeading = document.getElementById('movies-card-heading') as HTMLHeadingElement;
-const BASE_URL = `https://www.omdbapi.com/?apikey=${API_KEY}`;
+const BASE_URL = `https://www.omdbapi.com/?apikey=${OMDB_KEY}`;
 const pagination = new Pagination();
-
 let movieName = '';
 let totalPaginationPages: number
 let typingTimer: ReturnType<typeof setTimeout>;
@@ -67,11 +66,8 @@ function renderMovies(movies: DatabaseRecord[], markup: Function) {
   });
 }
 
-async function getMovieDetails(movieName: string) {
-  const response = await axios.get(
-    `https://www.omdbapi.com/?i=${movieName}&apikey=${API_KEY}&plot=full&y=`
-  );
-  return response.data;
+async function getMovieDetails(movieID: string) {
+  return (await axios.get(`${BASE_URL}&i=${movieID}&plot=full`)).data;
 }
 
 function renderMovie(movie: MovieDetails) {

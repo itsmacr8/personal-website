@@ -21,6 +21,11 @@
             @content;
         }
     }
+    @if $breakpoint == 1500 {
+        @media only screen and (min-width: 1500px) {
+            @content;
+        }
+    }
 }
 
 @mixin translate($direction: original, $value: 0) {

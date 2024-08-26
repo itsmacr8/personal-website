@@ -15,10 +15,6 @@ section:nth-child(even){
     }
 }
 
-.text-center {
-    text-align: center;
-}
-
 .mt-s {
     margin-top: var(--space-2);
 }
@@ -47,8 +43,8 @@ section:nth-child(even){
     margin-bottom: var(--space-5);
 }
 
-.my-xs {
-    margin-block: var(--space-1);
+.mb-xs {
+    margin-bottom: var(--space-1);
 }
 
 .my-s {
@@ -67,12 +63,6 @@ section:nth-child(even){
     margin-inline: auto;
 }
 
-.section-heading {
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--tertiary-400);
-}
-
 .page-layout {
 	display: grid;
 	grid-template-rows: max-content auto max-content;
@@ -81,10 +71,7 @@ section:nth-child(even){
 .poster {
     object-fit: cover;
     width: 100%;
-}
-
-.point-name {
-    font-weight: bold;
+    max-height: 525px;
 }
 
 .cursor-pointer {
@@ -95,12 +82,13 @@ section:nth-child(even){
     display: none !important;
 }
 
-.text-as-link {
-    text-decoration: none;
-    color: var(--tertiary-400);
-    transition: color var(--animation-duration) ease-in-out;
-    &:hover,
-    &--active {
-        color: var(--tertiary-500);
-    }
+.no-js-message {
+	display: flex;
+	color: red;
+	min-height: 100vh;
+	justify-content: center;
+	align-items: center;
+	background: black;
+	font-size: 3rem;
+	text-align: center;
 }
