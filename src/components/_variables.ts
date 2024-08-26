@@ -11,6 +11,7 @@ const articleTable: string = import.meta.env.VITE_PW_ATN;
 const totalProject: number = Number(import.meta.env.VITE_TOTAL_PROJECT);
 const loader = document.getElementById('loader-container') as HTMLDivElement;
 const AirTableDB = new AirTable();
+const projectsContainer = document.querySelector('.projects') as HTMLDivElement;
 
 export {
   pwKey,
@@ -24,4 +25,5 @@ export {
   loader,
   totalProject,
   AirTableDB,
+  projectsContainer,
 };

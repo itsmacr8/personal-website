@@ -3,9 +3,8 @@ import { showProjectsMarkup } from './_project_markup';
 import { projectDescriptionTable, AirTableDB } from '../_variables';
 import { renderDatabaseRecords } from '../_utils';
 import { addClassTo, removeClassFrom } from '../_utils';
-import { loader, totalProject } from '../_variables';
+import { projectsContainer, loader, totalProject } from '../_variables';
 
-const projectsContainer = document.querySelector('.projects') as HTMLDivElement;
 const load = document.getElementById('load-more-projects') as HTMLButtonElement;
 
 renderDatabaseRecords(
