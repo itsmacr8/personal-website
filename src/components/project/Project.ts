@@ -26,4 +26,5 @@ load.addEventListener('click', async () => {
     showProjectsMarkup
   );
   addClassTo(loader);
+  addClassTo(load);
 });

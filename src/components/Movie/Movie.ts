@@ -3,6 +3,7 @@ import axios from "axios";
 import { MovieDetails } from "./Movie.interface";
 import { DatabaseRecord } from "../../types/DatabaseRecord.interface";
 import { modal, showModal, autoCloseModal } from "../Modal/Modal";
+import { Pagination } from '../Pagination/Pagination';
 import { loader, AirTableDB } from '../_variables';
 import { removeClassFrom, addClassTo, capitalize } from '../_utils';
 import {
@@ -17,14 +18,16 @@ import "./Movie.scss";
 
 const searchMovie = document.getElementById("search-movie") as HTMLInputElement;
 const delay = 1500;
-const movieCards = document.querySelector("#movie-cards") as HTMLButtonElement;
-const API_KEY = import.meta.env.VITE_OMDB_KEY;
+const movieCards = document.querySelector("#movie-cards") as HTMLDivElement;
+const OMDB_KEY = import.meta.env.VITE_OMDB_KEY;
 const airTableRecord = import.meta.env.VITE_AIRTABLE_RECORD;
 const moviesButton = document.getElementById("btn-movies") as HTMLDivElement;
 const topMoviesText = 'Want to have a look at my top <span class="text-secondary cursor-pointer" data-top-movies="Top List">watched movies!</span>'
 const moviesCardHeading = document.getElementById('movies-card-heading') as HTMLHeadingElement;
-const BASE_URL = `https://www.omdbapi.com/?apikey=${API_KEY}`;
-
+const BASE_URL = `https://www.omdbapi.com/?apikey=${OMDB_KEY}`;
+const pagination = new Pagination();
+let movieName = '';
+let totalPaginationPages: number
 let typingTimer: ReturnType<typeof setTimeout>;
 
 function clearMoviesCards() {
@@ -36,18 +39,23 @@ function noMoviesFound(condition: boolean, message: string) {
     renderMoviesCardHeading(`${message} ${topMoviesText}`);
     clearMoviesCards();
     addClassTo(loader);
+    pagination.clear();
     return true;
   }
 }
 
-async function searchMovies(movieName: string) {
-  const response = await axios.get(
-    `https://www.omdbapi.com/?s=${movieName}&apikey=${API_KEY}&plot=full&y=`
-  );
-  const movies = response.data.Search;
+async function getSearchMoviesResults(num: number) {
+  const response = await axios.get(`${BASE_URL}&s=${movieName}&page=${num}`);
+  totalPaginationPages = response.data.totalResults;
+  return response.data.Search;
+}
+
+async function searchMovies() {
+  const movies = await getSearchMoviesResults(1);
   const message = `<span class="text-primary">${movieName}</span> not found.`;
   if(noMoviesFound(!movies, message)) return;
   renderMovies(movies, searchMoviesMarkup);
+  pagination.show(1, totalPaginationPages);
 }
 
 function renderMovies(movies: DatabaseRecord[], markup: Function) {
@@ -99,6 +107,18 @@ async function createCountryButtons() {
   }
 }
 
+pagination.container.addEventListener('click', async (event) => {
+  const target = event.target as HTMLElement;
+  if (target.tagName === 'BUTTON') {
+    const currPage = Number(target.dataset.pagination);
+    removeClassFrom(loader);
+    pagination.show(currPage, totalPaginationPages);
+    const movies = await getSearchMoviesResults(currPage);
+    renderMovies(movies, searchMoviesMarkup);
+    addClassTo(loader);
+  }
+});
+
 moviesButton.addEventListener("click", async (event) => {
   const target = event.target as HTMLElement;
   if (target.classList.contains("btn")) {
@@ -144,7 +164,8 @@ searchMovie.addEventListener("input", () => {
     const message = 'Type at least 3 characters to search for a movie.'
     if(noMoviesFound(searchValue.length < 3, message)) return;
     removeClassFrom(loader);
-    searchMovies(searchValue);
+    movieName = searchValue;
+    searchMovies()
     renderMoviesCardHeading('Search Results');
   }, delay);
 });

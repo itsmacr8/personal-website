@@ -1,0 +1,14 @@
+@import '../../sass/layout/flex';
+
+.pagination {
+  @include flexWrap(var(--space-2));
+  justify-content: center;
+
+  .btn--pagination {
+    background-color: var(--tertiary-500);
+    &[disabled]{
+      background-color: var(--accent-400);
+      color: var(--black);
+    }
+  }
+}
