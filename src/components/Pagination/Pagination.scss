@@ -5,7 +5,7 @@
   justify-content: center;
 
   .btn--pagination {
-    background-color: var(--tertiary-500);
+    background-color: var(--secondary-500);
     &[disabled]{
       background-color: var(--accent-400);
       color: var(--black);
