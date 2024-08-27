@@ -89,6 +89,6 @@ section:nth-child(even){
 	justify-content: center;
 	align-items: center;
 	background: black;
-	font-size: 3rem;
+	font-size: var(--fs-1);
 	text-align: center;
 }
