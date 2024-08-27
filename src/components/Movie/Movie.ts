@@ -22,12 +22,15 @@ const movieCards = document.querySelector("#movie-cards") as HTMLDivElement;
 const OMDB_KEY = import.meta.env.VITE_OMDB_KEY;
 const airTableRecord = import.meta.env.VITE_AIRTABLE_RECORD;
 const moviesButton = document.getElementById("btn-movies") as HTMLDivElement;
-const topMoviesText = 'Want to have a look at my top <span class="text-secondary cursor-pointer" data-top-movies="Top List">watched movies!</span>'
-const moviesCardHeading = document.getElementById('movies-card-heading') as HTMLHeadingElement;
+const topMoviesText =
+  'Want to have a look at my <span class="text-secondary cursor-pointer" data-top-movies="Top">top watched movies!</span>';
+const moviesCardHeading = document.getElementById(
+  'movies-card-heading'
+) as HTMLHeadingElement;
 const BASE_URL = `https://www.omdbapi.com/?apikey=${OMDB_KEY}`;
 const pagination = new Pagination();
 let movieName = '';
-let totalPaginationPages: number
+let totalPaginationPages: number;
 let typingTimer: ReturnType<typeof setTimeout>;
 
 function clearMoviesCards() {
@@ -53,7 +56,7 @@ async function getSearchMoviesResults(num: number) {
 async function searchMovies() {
   const movies = await getSearchMoviesResults(1);
   const message = `<span class="text-primary">${movieName}</span> not found.`;
-  if(noMoviesFound(!movies, message)) return;
+  if (noMoviesFound(!movies, message)) return;
   renderMovies(movies, searchMoviesMarkup);
   pagination.show(1, totalPaginationPages);
 }
@@ -73,18 +76,18 @@ async function getMovieDetails(movieID: string) {
 function renderMovie(movie: MovieDetails) {
   // We have to use movie.imdbID || movie.IMDB_ID because
   // imdbID is the property of OMDB and IMDB_ID is airtable
-  modal.innerHTML = "";
-  modal.insertAdjacentHTML("beforeend", detailsMovieMarkup(movie));
+  modal.innerHTML = '';
+  modal.insertAdjacentHTML('beforeend', detailsMovieMarkup(movie));
   showModal(modal);
 }
 
-movieCards.addEventListener("click", async (event) => {
+movieCards.addEventListener('click', async (event) => {
   const target = event.target as HTMLElement;
-  if (target.classList.contains("btn--movie-details")) {
+  if (target.classList.contains('btn--movie-details')) {
     const movieID = target.dataset.imdbid;
     movieID && renderMovie(await getMovieDetails(movieID));
     return;
-  } else if (target.classList.contains("btn--movie-add")) {
+  } else if (target.classList.contains('btn--movie-add')) {
     const movieID = target.dataset.imdbid;
     movieID && addMovie(movieID);
     return;
@@ -93,16 +96,16 @@ movieCards.addEventListener("click", async (event) => {
 
 moviesCardHeading.addEventListener('click', (event) => {
   const target = event.target as HTMLElement;
-  const topMovies = target.dataset.topMovies
+  const topMovies = target.dataset.topMovies;
   topMovies && showMovies(topMovies);
-})
+});
 
 async function createCountryButtons() {
   const countries = await AirTableDB.getCountryList();
   for (const country of countries) {
     moviesButton.insertAdjacentHTML(
-      "beforeend",
-      `<button class="btn" data-country="${country}">${country} Movies</button>`
+      'beforeend',
+      `<button class="btn" data-country="${country}">${country}</button>`
     );
   }
 }
@@ -119,9 +122,9 @@ pagination.container.addEventListener('click', async (event) => {
   }
 });
 
-moviesButton.addEventListener("click", async (event) => {
+moviesButton.addEventListener('click', async (event) => {
   const target = event.target as HTMLElement;
-  if (target.classList.contains("btn")) {
+  if (target.classList.contains('btn')) {
     const country = target.dataset.country;
     country && showMovies(country);
     return;
@@ -130,11 +133,11 @@ moviesButton.addEventListener("click", async (event) => {
 
 async function showMovies(country: string) {
   removeClassFrom(loader);
-  const movies = await AirTableDB.getRecords(country, 3, AirTableDB.base);
-  const message = 'There is an error and we could not retrieve the movies.'
-  if(noMoviesFound(movies.length == 0, message)) return;
+  const movies = await AirTableDB.getRecords(country, 12, AirTableDB.base);
+  const message = 'There is an error and we could not retrieve the movies.';
+  if (noMoviesFound(movies.length == 0, message)) return;
   renderMovies(movies, showMoviesMarkup);
-  renderMoviesCardHeading(`${country} Movies`);
+  renderMoviesCardHeading(`${country}`);
   removeClassFrom(moviesButton);
   addClassTo(loader);
 }
@@ -146,7 +149,7 @@ function renderMoviesCardHeading(message: string) {
 async function addMovie(movieID: string) {
   removeClassFrom(loader);
   const movieDetails = await getMovieDetails(movieID);
-  const country: string = movieDetails.Country.split(",").shift()?.trim();
+  const country: string = movieDetails.Country.split(',').shift()?.trim();
   const countries = await AirTableDB.getCountryList();
   if (countries.includes(country)) {
     saveMovieData(country, movieDetails);
@@ -155,17 +158,17 @@ async function addMovie(movieID: string) {
   }
 }
 
-searchMovie.addEventListener("input", () => {
+searchMovie.addEventListener('input', () => {
   clearTimeout(typingTimer); // Clear the previous timer
   // Start a new timer that code will execute after the specified delay
   typingTimer = setTimeout(() => {
     addClassTo(moviesButton);
     const searchValue = searchMovie.value;
-    const message = 'Type at least 3 characters to search for a movie.'
-    if(noMoviesFound(searchValue.length < 3, message)) return;
+    const message = 'Type at least 3 characters to search for a movie.';
+    if (noMoviesFound(searchValue.length < 3, message)) return;
     removeClassFrom(loader);
     movieName = searchValue;
-    searchMovies()
+    searchMovies();
     renderMoviesCardHeading('Search Results');
   }, delay);
 });
@@ -179,7 +182,7 @@ function saveMovieData(tableName: string, movie: MovieDetails) {
           IMDB_ID: movie.imdbID,
           Poster: movie.Poster,
           Title: movie.Title,
-          Year: Number(movie.Year),
+          Year: movie.Year,
           Genre: movie.Genre,
           Type: capitalize(movie.Type),
           Runtime: movie.Runtime,
@@ -218,7 +221,7 @@ function cleanAndShowModal(
 }
 
 function init() {
-  showMovies('Top List');
+  showMovies('Top');
   createCountryButtons();
 }
 
