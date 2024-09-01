@@ -17,7 +17,7 @@ header {
         font-size: var(--fs-fix-2);
         cursor: pointer;
 
-        @include respond(tab-land) {
+        @include respond(tab-port) {
             display: none;
         }
     }
@@ -42,7 +42,7 @@ header {
     padding: 1.5rem 1.5rem 0 0;
     background-color: var(--primary-500);
     @include transitionEaseInOut(left);
-    @include respond(tab-land) {
+    @include respond(tab-port) {
         position: static;
         width: auto;
         height: auto;
@@ -53,7 +53,7 @@ header {
     .align-close-icon {
         display: flex;
         justify-content: end;
-        @include respond(tab-land) {
+        @include respond(tab-port) {
             display: none;
         }
     }
@@ -77,10 +77,14 @@ header {
     justify-content: center;
     height: calc(100% - 15rem);
 
-    @include respond(tab-land) {
+    @include respond(tab-port) {
         flex-direction: row;
-        gap: var(--space-4);
+        gap: var(--space-3);
         height: auto;
+    }
+
+    @include respond(tab-land) {
+        gap: var(--space-4);
     }
 
     &__item {
@@ -94,7 +98,7 @@ header {
             }
         }
 
-        @include respond(tab-land) {
+        @include respond(tab-port) {
             @include translate;
         }
     }
