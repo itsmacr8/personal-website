@@ -92,7 +92,7 @@ header {
         @include transitionEaseInOut;
 
         // Delay each nav item slide by 0.2s
-        @for $x from 1 through 6 {
+        @for $x from 1 through 7 {
             &:nth-child(#{$x}) {
                 transition-delay: $x * 0.2s;
             }
