@@ -1,0 +1,51 @@
+@import '../../sass/abstracts/mixins';
+
+.slider {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden;
+  min-height: 200px;
+  @include respond(tab-port) {
+    min-height: 400px;
+  }
+  @include respond(tab-land) {
+    min-height: 500px;
+  }
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  transition: transform 750ms;
+}
+
+.dots {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+
+  &__dot {
+    border: none;
+    background-color: var(--grey-800);
+    opacity: 0.7;
+    height: 1rem;
+    width: 1rem;
+    border-radius: 50%;
+    margin-right: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.5s;
+
+    &--active {
+      background-color: var(--primary-500);
+      opacity: 1;
+    }
+
+    &:last-child {
+      margin: 0;
+    }
+  }
+}

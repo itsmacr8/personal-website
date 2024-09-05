@@ -1,6 +1,6 @@
 import { FieldSet } from 'airtable';
-
 import { DatabaseRecordType, DatabaseRecord } from '../types/DatabaseRecord.interface';
+import { AirTableDB } from './_variables';
 
 
 function capitalize(string: string) {
@@ -78,6 +78,14 @@ function sortedArray(fieldNames: string[], fields: FieldSet) {
   return fieldNames.map((fieldName) => fields[fieldName]);
 }
 
+async function getSortedRecord(tableName: string, recordID: string) {
+  const record = await AirTableDB.getRecord(tableName, recordID);
+  if (record)
+    // .slice(1) removes the first value which is primary key
+    return sortedArray(sortFieldsByNumericOrder(record), record).slice(1);
+  return []
+}
+
 export {
   capitalize,
   createArray,
@@ -89,4 +97,5 @@ export {
   removeClassFrom,
   sortFieldsByNumericOrder,
   sortedArray,
+  getSortedRecord,
 };
