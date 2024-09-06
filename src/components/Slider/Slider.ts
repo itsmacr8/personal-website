@@ -93,6 +93,7 @@ const initializeSlider = async () => {
   createDots();
   activeDot(0);
   goToSlide(0);
+  setInterval(nextSlide, 5000);
 };
 
 export { initializeSlider }
