@@ -9,11 +9,13 @@ import {
   projectDescriptionTable,
   projectsContainer,
 } from '../_variables';
+import { initializeSlider } from '../Slider/Slider';
 
 const xSec = document.getElementById('experience-section') as HTMLElement;
 const toolsSec = document.getElementById('tools-section') as HTMLElement;
 const projectsSec = document.getElementById('portfolio-section') as HTMLElement;
 const articlesSec = document.getElementById('articles-section') as HTMLElement;
+const testimonialsSec = document.getElementById('testimonials') as HTMLElement;
 const xContainer = document.querySelector('.experiences') as HTMLDivElement;
 const toolsContainer = document.querySelector('.tools') as HTMLDivElement;
 const articlesContainer = document.querySelector('.articles') as HTMLDivElement;
@@ -31,6 +33,8 @@ function observeSection(currentSec: Element) {
     renderDatabaseRecords(projectsData, projectsContainer, showProjectsMarkup);
   else if (currentSec === articlesSec)
     renderDatabaseRecords(articlesData, articlesContainer, cardMarkup);
+  else if (currentSec === testimonialsSec)
+    initializeSlider()
 }
 
 const options = {
@@ -52,3 +56,4 @@ observer.observe(xSec);
 observer.observe(toolsSec);
 observer.observe(projectsSec);
 observer.observe(articlesSec);
+observer.observe(testimonialsSec);

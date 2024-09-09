@@ -2,14 +2,31 @@
 <html lang="en">
 
 <head>
+	<title>Welcome To My Portfolio | ITS MAC</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="author" content="ITS MAC">
 	<meta name="robots" content="index, follow">
 	<meta name="keywords" content="HTML, CSS, JavaScript, ReactJS, NextJS, Python, Django, Web Developer, Figma, Prompt Engineering">
 	<meta name="description" content="ITS MAC is a skilled Web Developer with expertise in HTML, CSS, JavaScript, and modern frameworks like React. Explore his portfolio, projects, and articles for insights into web development and design.">
+	<link rel="apple-touch-icon" sizes="57x57" href="/assets/fav-icons/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/assets/fav-icons/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/assets/fav-icons/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/assets/fav-icons/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/assets/fav-icons/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/assets/fav-icons/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/assets/fav-icons/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/assets/fav-icons/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/fav-icons/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="/assets/fav-icons/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/fav-icons/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="/assets/fav-icons/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/fav-icons/favicon-16x16.png">
+	<link rel="manifest" href="/manifest.json">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-	<title>Welcome To My Portfolio | ITS MAC</title>
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
 </head>
 
 <body class="page-layout">
@@ -27,7 +44,7 @@
 		<nav class="nav-bar container">
 			<i class="fa-solid fa-bars hamburger-icon"></i>
 			<div class="brand">
-				<a href="index.html" class="brand__logo">ITS MAC</a>
+				<a href="/" class="brand__logo">ITS MAC</a>
 			</div>
 			<div class="menu">
 				<div class="align-close-icon">
@@ -38,18 +55,14 @@
 					Remember to update menu transitions when
 					updating nav item.
 					-->
-					<li class="menu__nav__item"><a href="#about-section" class="menu__nav__link">About</a></li>
 					<li class="menu__nav__item"><a href="#skills-section" class="menu__nav__link">Skills</a></li>
 					<li class="menu__nav__item"><a href="#experience-section" class="menu__nav__link">Experience</a></li>
-					<li class="menu__nav__item"><a href="#tools-section" class="menu__nav__link">Tools</a></li>
 					<li class="menu__nav__item"><a href="#portfolio-section" class="menu__nav__link">Portfolio</a></li>
+					<li class="menu__nav__item"><a href="#testimonials" class="menu__nav__link">Testimonials</a></li>
 					<li class="menu__nav__item"><a href="#articles-section" class="menu__nav__link">Articles</a></li>
+					<li class="menu__nav__item"><a href="#tools-section" class="menu__nav__link">Tools</a></li>
 					<li class="menu__nav__item"><a href="#contact-section" class="menu__nav__link">Contact</a></li>
 				</ul>
-			</div>
-			<div class="ui-icon">
-				<i class="fa-solid fa-moon ui-icon__moon"></i>
-				<i class="fa-solid fa-sun ui-icon__sun"></i>
 			</div>
 		</nav>
 	</header>
@@ -138,12 +151,6 @@
 				<div class="experiences mb-2"></div>
 			</div>
 		</section>
-		<section id="tools-section">
-			<h2 class="section-heading text-center mb-3">Tools</h2>
-			<div class="container">
-				<div class="cards tools mb-2"></div>
-			</div>
-		</section>
 		<section id="portfolio-section">
 			<h2 class="section-heading text-center mb-3">Featured projects</h2>
 			<div class="container">
@@ -151,10 +158,22 @@
 				<button id="load-more-projects" class="btn mx-auto">Load More</button>
 			</div>
 		</section>
+		<section id="testimonials">
+			<h2 class="section-heading text-center mb-3">Mentors</h2>
+			<div id="slider" class="container slider">
+				<div class="dots"></div>
+			</div>
+		</section>
 		<section id="articles-section">
 			<h2 class="section-heading text-center mb-3">Articles</h2>
 			<div class="container">
 				<div class="cards articles mb-2"></div>
+			</div>
+		</section>
+		<section id="tools-section">
+			<h2 class="section-heading text-center mb-3">Tools</h2>
+			<div class="container">
+				<div class="cards tools mb-2"></div>
 			</div>
 		</section>
 		<section id="contact-section">
@@ -185,7 +204,7 @@
 	</main>
 	<footer class="footer">
 		<div class="container footer__content">
-			<p>Copyright &copy; 2023-<script>document.write(new Date().getFullYear())</script> <a class="developer-link" href="https://itsmac.netlify.app/">its mac</a> - Front-end and React Developer</p>
+			<p>Copyright &copy; 2023-<script>document.write(new Date().getFullYear())</script> <a class="developer-link" href="/">its mac</a> - Front-end and React Developer</p>
 			<ul class="social">
 				<li><a class="social__icon" href="https://t.me/itsmacr8/" aria-label="Click here to get in touch with me via telegram"><i class="fab fa-telegram fa-2x"></i></a></li>
 				<li><a class="social__icon" href="https://www.linkedin.com/in/itsmacr8/" aria-label="Click here to get in touch with me via LinkedIn"><i class="fab fa-linkedin fa-2x"></i></a></li>
