@@ -5,10 +5,11 @@ import {
   AirTableDB,
   experienceTable,
   articleTable,
-  projectDescriptionTable,
+  projectTable,
   projectsContainer,
 } from '../_variables';
 import { initializeSlider } from '../Slider/Slider';
+import { updateOffset } from '../project/Project';
 
 const xSec = document.getElementById('experience-section') as HTMLElement;
 const projectsSec = document.getElementById('portfolio-section') as HTMLElement;
@@ -16,19 +17,26 @@ const articlesSec = document.getElementById('articles-section') as HTMLElement;
 const testimonialsSec = document.getElementById('testimonials') as HTMLElement;
 const xContainer = document.querySelector('.experiences') as HTMLDivElement;
 const articlesContainer = document.querySelector('.articles') as HTMLDivElement;
-const xData = await AirTableDB.getRecords(experienceTable);
-const projectsData = await AirTableDB.getRecords(projectDescriptionTable);
-const articlesData = await AirTableDB.getRecords(articleTable);
 
 function observeSection(currentSec: Element) {
   if (currentSec === xSec)
-    renderDatabaseRecords(xData, xContainer, showExperiencesMarkup);
+    renderUpdate(experienceTable, xContainer, showExperiencesMarkup);
   else if (currentSec === projectsSec)
-    renderDatabaseRecords(projectsData, projectsContainer, showProjectsMarkup);
+    renderUpdate(projectTable, projectsContainer, showProjectsMarkup);
   else if (currentSec === articlesSec)
-    renderDatabaseRecords(articlesData, articlesContainer, cardMarkup);
-  else if (currentSec === testimonialsSec)
-    initializeSlider()
+    renderUpdate(articleTable, articlesContainer, cardMarkup);
+  else if (currentSec === testimonialsSec) initializeSlider();
+}
+
+// It fetches and renders the records and update the offset value.
+async function renderUpdate(
+  tableName: string,
+  container: HTMLDivElement,
+  markup: Function
+) {
+  const [data, offset] = await AirTableDB.getRecords(tableName);
+  renderDatabaseRecords(data, container, markup);
+  updateOffset(tableName, offset);
 }
 
 const options = {

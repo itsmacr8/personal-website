@@ -1,13 +1,13 @@
 import Airtable, { Base } from "airtable";
-
-import { pwKey, pwBase } from '../_variables';
 import { DatabaseRecord } from '../../types/DatabaseRecord.interface';
 
 class AirTable {
+  private pwKey: string = import.meta.env.VITE_PWK;
+  private pwBase: string = import.meta.env.VITE_PWB;
   private apiKey: string = import.meta.env.VITE_MPK;
   private apiBase: string = import.meta.env.VITE_MPB;
   public base: Base = this.getBase(this.apiKey, this.apiBase);
-  private pwBase: Base = this.getBase(pwKey, pwBase);
+  private pwBaseFun: Base = this.getBase(this.pwKey, this.pwBase);
   private airTableName: string = import.meta.env.VITE_TABLE_NAME;
 
   getBase(apiKey: string, apiBase: string): Base {
@@ -17,7 +17,7 @@ class AirTable {
   async getRecord(
     tableName: string,
     recordID: string,
-    base: Base = this.pwBase
+    base: Base = this.pwBaseFun
   ) {
     try {
       const record = await base(tableName).find(recordID);
@@ -29,22 +29,26 @@ class AirTable {
 
   async getRecords(
     tableName: string,
+    offset: string = '',
     maxRecords: number = 3,
-    base: Base = this.pwBase
+    apiKey: string = this.pwKey,
+    baseId: string = this.pwBase
   ) {
-    const dbRecords: DatabaseRecord[] = [];
     try {
-      const records = await base(tableName)
-        .select({
-          maxRecords: maxRecords,
-          // Returns data in the same order we set in the view
-          view: 'Grid view',
-        })
-        .firstPage();
-      records.forEach((record) => {
-        dbRecords.push(record.fields);
+      let url = `https://api.airtable.com/v0/${baseId}/${tableName}?pageSize=${maxRecords}&view=Grid%20view`;
+      if (offset) url += `&offset=${offset}`;
+
+      const response = await fetch(url, {
+        headers: { Authorization: `Bearer ${apiKey}` },
       });
-      return dbRecords;
+      const data = await response.json();
+      offset = data.offset; // Save the offset for the next fetch
+
+      const records: DatabaseRecord[] = [];
+      data.records.forEach((record: any) => {
+        records.push(record.fields);
+      });
+      return [records, offset] as [DatabaseRecord[], string]; // Type assertion
     } catch (err) {
       console.error(err);
       throw err;
