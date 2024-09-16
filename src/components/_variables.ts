@@ -1,4 +1,4 @@
-import { AirTable } from "./Airtable/Airtable";
+import { AirTable } from './Airtable/Airtable';
 
 const HTextTableName: string = import.meta.env.VITE_PW_HTTN;
 const aboutTextRecord: string = import.meta.env.VITE_PW_ATR;

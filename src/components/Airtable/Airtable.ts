@@ -1,4 +1,4 @@
-import Airtable, { Base } from "airtable";
+import Airtable, { Base } from 'airtable';
 import { DatabaseRecord } from '../../types/DatabaseRecord.interface';
 
 class AirTable {

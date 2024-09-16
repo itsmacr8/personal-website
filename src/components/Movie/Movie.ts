@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios from 'axios';
 
-import { MovieDetails } from "./Movie.interface";
-import { DatabaseRecord } from "../../types/DatabaseRecord.interface";
-import { modal, showModal, autoCloseModal } from "../Modal/Modal";
+import { MovieDetails } from './Movie.interface';
+import { DatabaseRecord } from '../../types/DatabaseRecord.interface';
+import { modal, showModal, autoCloseModal } from '../Modal/Modal';
 import { Pagination } from '../Pagination/Pagination';
 import { loader, AirTableDB } from '../_variables';
 import { removeClassFrom, addClassTo, capitalize } from '../_utils';
@@ -11,17 +11,17 @@ import {
   showMoviesMarkup,
   detailsMovieMarkup,
   movieDBErrorMarkup,
-  movieDBSaveMarkup
-} from "./_movie_markup";
+  movieDBSaveMarkup,
+} from './_movie_markup';
 
-import "./Movie.scss";
+import './Movie.scss';
 
-const searchMovie = document.getElementById("search-movie") as HTMLInputElement;
+const searchMovie = document.getElementById('search-movie') as HTMLInputElement;
 const delay = 1500;
-const movieCards = document.querySelector("#movie-cards") as HTMLDivElement;
+const movieCards = document.querySelector('#movie-cards') as HTMLDivElement;
 const OMDB_KEY = import.meta.env.VITE_OMDB_KEY;
 const airTableRecord = import.meta.env.VITE_AIRTABLE_RECORD;
-const moviesButton = document.getElementById("btn-movies") as HTMLDivElement;
+const moviesButton = document.getElementById('btn-movies') as HTMLDivElement;
 const topMoviesText =
   'Want to have a look at my <span class="text-secondary cursor-pointer" data-top-movies="Top">top watched movies!</span>';
 const moviesCardHeading = document.getElementById(
@@ -231,4 +231,4 @@ function init() {
   createCountryButtons();
 }
 
-init()
+init();
