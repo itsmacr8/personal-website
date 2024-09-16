@@ -4,9 +4,9 @@ import { DatabaseRecord } from '../../types/DatabaseRecord.interface';
 class AirTable {
   private pwKey: string = import.meta.env.VITE_PWK;
   private pwBase: string = import.meta.env.VITE_PWB;
-  private apiKey: string = import.meta.env.VITE_MPK;
-  private apiBase: string = import.meta.env.VITE_MPB;
-  public base: Base = this.getBase(this.apiKey, this.apiBase);
+  public mpKey: string = import.meta.env.VITE_MPK;
+  public mpBase: string = import.meta.env.VITE_MPB;
+  public base: Base = this.getBase(this.mpKey, this.mpBase);
   private pwBaseFun: Base = this.getBase(this.pwKey, this.pwBase);
   private airTableName: string = import.meta.env.VITE_TABLE_NAME;
 

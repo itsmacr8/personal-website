@@ -133,7 +133,13 @@ moviesButton.addEventListener('click', async (event) => {
 
 async function showMovies(country: string) {
   removeClassFrom(loader);
-  const movies = await AirTableDB.getRecords(country, 12, AirTableDB.base);
+  const [movies, _] = await AirTableDB.getRecords(
+    country,
+    '',
+    12,
+    AirTableDB.mpKey,
+    AirTableDB.mpBase
+  );
   const message = 'There is an error and we could not retrieve the movies.';
   if (noMoviesFound(movies.length == 0, message)) return;
   renderMovies(movies, showMoviesMarkup);
