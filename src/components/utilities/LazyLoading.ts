@@ -9,7 +9,7 @@ import {
   projectsContainer,
 } from '../_variables';
 import { initializeSlider } from '../Slider/Slider';
-import { updateOffset } from '../project/Project';
+import { updateOffset } from './LoadMore';
 
 const xSec = document.getElementById('experience-section') as HTMLElement;
 const projectsSec = document.getElementById('portfolio-section') as HTMLElement;
