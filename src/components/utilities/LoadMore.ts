@@ -1,7 +1,9 @@
 import { loader, AirTableDB, projectTable } from '../_variables';
 import { renderDatabaseRecords, addClassTo, removeClassFrom } from '../_utils';
+import { Offset } from '../../types/LoadMore.interface';
 
 let projectOffset: string = '';
+const offset: Offset = {};
 
 function updateOffset(tableName: string, offset: string) {
   if (tableName == projectTable) projectOffset = offset;
@@ -22,4 +24,4 @@ async function loadMore(
   !newOffset && addClassTo(loadButton);
 }
 
-export { projectOffset, updateOffset, loadMore };
+export { projectOffset, offset, updateOffset, loadMore };

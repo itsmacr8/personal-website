@@ -13,6 +13,7 @@ import {
   movieDBErrorMarkup,
   movieDBSaveMarkup,
 } from './_movie_markup';
+import { offset } from '../utilities/LoadMore';
 
 import './Movie.scss';
 
@@ -61,8 +62,14 @@ async function searchMovies() {
   pagination.show(1, totalPaginationPages);
 }
 
-function renderMovies(movies: DatabaseRecord[], markup: Function) {
-  clearMoviesCards();
+function renderMovies(
+  movies: DatabaseRecord[],
+  markup: Function,
+  shouldClear: boolean = true
+) {
+  // Clear the container when fetching movies from a different table.
+  // Do not clear the container when loading more movies from the same table.
+  shouldClear && clearMoviesCards();
   addClassTo(loader);
   movies.forEach((movie: DatabaseRecord, index: number) => {
     movieCards.insertAdjacentHTML('beforeend', markup(movie, index));
@@ -131,18 +138,30 @@ moviesButton.addEventListener('click', async (event) => {
   }
 });
 
+const loadMovies = document.getElementById('load-movies') as HTMLButtonElement;
+loadMovies.addEventListener('click', () => {
+  const tableName = moviesCardHeading.textContent;
+  if (tableName) {
+    showMovies(tableName);
+    !offset[tableName] && addClassTo(loadMovies);
+  }
+});
+
 async function showMovies(country: string) {
   removeClassFrom(loader);
-  const [movies, _] = await AirTableDB.getRecords(
+  const [movies, newOffset] = await AirTableDB.getRecords(
     country,
-    '',
+    offset[country],
     12,
     AirTableDB.mpKey,
     AirTableDB.mpBase
   );
+  let shouldClear = true;
+  if (offset[country]) shouldClear = false;
+  offset[country] = newOffset;
   const message = 'There is an error and we could not retrieve the movies.';
   if (noMoviesFound(movies.length == 0, message)) return;
-  renderMovies(movies, showMoviesMarkup);
+  renderMovies(movies, showMoviesMarkup, shouldClear);
   renderMoviesCardHeading(`${country}`);
   removeClassFrom(moviesButton);
   addClassTo(loader);
