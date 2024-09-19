@@ -141,10 +141,7 @@ moviesButton.addEventListener('click', async (event) => {
 const loadMovies = document.getElementById('load-movies') as HTMLButtonElement;
 loadMovies.addEventListener('click', () => {
   const tableName = moviesCardHeading.textContent;
-  if (tableName) {
-    showMovies(tableName);
-    !offset[tableName] && addClassTo(loadMovies);
-  }
+  tableName && showMovies(tableName);
 });
 
 async function showMovies(country: string) {
@@ -165,6 +162,8 @@ async function showMovies(country: string) {
   renderMoviesCardHeading(`${country}`);
   removeClassFrom(moviesButton);
   addClassTo(loader);
+  removeClassFrom(loadMovies);
+  !offset[country] && addClassTo(loadMovies);
 }
 
 function renderMoviesCardHeading(message: string) {
