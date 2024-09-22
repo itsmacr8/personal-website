@@ -1,5 +1,6 @@
 import Airtable, { Base } from 'airtable';
 import { DatabaseRecord } from '../../types/DatabaseRecord.interface';
+import { sortFieldsByNumericOrder, sortedArray } from '../_utils';
 
 class AirTable {
   private pwKey: string = import.meta.env.VITE_PWK;
@@ -8,7 +9,6 @@ class AirTable {
   public mpBase: string = import.meta.env.VITE_MPB;
   public base: Base = this.getBase(this.mpKey, this.mpBase);
   private pwBaseFun: Base = this.getBase(this.pwKey, this.pwBase);
-  private airTableName: string = import.meta.env.VITE_TABLE_NAME;
 
   getBase(apiKey: string, apiBase: string): Base {
     return new Airtable({ apiKey: apiKey }).base(apiBase);
@@ -55,17 +55,23 @@ class AirTable {
     }
   }
 
-  async getCountryList() {
-    const countries: any[] = [];
+  async getCountryList(
+    tableName: string,
+    recordId: string,
+    apiKey: string = this.pwKey,
+    baseId: string = this.pwBase
+  ) {
     try {
-      const records = await this.base(this.airTableName).select().firstPage();
-      records?.forEach((record) => {
-        countries.push(record.get(this.airTableName));
+      const url = `https://api.airtable.com/v0/${baseId}/${tableName}/${recordId}`;
+      const response = await fetch(url, {
+        headers: { Authorization: `Bearer ${apiKey}` },
       });
-      return countries;
+      const data = await response.json();
+      const record = data.fields;
+      return sortedArray(sortFieldsByNumericOrder(record), record);
     } catch (err) {
       console.error(err);
-      return [];
+      throw err;
     }
   }
 }
