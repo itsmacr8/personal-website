@@ -1,6 +1,6 @@
 import './Slider.scss';
-import { getSortedRecord, renderDatabaseRecord } from '../_utils';
-import { testimonial, testimonialRecordID } from '../_variables';
+import { renderDatabaseRecord } from '../_utils';
+import { AirTableDB, testimonial, testimonialRecordID } from '../_variables';
 
 const dotContainer = document.querySelector('.dots') as HTMLDivElement;
 
@@ -22,8 +22,8 @@ function addActiveClass(slide: number) {
 }
 
 const initializeSlider = async () => {
-  const record = await getSortedRecord(testimonial, testimonialRecordID);
-  renderDatabaseRecord('.slider', record);
+  const record = await AirTableDB.getRecord(testimonial, testimonialRecordID);
+  renderDatabaseRecord('.slider', record.slice(1));
   let currentSlide = 0;
   let maxSlide: number = 0;
   const slides = document.querySelectorAll('.slide') as NodeListOf<HTMLElement>;
@@ -96,4 +96,4 @@ const initializeSlider = async () => {
   setInterval(nextSlide, 5000);
 };
 
-export { initializeSlider }
+export { initializeSlider };

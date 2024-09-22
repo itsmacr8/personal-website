@@ -110,7 +110,7 @@ moviesCardHeading.addEventListener('click', (event) => {
 });
 
 async function createCountryButtons() {
-  const countries = await AirTableDB.getCountryList(
+  const countries = await AirTableDB.getRecord(
     countriesTable,
     countriesRecordID,
     AirTableDB.mpKey,
@@ -181,7 +181,7 @@ async function addMovie(movieID: string) {
   removeClassFrom(loader);
   const movieDetails = await getMovieDetails(movieID);
   const country: string = movieDetails.Country.split(',').shift()?.trim();
-  const countries = await AirTableDB.getCountryList(
+  const countries = await AirTableDB.getRecord(
     countriesTable,
     countriesRecordID,
     AirTableDB.mpKey,

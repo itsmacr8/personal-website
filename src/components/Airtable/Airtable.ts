@@ -8,23 +8,9 @@ class AirTable {
   public mpKey: string = import.meta.env.VITE_MPK;
   public mpBase: string = import.meta.env.VITE_MPB;
   public base: Base = this.getBase(this.mpKey, this.mpBase);
-  private pwBaseFun: Base = this.getBase(this.pwKey, this.pwBase);
 
   getBase(apiKey: string, apiBase: string): Base {
     return new Airtable({ apiKey: apiKey }).base(apiBase);
-  }
-
-  async getRecord(
-    tableName: string,
-    recordID: string,
-    base: Base = this.pwBaseFun
-  ) {
-    try {
-      const record = await base(tableName).find(recordID);
-      return record.fields;
-    } catch (err) {
-      console.error(err);
-    }
   }
 
   async getRecords(
@@ -55,7 +41,7 @@ class AirTable {
     }
   }
 
-  async getCountryList(
+  async getRecord(
     tableName: string,
     recordId: string,
     apiKey: string = this.pwKey,

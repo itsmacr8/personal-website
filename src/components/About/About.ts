@@ -1,11 +1,6 @@
-import {
-  HTextTableName,
-  aboutTextRecord,
-} from "../_variables";
-import {
-  renderDatabaseRecord,
-  getSortedRecord
-} from "../_utils";
+import { renderDatabaseRecord } from '../_utils';
+import { AirTableDB, HTextTableName, aboutTextRecord } from '../_variables';
 
-const record = await getSortedRecord(HTextTableName, aboutTextRecord)
-renderDatabaseRecord('.about__description', record);
+const record = await AirTableDB.getRecord(HTextTableName, aboutTextRecord);
+// .slice(1) removes the first value which is primary key
+renderDatabaseRecord('.about__description', record.slice(1));
