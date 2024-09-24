@@ -9,7 +9,7 @@ import {
   projectsContainer,
 } from '../_variables';
 import { initializeSlider } from '../Slider/Slider';
-import { updateOffset } from './LoadMore';
+import { offset } from './LoadMore';
 
 const xSec = document.getElementById('experience-section') as HTMLElement;
 const projectsSec = document.getElementById('portfolio-section') as HTMLElement;
@@ -34,9 +34,9 @@ async function renderUpdate(
   container: HTMLDivElement,
   markup: Function
 ) {
-  const [data, offset] = await AirTableDB.getRecords(tableName);
+  const [data, newOffset] = await AirTableDB.getRecords(tableName);
   renderDatabaseRecords(data, container, markup);
-  updateOffset(tableName, offset);
+  offset[tableName] = newOffset;
 }
 
 const options = {
