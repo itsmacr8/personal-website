@@ -209,10 +209,11 @@ searchMovie.addEventListener('input', () => {
   }, delay);
 });
 
-function saveMovieData(tableName: string, movie: MovieDetails) {
-  const base = AirTableDB.base;
-  base(tableName).create(
-    [
+async function saveMovieData(tableName: string, movie: MovieDetails) {
+  const url = `https://api.airtable.com/v0/${AirTableDB.mpBase}/${tableName}`;
+  try {
+    await axios.post(
+      url,
       {
         fields: {
           IMDB_ID: movie.imdbID,
@@ -230,18 +231,19 @@ function saveMovieData(tableName: string, movie: MovieDetails) {
           BoxOffice: movie.BoxOffice,
         },
       },
-    ],
-    (err, records) => {
-      if (err) {
-        cleanAndShowModal(movieDBErrorMarkup, movie.Title, err.message);
-        return;
+      {
+        headers: {
+          Authorization: `Bearer ${AirTableDB.mpKey}`,
+          'Content-Type': 'application/json',
+        },
       }
-      records?.forEach(() => {
-        cleanAndShowModal(movieDBSaveMarkup, movie.Title, movie.Country);
-        autoCloseModal(modal);
-      });
-    }
-  );
+    );
+    cleanAndShowModal(movieDBSaveMarkup, movie.Title, movie.Country);
+    autoCloseModal(modal);
+  } catch (error) {
+    cleanAndShowModal(movieDBErrorMarkup, movie.Title, 'Try again later');
+    return;
+  }
 }
 
 function cleanAndShowModal(
