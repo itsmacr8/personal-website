@@ -80,19 +80,11 @@ function detailsMovieMarkup(movie: MovieDetails) {
     </div>`;
 }
 
-function movieDBSaveMarkup(movieName: string, countryName: string) {
+function movieSaveMessage(message: string, isErr: boolean) {
   return `
-    <div class="modal__content movie-db">
-        <p><strong>${movieName}</strong> saved to the <strong>${countryName}</strong> movies database successfully!</p>
-        <button class="modal__close" aria-label="Close">&times;</button>
-    </div>`;
-}
-
-function movieDBErrorMarkup(movieName: string, errMess: string) {
-  return `
-    <div class="modal__content movie-db movie-db--error">
-        <p>Error! Could not save <strong>${movieName}</strong> to the database. ${errMess}.</p>
-        <button class="modal__close" aria-label="Close">&times;</button>
+    <div class="modal__content movie-db ${isErr && 'movie-db--error'}">
+      <p>${message}</p>
+      <button class="modal__close" aria-label="Close">&times;</button>
     </div>`;
 }
 
@@ -100,6 +92,5 @@ export {
   searchMoviesMarkup,
   showMoviesMarkup,
   detailsMovieMarkup,
-  movieDBSaveMarkup,
-  movieDBErrorMarkup,
+  movieSaveMessage,
 };

@@ -10,8 +10,7 @@ import {
   searchMoviesMarkup,
   showMoviesMarkup,
   detailsMovieMarkup,
-  movieDBErrorMarkup,
-  movieDBSaveMarkup,
+  movieSaveMessage,
 } from './_movie_markup';
 import { offset } from '../utilities/LoadMore';
 
@@ -238,21 +237,24 @@ async function saveMovieData(tableName: string, movie: MovieDetails) {
         },
       }
     );
-    cleanAndShowModal(movieDBSaveMarkup, movie.Title, movie.Country);
+    cleanAndShowModal(
+      `Thank you for your recommendation! <strong>${movie.Title}</strong> \n
+      saved to the database successfully!`,
+      false
+    );
     autoCloseModal(modal);
   } catch (error) {
-    cleanAndShowModal(movieDBErrorMarkup, movie.Title, 'Try again later');
+    cleanAndShowModal(
+      `Error! <strong>${movie.Title}</strong> could not save to the database.`,
+      true
+    );
     return;
   }
 }
 
-function cleanAndShowModal(
-  movieDBMarkup: Function,
-  name: string,
-  countryOrErr: string
-) {
+function cleanAndShowModal(message: string, isErr: boolean) {
   modal.innerHTML = '';
-  modal.insertAdjacentHTML('beforeend', movieDBMarkup(name, countryOrErr));
+  modal.insertAdjacentHTML('beforeend', movieSaveMessage(message, isErr));
   addClassTo(modal, 'modal--db-mess');
   addClassTo(loader);
   showModal(modal);
