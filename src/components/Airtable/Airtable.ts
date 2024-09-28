@@ -1,4 +1,3 @@
-import Airtable, { Base } from 'airtable';
 import { DatabaseRecord } from '../../types/DatabaseRecord.interface';
 import { sortFieldsByNumericOrder, sortedArray } from '../_utils';
 
@@ -7,11 +6,6 @@ class AirTable {
   private pwBase: string = import.meta.env.VITE_PWB;
   public mpKey: string = import.meta.env.VITE_MPK;
   public mpBase: string = import.meta.env.VITE_MPB;
-  public base: Base = this.getBase(this.mpKey, this.mpBase);
-
-  getBase(apiKey: string, apiBase: string): Base {
-    return new Airtable({ apiKey: apiKey }).base(apiBase);
-  }
 
   async getRecords(
     tableName: string,
