@@ -1,8 +1,4 @@
-import { FieldSet } from 'airtable';
-import {
-  DatabaseRecordType,
-  DatabaseRecord,
-} from '../types/DatabaseRecord.interface';
+import { FieldSet, DatabaseRecord } from '../types/DatabaseRecord.interface';
 
 function capitalize(string: string) {
   // Capitalize the word, eg. movie to Movie
@@ -23,7 +19,7 @@ function listTags(tags: string[]) {
   return tagsMarkup
 }
 
-async function renderDatabaseRecord(selector: string, records: DatabaseRecordType[]) {
+function renderDatabaseRecord(selector: string, records: FieldSet[]) {
   const selectElement = document.querySelector(selector) as HTMLDivElement;
   for (const record of records) {
     record && selectElement.insertAdjacentHTML("beforeend", `${record}`);
