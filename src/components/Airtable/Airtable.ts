@@ -9,7 +9,7 @@ import {
   capitalize,
 } from '../_utils';
 import { modal, showModal, autoCloseModal } from '../Modal/Modal';
-import { loader } from '../_variables';
+import { loader, countriesTable, countriesRecordID } from '../_variables';
 
 class AirTable {
   private pwKey: string = import.meta.env.VITE_PWK;
@@ -115,6 +115,15 @@ class AirTable {
     addClassTo(modal, 'modal--db-mess');
     addClassTo(loader);
     showModal(modal);
+  }
+
+  async getCountries() {
+    return await this.getRecord(
+      countriesTable,
+      countriesRecordID,
+      this.mpKey,
+      this.mpBase
+    );
   }
 }
 

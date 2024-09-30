@@ -15,8 +15,6 @@ import { offset } from '../utilities/LoadMore';
 
 import './Movie.scss';
 
-const countriesTable: string = import.meta.env.VITE_MP_CT;
-const countriesRecordID: string = import.meta.env.VITE_MP_CR;
 const searchMovie = document.getElementById('search-movie') as HTMLInputElement;
 const delay = 1500;
 const movieCards = document.querySelector('#movie-cards') as HTMLDivElement;
@@ -107,13 +105,8 @@ moviesCardHeading.addEventListener('click', (event) => {
   topMovies && showMovies(topMovies);
 });
 
-async function createCountryButtons() {
-  const countries = await AirTableDB.getRecord(
-    countriesTable,
-    countriesRecordID,
-    AirTableDB.mpKey,
-    AirTableDB.mpBase
-  );
+function createCountryButtons() {
+  const countries = airTableRecord.getCountries();
   for (const country of countries) {
     moviesButton.insertAdjacentHTML(
       'beforeend',
@@ -179,12 +172,7 @@ async function addMovie(movieID: string) {
   removeClassFrom(loader);
   const movieDetails = await getMovieDetails(movieID);
   const country: string = movieDetails.Country.split(',').shift()?.trim();
-  const countries = await AirTableDB.getRecord(
-    countriesTable,
-    countriesRecordID,
-    AirTableDB.mpKey,
-    AirTableDB.mpBase
-  );
+  const countries = airTableRecord.getCountries();
   if (countries.includes(country)) {
     AirTableDB.addRecord(country, movieDetails);
   } else {
