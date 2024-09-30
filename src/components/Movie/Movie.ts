@@ -2,15 +2,14 @@ import axios from 'axios';
 
 import { MovieDetails } from './Movie.interface';
 import { DatabaseRecord } from '../../types/DatabaseRecord.interface';
-import { modal, showModal, autoCloseModal } from '../Modal/Modal';
+import { modal, showModal } from '../Modal/Modal';
 import { Pagination } from '../Pagination/Pagination';
 import { loader, AirTableDB } from '../_variables';
-import { removeClassFrom, addClassTo, capitalize } from '../_utils';
+import { removeClassFrom, addClassTo } from '../_utils';
 import {
   searchMoviesMarkup,
   showMoviesMarkup,
   detailsMovieMarkup,
-  movieSaveMessage,
 } from './_movie_markup';
 import { offset } from '../utilities/LoadMore';
 
@@ -187,9 +186,9 @@ async function addMovie(movieID: string) {
     AirTableDB.mpBase
   );
   if (countries.includes(country)) {
-    saveMovieData(country, movieDetails);
+    AirTableDB.addRecord(country, movieDetails);
   } else {
-    saveMovieData(airTableRecord, movieDetails);
+    AirTableDB.addRecord(airTableRecord, movieDetails);
   }
 }
 
@@ -207,58 +206,6 @@ searchMovie.addEventListener('input', () => {
     renderMoviesCardHeading('Search Results');
   }, delay);
 });
-
-async function saveMovieData(tableName: string, movie: MovieDetails) {
-  const url = `https://api.airtable.com/v0/${AirTableDB.mpBase}/${tableName}`;
-  try {
-    await axios.post(
-      url,
-      {
-        fields: {
-          IMDB_ID: movie.imdbID,
-          Poster: movie.Poster,
-          Title: movie.Title,
-          Year: movie.Year,
-          Genre: movie.Genre,
-          Type: capitalize(movie.Type),
-          Runtime: movie.Runtime,
-          Plot: movie.Plot,
-          IMDBRatings: movie.Ratings[0]?.Value || 'N/A',
-          RottenRatings: movie.Ratings[1]?.Value || 'N/A',
-          Country: movie.Country,
-          Language: movie.Language,
-          BoxOffice: movie.BoxOffice,
-        },
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${AirTableDB.mpKey}`,
-          'Content-Type': 'application/json',
-        },
-      }
-    );
-    cleanAndShowModal(
-      `Thank you for your recommendation! <strong>${movie.Title}</strong> \n
-      saved to the database successfully!`,
-      false
-    );
-    autoCloseModal(modal);
-  } catch (error) {
-    cleanAndShowModal(
-      `Error! <strong>${movie.Title}</strong> could not save to the database.`,
-      true
-    );
-    return;
-  }
-}
-
-function cleanAndShowModal(message: string, isErr: boolean) {
-  modal.innerHTML = '';
-  modal.insertAdjacentHTML('beforeend', movieSaveMessage(message, isErr));
-  addClassTo(modal, 'modal--db-mess');
-  addClassTo(loader);
-  showModal(modal);
-}
 
 function init() {
   showMovies('Top');

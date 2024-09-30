@@ -1,5 +1,15 @@
+import axios from 'axios';
+import { MovieDetails } from '../Movie/Movie.interface';
+import { movieSaveMessage } from '../Movie/_movie_markup';
 import { DatabaseRecord } from '../../types/DatabaseRecord.interface';
-import { sortFieldsByNumericOrder, sortedArray } from '../_utils';
+import {
+  sortFieldsByNumericOrder,
+  sortedArray,
+  addClassTo,
+  capitalize,
+} from '../_utils';
+import { modal, showModal, autoCloseModal } from '../Modal/Modal';
+import { loader } from '../_variables';
 
 class AirTable {
   private pwKey: string = import.meta.env.VITE_PWK;
@@ -53,6 +63,58 @@ class AirTable {
       console.error(err);
       throw err;
     }
+  }
+
+  async addRecord(tableName: string, movie: MovieDetails) {
+    const url = `https://api.airtable.com/v0/${this.mpBase}/${tableName}`;
+    try {
+      await axios.post(
+        url,
+        {
+          fields: {
+            IMDB_ID: movie.imdbID,
+            Poster: movie.Poster,
+            Title: movie.Title,
+            Year: movie.Year,
+            Genre: movie.Genre,
+            Type: capitalize(movie.Type),
+            Runtime: movie.Runtime,
+            Plot: movie.Plot,
+            IMDBRatings: movie.Ratings[0]?.Value || 'N/A',
+            RottenRatings: movie.Ratings[1]?.Value || 'N/A',
+            Country: movie.Country,
+            Language: movie.Language,
+            BoxOffice: movie.BoxOffice,
+          },
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${this.mpKey}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      this.cleanAndShowModal(
+        `Thank you for your recommendation! <strong>${movie.Title}</strong> \n
+        saved to the database successfully!`,
+        false
+      );
+      autoCloseModal(modal);
+    } catch (error) {
+      this.cleanAndShowModal(
+        `Error! <strong>${movie.Title}</strong> could not save to the database.`,
+        true
+      );
+      return;
+    }
+  }
+
+  private cleanAndShowModal(message: string, isErr: boolean) {
+    modal.innerHTML = '';
+    modal.insertAdjacentHTML('beforeend', movieSaveMessage(message, isErr));
+    addClassTo(modal, 'modal--db-mess');
+    addClassTo(loader);
+    showModal(modal);
   }
 }
 
