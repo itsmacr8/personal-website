@@ -1,5 +1,11 @@
 section {
-    padding-block: var(--space-6);
+    padding-block: var(--space-4);
+    @include respond(tab-port) {
+        padding-block: var(--space-5);
+    }
+    @include respond(tab-land) {
+        padding-block: var(--space-6);
+    }
 }
 
 section:nth-child(even){
