@@ -89,12 +89,10 @@ section:nth-child(even){
 }
 
 .no-js-message {
-	display: flex;
-	color: red;
+    @include flexCenter;
+    color: var(--warning-400);
 	min-height: 100vh;
-	justify-content: center;
-	align-items: center;
-	background: black;
+	background-color: var(--black);
 	font-size: var(--fs-1);
 	text-align: center;
 }
