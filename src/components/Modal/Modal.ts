@@ -26,7 +26,9 @@ async function autoCloseModal(modal:HTMLDivElement) {
 }
 
 // close modal window with click on close button or outside of the modal
-modal.addEventListener('click', function (e) {
+// There is no modal in the homepage and it throws error.
+// Optional chaining will handle the homepage error
+modal?.addEventListener('click', function (e) {
   const target = e.target as HTMLElement
   if (target.classList.contains('modal__close')) closeModal(modal)
   else if (target.classList.contains('modal--show')) closeModal(modal)
