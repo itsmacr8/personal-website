@@ -105,8 +105,8 @@ moviesCardHeading.addEventListener('click', (event) => {
   topMovies && showMovies(topMovies);
 });
 
-function createCountryButtons() {
-  const countries = airTableRecord.getCountries();
+async function createCountryButtons() {
+  const countries = await AirTableDB.getCountries();
   for (const country of countries) {
     moviesButton.insertAdjacentHTML(
       'beforeend',
@@ -172,7 +172,7 @@ async function addMovie(movieID: string) {
   removeClassFrom(loader);
   const movieDetails = await getMovieDetails(movieID);
   const country: string = movieDetails.Country.split(',').shift()?.trim();
-  const countries = airTableRecord.getCountries();
+  const countries = await AirTableDB.getCountries();
   if (countries.includes(country)) {
     AirTableDB.addRecord(country, movieDetails);
   } else {
