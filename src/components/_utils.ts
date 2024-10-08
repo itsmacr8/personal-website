@@ -39,7 +39,7 @@ function renderDatabaseRecords(
   });
 }
 
-function cardMarkup(card: DatabaseRecord, index: number) {
+function cardMarkup(card: FieldSet, index: number) {
   const cardName = card.ButtonText === 'Read More' ? "article" : "tool";
   return `<div class="card" id="${cardName}-${index}">
     <div><img class="card__thumbnail" src="${card.Thumbnail}" alt="${card.Title} thumbnail" title="${card.Title} thumbnail"></div>
