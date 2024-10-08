@@ -157,7 +157,7 @@ async function showMovies(country: string) {
   const message = 'There is an error and we could not retrieve the movies.';
   if (noMoviesFound(movies.length == 0, message)) return;
   renderMovies(movies, showMoviesMarkup, shouldClear);
-  renderMoviesCardHeading(`${country}`);
+  renderMoviesCardHeading(country);
   removeClassFrom(moviesButton);
   addClassTo(loader);
   removeClassFrom(loadMovies);
