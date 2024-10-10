@@ -1,4 +1,8 @@
-import { FieldSet, DatabaseRecord } from '../types/DatabaseRecord.interface';
+import {
+  RecordDataType,
+  FieldSet,
+  DatabaseRecord,
+} from '../types/DatabaseRecord.interface';
 
 function capitalize(string: string) {
   // Capitalize the word, eg. movie to Movie
@@ -19,7 +23,7 @@ function listTags(tags: string[]) {
   return tagsMarkup
 }
 
-function renderDatabaseRecord(selector: string, records: FieldSet[]) {
+function renderDatabaseRecord(selector: string, records: RecordDataType[]) {
   const selectElement = document.querySelector(selector) as HTMLDivElement;
   for (const record of records) {
     record && selectElement.insertAdjacentHTML("beforeend", `${record}`);

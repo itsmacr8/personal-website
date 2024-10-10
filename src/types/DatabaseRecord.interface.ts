@@ -1,9 +1,11 @@
+type RecordDataType = string | number | undefined;
+
 interface FieldSet {
-  [key: string]: string | number | undefined;
+  [key: string]: RecordDataType;
 }
 
 interface DatabaseRecord {
-  [key: string]: FieldSet
+  [key: string]: FieldSet;
 }
 
-export type { FieldSet, DatabaseRecord }
+export type { RecordDataType, FieldSet, DatabaseRecord };
