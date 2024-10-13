@@ -12,6 +12,7 @@ import { modal, showModal, autoCloseModal } from '../Modal/Modal';
 import { loader, countriesTable, countriesRecordID } from '../_variables';
 
 class AirTable {
+  private url: string = 'https://api.airtable.com/v0';
   private pwKey: string = import.meta.env.VITE_PWK;
   private pwBase: string = import.meta.env.VITE_PWB;
   public mpKey: string = import.meta.env.VITE_MPK;
@@ -24,8 +25,9 @@ class AirTable {
     apiKey: string = this.pwKey,
     baseId: string = this.pwBase
   ) {
+    const filter = `pageSize=${maxRecords}&view=Grid%20view`;
     try {
-      let url = `https://api.airtable.com/v0/${baseId}/${tableName}?pageSize=${maxRecords}&view=Grid%20view`;
+      let url = `${this.url}/${baseId}/${tableName}?${filter}`;
       if (offset) url += `&offset=${offset}`;
 
       const response = await fetch(url, {
@@ -52,7 +54,7 @@ class AirTable {
     baseId: string = this.pwBase
   ) {
     try {
-      const url = `https://api.airtable.com/v0/${baseId}/${tableName}/${recordId}`;
+      const url = `${this.url}/${baseId}/${tableName}/${recordId}`;
       const response = await fetch(url, {
         headers: { Authorization: `Bearer ${apiKey}` },
       });
@@ -66,7 +68,7 @@ class AirTable {
   }
 
   async addRecord(tableName: string, movie: MovieDetails) {
-    const url = `https://api.airtable.com/v0/${this.mpBase}/${tableName}`;
+    const url = `${this.url}/${this.mpBase}/${tableName}`;
     try {
       await axios.post(
         url,
