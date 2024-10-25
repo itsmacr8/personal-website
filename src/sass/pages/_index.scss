@@ -1,3 +1,6 @@
+@import '../layout/flex';
+@import '../abstracts/mixins';
+
 #hero-section {
     // Image will not display if you use solid color.
     // You must use color with alpha value.
