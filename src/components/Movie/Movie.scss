@@ -1,9 +1,9 @@
+@import '../../sass/layout/flex';
+
 .movie-cards {
+    @include flexWrap(var(--space-3));
     color: var(--black);
-    display: flex;
-    flex-wrap: wrap;
     text-align: left;
-    gap: var(--space-3);
 }
 
 .movie-card {

@@ -1,8 +1,6 @@
 .cards {
-  display: flex;
-  flex-wrap: wrap;
+  @include flexWrap(var(--space-3));
   text-align: left;
-  gap: var(--space-3);
 }
 
 .card {
