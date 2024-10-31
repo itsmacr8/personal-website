@@ -1,17 +1,3 @@
-@import '../../sass/layout/flex';
-
-.movie-cards {
-    @include flexWrap(var(--space-3));
-    color: var(--black);
-    text-align: left;
-}
-
-.movie-card {
-    width: min(100%, var(--card-width));
-    background-color: var(--grey-300);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-    &__body {
-        padding: 10px;
-    }
+.poster {
+  max-height: 525px;
 }

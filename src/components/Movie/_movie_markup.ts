@@ -11,13 +11,13 @@ function searchMoviesMarkup(movie: DatabaseRecord, index: number) {
   const capitalized = typeof movie.Type === 'string' && capitalize(movie.Type);
   const imdbID = movie.imdbID || movie.IMDB_ID;
   return `
-    <div class="movie-card" id=${index}>
+    <div class="card" id=${index}>
       <div>
-        <img class="poster" src="${movie.Poster}"
+        <img class="card__thumbnail poster" src="${movie.Poster}"
         alt="${movie.Title} (${movie.Year}) ${capitalized} Poster"
         title="${movie.Title} (${movie.Year}) ${capitalized} Poster">
       </div>
-      <div class="movie-card__body">
+      <div class="card__body">
         <h4>${movie.Title} (${movie.Year})</h4>
         <p class="mb-xs">Type: ${capitalized}</p>
         <div class="btn-group">
@@ -34,13 +34,13 @@ function showMoviesMarkup(movie: DatabaseRecord, index: number) {
   const capitalized = typeof movie.Type === 'string' && capitalize(movie.Type);
   const imdbID = movie.imdbID || movie.IMDB_ID;
   return `
-    <div class="movie-card" id=${index}>
+    <div class="card" id=${index}>
       <div>
-        <img class="poster" src="${movie.Poster}"
+        <img class="card__thumbnail poster" src="${movie.Poster}"
         alt="${movie.Title} (${movie.Year}) ${capitalized} Poster"
         title="${movie.Title} (${movie.Year}) ${capitalized} Poster">
       </div>
-      <div class="movie-card__body">
+      <div class="card__body">
         <h4>${movie.Title} (${movie.Year})</h4>
         <p class="mb-xs">
           ${capitalized} - ${movie.Runtime} | Ratings: ${movie.IMDBRatings}
@@ -61,7 +61,7 @@ function detailsMovieMarkup(movie: MovieDetails) {
       <button class="modal__close">&times;</button>
       <div class="modal__primary-details">
         <div>
-          <img class="poster" src="${movie.Poster}"
+          <img class="card__thumbnail poster" src="${movie.Poster}"
           alt="${movie.Title} (${movie.Year}) ${capitalized} Poster"
           title="${movie.Title} (${movie.Year}) ${capitalized} Poster">
         </div>
