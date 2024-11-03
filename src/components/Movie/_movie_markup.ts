@@ -2,14 +2,22 @@ import { MovieDetails } from "./Movie.interface";
 import { DatabaseRecord } from "../../types/DatabaseRecord.interface";
 import { capitalize } from "../_utils";
 
-const detailBtnClass = 'class="btn btn--movie-details"';
-const addBtnClass = 'class="btn btn--movie-add"';
-const base = 'https://www.imdb.com/title';
-
-
-function searchMoviesMarkup(movie: DatabaseRecord, index: number) {
+function moviesMarkup(
+  movie: DatabaseRecord,
+  index: number,
+  isSearch: boolean = true
+) {
+  const detailBtnClass = 'class="btn btn--movie-details"';
+  const addBtnClass = 'class="btn btn--movie-add"';
+  const base = 'https://www.imdb.com/title';
   const capitalized = typeof movie.Type === 'string' && capitalize(movie.Type);
   const imdbID = movie.imdbID || movie.IMDB_ID;
+  const type = isSearch
+    ? `Type: ${capitalized}`
+    : `${capitalized} - ${movie.Runtime} | Ratings: ${movie.IMDBRatings}`;
+  const recBtn = isSearch
+    ? `<button ${addBtnClass} data-imdbid=${imdbID}>Recommend</button>`
+    : '';
   return `
     <div class="card" id=${index}>
       <div>
@@ -19,10 +27,10 @@ function searchMoviesMarkup(movie: DatabaseRecord, index: number) {
       </div>
       <div class="card__body">
         <h4>${movie.Title} (${movie.Year})</h4>
-        <p class="mb-xs">Type: ${capitalized}</p>
+        <p class="mb-xs">${type}</p>
         <div class="btn-group">
           <button ${detailBtnClass} data-imdbid=${imdbID}>Details</button>
-          <button ${addBtnClass} data-imdbid=${imdbID}>Recommend</button>
+          ${recBtn}
           <a href="${base}/${imdbID}/" class="btn" target="_blank"
           rel="noopener noreferrer">Visit IMDB</a>
         </div>
@@ -30,28 +38,12 @@ function searchMoviesMarkup(movie: DatabaseRecord, index: number) {
     </div>`;
 }
 
+function searchMoviesMarkup(movie: DatabaseRecord, index: number) {
+  return moviesMarkup(movie, index);
+}
+
 function showMoviesMarkup(movie: DatabaseRecord, index: number) {
-  const capitalized = typeof movie.Type === 'string' && capitalize(movie.Type);
-  const imdbID = movie.imdbID || movie.IMDB_ID;
-  return `
-    <div class="card" id=${index}>
-      <div>
-        <img class="card__thumbnail poster" src="${movie.Poster}"
-        alt="${movie.Title} (${movie.Year}) ${capitalized} Poster"
-        title="${movie.Title} (${movie.Year}) ${capitalized} Poster">
-      </div>
-      <div class="card__body">
-        <h4>${movie.Title} (${movie.Year})</h4>
-        <p class="mb-xs">
-          ${capitalized} - ${movie.Runtime} | Ratings: ${movie.IMDBRatings}
-        </p>
-        <div class="btn-group">
-          <button ${detailBtnClass} data-imdbid=${imdbID}>Details</button>
-          <a href="${base}/${imdbID}/" class="btn" target="_blank"
-          rel="noopener noreferrer">Visit IMDB</a>
-        </div>
-      </div>
-    </div>`;
+  return moviesMarkup(movie, index, false);
 }
 
 function detailsMovieMarkup(movie: MovieDetails) {
