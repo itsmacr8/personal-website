@@ -1,6 +1,6 @@
-import { MovieDetails } from "./Movie.interface";
-import { DatabaseRecord } from "../../types/DatabaseRecord.interface";
-import { capitalize } from "../_utils";
+import { MovieDetails } from './Movie.interface';
+import { DatabaseRecord } from '../../types/DatabaseRecord.interface';
+import { capitalize } from '../_utils';
 
 function moviesMarkup(
   movie: DatabaseRecord,
@@ -47,7 +47,7 @@ function showMoviesMarkup(movie: DatabaseRecord, index: number) {
 }
 
 function detailsMovieMarkup(movie: MovieDetails) {
-  const capitalized = capitalize(movie.Type)
+  const capitalized = capitalize(movie.Type);
   return `
     <div class="modal__content">
       <button class="modal__close">&times;</button>
