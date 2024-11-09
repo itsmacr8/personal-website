@@ -4,7 +4,7 @@
 #hero-section {
     // Image will not display if you use solid color.
     // You must use color with alpha value.
-    background: linear-gradient(45deg, var(--gradient-100) 45%, var(--gradient-300) 100%), linear-gradient(90deg, var(--gradient-300) 50%, var(--gradient-100) 100%), url("../../../assets/hero.jpg") no-repeat center/cover;
+    background: linear-gradient(45deg, var(--gradient-100) 45%, var(--gradient-300) 100%), linear-gradient(90deg, var(--gradient-300) 50%, var(--gradient-100) 100%), url("../../../public/assets/hero.jpg") no-repeat center/cover;
 }
 
 .hero {
