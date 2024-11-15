@@ -26,7 +26,7 @@ function listTags(tags: string[]) {
 function renderDatabaseRecord(selector: string, records: RecordDataType[]) {
   const selectElement = document.querySelector(selector) as HTMLDivElement;
   for (const record of records) {
-    record && selectElement.insertAdjacentHTML("beforeend", `${record}`);
+    record && selectElement.insertAdjacentHTML('beforeend', `${record}`);
   }
 }
 
@@ -37,7 +37,7 @@ function renderDatabaseRecords(
 ) {
   databaseRecords.forEach((databaseRecord: DatabaseRecord, index: number) => {
     container.insertAdjacentHTML(
-      "beforeend",
+      'beforeend',
       markupFunction(databaseRecord, index)
     );
   });
@@ -45,21 +45,21 @@ function renderDatabaseRecords(
 
 function cardMarkup(card: FieldSet, index: number) {
   const cardName = 'article';
-  return `<div class="card" id="${cardName}-${index}">
-    <div><img class="card__thumbnail" src="${card.Thumbnail}" alt="${card.Title} thumbnail" title="${card.Title} thumbnail"></div>
-    <div class="card__body">
-      <h3 class="card__title">${card.Title}</h3>
-      <p class="card__description my-s">${card.Description}</p>
-      <a href="${card.LiveView}" class="btn" target="_blank">${card.ButtonText}</a>
+  return `<div class='card' id='${cardName}-${index}'>
+    <div><img class='card__thumbnail' src='${card.Thumbnail}' alt='${card.Title} thumbnail' title='${card.Title} thumbnail'></div>
+    <div class='card__body'>
+      <h3 class='card__title'>${card.Title}</h3>
+      <p class='card__description my-s'>${card.Description}</p>
+      <a href='${card.LiveView}' class='btn' target='_blank'>${card.ButtonText}</a>
     </div>
   </div>`;
 }
 
-function removeClassFrom(element: HTMLElement, className: string = "hide") {
+function removeClassFrom(element: HTMLElement, className: string = 'hide') {
   element.classList.remove(className);
 }
 
-function addClassTo(element: HTMLElement, className: string = "hide") {
+function addClassTo(element: HTMLElement, className: string = 'hide') {
   element.classList.add(className);
 }
 
