@@ -57,13 +57,15 @@
     }
   }
 
-  &__company, &__period {
+  &__company,
+  &__period {
     @include respond(tab-land) {
       position: absolute;
     }
   }
 
-  &--left &__company, &--left &__period {
+  &--left &__company,
+  &--left &__period {
     @include respond(tab-land) {
       right: var(--work-type-duration-position);
     }
@@ -80,7 +82,8 @@
       margin-left: var(--fifty);
       --circle-position: -5.3%;
     }
-    .experience__company, .experience__period {
+    .experience__company,
+    .experience__period {
       @include respond(tab-land) {
         left: var(--work-type-duration-position-right);
       }
