@@ -1,4 +1,4 @@
-import './Modal.scss'
+import './Modal.scss';
 import { removeClassFrom, addClassTo } from '../_utils';
 
 const modal = document.querySelector('.modal') as HTMLDivElement;
@@ -20,19 +20,19 @@ async function closeModal(modal: HTMLDivElement) {
   removeClassFrom(modal, 'modal--db-mess');
 }
 
-async function autoCloseModal(modal:HTMLDivElement) {
+async function autoCloseModal(modal: HTMLDivElement) {
   await waitFor(5000);
-  closeModal(modal)
+  closeModal(modal);
 }
 
 // close modal window with click on close button or outside of the modal
 // There is no modal in the homepage and it throws error.
 // Optional chaining will handle the homepage error
 modal?.addEventListener('click', function (e) {
-  const target = e.target as HTMLElement
-  if (target.classList.contains('modal__close')) closeModal(modal)
-  else if (target.classList.contains('modal--show')) closeModal(modal)
-})
+  const target = e.target as HTMLElement;
+  if (target.classList.contains('modal__close')) closeModal(modal);
+  else if (target.classList.contains('modal--show')) closeModal(modal);
+});
 
 // close modal window with keyboard (Escape key)
 document.addEventListener('keydown', function (e) {
@@ -40,4 +40,4 @@ document.addEventListener('keydown', function (e) {
     closeModal(modal);
 });
 
-export { modal, showModal, autoCloseModal }
+export { modal, showModal, autoCloseModal };
