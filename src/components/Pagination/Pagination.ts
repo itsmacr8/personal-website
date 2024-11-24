@@ -5,7 +5,7 @@ class Pagination {
   container = document.getElementById('pagination') as HTMLDivElement;
 
   show(currentPage: number = 1, totalPages: number) {
-    this.clear()
+    this.clear();
     this.container.classList.add('mt-2');
     this.currentPage = currentPage;
     const { start, end } = this.getCurrentNumber(totalPages);

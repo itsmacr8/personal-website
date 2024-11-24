@@ -6,7 +6,7 @@
 
   .btn--pagination {
     background-color: var(--secondary-500);
-    &[disabled]{
+    &[disabled] {
       background-color: var(--accent-400);
       color: var(--black);
     }
