@@ -3,9 +3,11 @@ import './Pagination.scss';
 class Pagination {
   currentPage = 1;
   container = document.getElementById('pagination') as HTMLDivElement;
+  total: number = 1;
 
   show(currentPage: number = 1, totalPages: number) {
     this.clear();
+    if (this.total < 1) return;
     this.container.classList.add('mt-2');
     this.currentPage = currentPage;
     const { start, end } = this.getCurrentNumber(totalPages);

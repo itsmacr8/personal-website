@@ -1,3 +1,5 @@
+import { DatabaseRecord } from "../../types/DatabaseRecord.interface";
+
 interface MovieDetails {
     imdbID: string;
     Poster?: string;
@@ -16,4 +18,9 @@ interface MovieDetails {
     BoxOffice?: string;
 }
 
-export type { MovieDetails }
+interface SearchMovies {
+  movies: DatabaseRecord[];
+  totalFoundMovies: number;
+}
+
+export type { MovieDetails, SearchMovies }
