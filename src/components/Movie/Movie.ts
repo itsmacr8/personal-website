@@ -22,7 +22,7 @@ const OMDB_KEY = import.meta.env.VITE_OMDB_KEY;
 const airTableRecord = import.meta.env.VITE_AIRTABLE_RECORD;
 const moviesButton = document.getElementById('btn-movies') as HTMLDivElement;
 const topMoviesText =
-  'Want to have a look at my <span class="text-secondary cursor-pointer" data-top-movies="Top">top watched movies!</span>';
+  "Want to have a look at my <span class='text-secondary cursor-pointer' data-top-movies='Top'>top watched movies!</span>";
 const moviesCardHeading = document.getElementById(
   'movies-card-heading'
 ) as HTMLHeadingElement;
@@ -54,7 +54,7 @@ async function getSearchMoviesResults(num: number) {
 
 async function searchMovies() {
   const movies = await getSearchMoviesResults(1);
-  const message = `<span class="text-primary">${movieName}</span> not found.`;
+  const message = `<span class='text-primary'>${movieName}</span> not found.`;
   if (noMoviesFound(!movies, message)) return;
   renderMovies(movies, searchMoviesMarkup);
   pagination.show(1, totalPaginationPages);
@@ -110,7 +110,7 @@ async function createCountryButtons() {
   for (const country of countries) {
     moviesButton.insertAdjacentHTML(
       'beforeend',
-      `<button class="btn" data-country="${country}">${country}</button>`
+      `<button class='btn' data-country='${country}'>${country}</button>`
     );
   }
 }
