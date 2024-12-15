@@ -38,14 +38,14 @@ class Pagination {
   button(text: string, value: number) {
     this.container.insertAdjacentHTML(
       'beforeend',
-      `<button class="btn" data-pagination='${value}'>${text}</button>`
+      `<button class='btn' data-pagination='${value}'>${text}</button>`
     );
   }
 
   buttons(number: number) {
     this.container.insertAdjacentHTML(
       'beforeend',
-      `<button class="btn btn--pagination" data-pagination="${number}"
+      `<button class='btn btn--pagination' data-pagination='${number}'
       ${number === this.currentPage ? 'disabled' : ''}>${number}</button>`
     );
   }
