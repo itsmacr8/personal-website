@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { MovieDetails } from './Movie.interface';
+import { MovieDetails, SearchMovies } from './Movie.interface';
 import { DatabaseRecord } from '../../types/DatabaseRecord.interface';
 import { modal, showModal } from '../Modal/Modal';
 import { Pagination } from '../Pagination/Pagination';
@@ -29,7 +29,6 @@ const moviesCardHeading = document.getElementById(
 const BASE_URL = `https://www.omdbapi.com/?apikey=${OMDB_KEY}`;
 const pagination = new Pagination();
 let movieName = '';
-let totalPaginationPages: number;
 let typingTimer: ReturnType<typeof setTimeout>;
 
 function clearMoviesCards() {
@@ -46,18 +45,22 @@ function noMoviesFound(condition: boolean, message: string) {
   }
 }
 
-async function getSearchMoviesResults(num: number) {
+async function getSearchMoviesResults(num: number): Promise<SearchMovies> {
   const response = await axios.get(`${BASE_URL}&s=${movieName}&page=${num}`);
-  totalPaginationPages = response.data.totalResults;
-  return response.data.Search;
+  return {
+    movies: response.data.Search,
+    totalFoundMovies: response.data.totalResults,
+  };
 }
 
 async function searchMovies() {
-  const movies = await getSearchMoviesResults(1);
-  const message = `<span class='text-primary'>${movieName}</span> not found.`;
+  const { movies, totalFoundMovies } = await getSearchMoviesResults(1);
+  const message = `<span class="text-primary">${movieName}</span> not found.`;
   if (noMoviesFound(!movies, message)) return;
   renderMovies(movies, searchMoviesMarkup);
-  pagination.show(1, totalPaginationPages);
+  const maxResultPerPage: number = 10;
+  pagination.total = Math.ceil(totalFoundMovies / maxResultPerPage);
+  pagination.show(1, pagination.total);
 }
 
 function renderMovies(
@@ -120,8 +123,8 @@ pagination.container.addEventListener('click', async (event) => {
   if (target.tagName === 'BUTTON') {
     const currPage = Number(target.dataset.pagination);
     removeClassFrom(loader);
-    pagination.show(currPage, totalPaginationPages);
-    const movies = await getSearchMoviesResults(currPage);
+    pagination.show(currPage, pagination.total);
+    const { movies } = await getSearchMoviesResults(currPage);
     renderMovies(movies, searchMoviesMarkup);
     addClassTo(loader);
   }
