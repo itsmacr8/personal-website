@@ -71,6 +71,21 @@ const initializeSlider = async () => {
     activeDot(currentSlide);
   };
 
+  let slideInterval: number;
+  const startSlider = () => (slideInterval = setInterval(nextSlide, 3000));
+  const stopSlider = () => clearInterval(slideInterval);
+
+  // Event listeners to stop the slider on mouse hover & restart on mouse leave
+  // Event delegation relies on event bubbling. Since mouseenter and mouseleave
+  // do not bubble up the DOM tree, unlike click event, we must attach listeners
+  // directly to the target elements.
+  if (slides) {
+    slides.forEach((slide) => {
+      slide.addEventListener('mouseenter', stopSlider);
+      slide.addEventListener('mouseleave', startSlider);
+    });
+  }
+
   document.addEventListener('keydown', function (e) {
     e.key === 'ArrowLeft' && prevSlide();
     e.key === 'ArrowRight' && nextSlide();
@@ -93,7 +108,7 @@ const initializeSlider = async () => {
   createDots();
   activeDot(0);
   goToSlide(0);
-  setInterval(nextSlide, 5000);
+  startSlider();
 };
 
 export { initializeSlider };
