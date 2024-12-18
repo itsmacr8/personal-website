@@ -17,7 +17,7 @@ function removeActiveClass() {
 function addActiveClass(slide: number) {
   if (dotContainer) {
     const dot = document.querySelector(`.dots__dot[data-slide='${slide}']`);
-    if (dot) dot.classList.add('dots__dot--active');
+    dot && dot.classList.add('dots__dot--active');
   }
 }
 
@@ -30,17 +30,11 @@ const initializeSlider = async () => {
   if (slides) maxSlide = slides.length - 1;
 
   // creating the dots for the slider
-  const createDots = () => {
-    if (slides) {
-      slides.forEach((_, i) => {
-        if (dotContainer) {
-          dotContainer.insertAdjacentHTML(
-            'beforeend',
-            `<button class='dots__dot' data-slide='${i}'></button>`
-          );
-        }
-      });
-    }
+  const createDots = () => slides && slides.forEach((_, i) => { dot(i); });
+
+  const dot = (dotNum: number) => {
+    const btn = `<button class='dots__dot' data-slide='${dotNum}'></button>`;
+    dotContainer && dotContainer.insertAdjacentHTML('beforeend', btn);
   };
 
   // moving the slide horizontally accordingly the slide number
@@ -79,15 +73,17 @@ const initializeSlider = async () => {
   if (dotContainer) {
     dotContainer.addEventListener('click', function (e) {
       const target = e.target as HTMLElement;
-      if (target.classList.contains('dots__dot')) {
-        const slide = target.dataset.slide;
-        if (slide) {
-          goToSlide(+slide);
-          activeDot(+slide);
-        }
-      }
+      target.classList.contains('dots__dot') && handleSliderDotClick(target);
     });
   }
+
+  const handleSliderDotClick = (target: HTMLElement) => {
+    const slide = target.dataset.slide;
+    if (slide) {
+      goToSlide(+slide);
+      activeDot(+slide);
+    }
+  };
 
   // Initializing the slider with the first slide
   createDots();
