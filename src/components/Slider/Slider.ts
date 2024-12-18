@@ -16,7 +16,7 @@ function removeActiveClass() {
 // Add active class to the slider dot that is currently active
 function addActiveClass(slide: number) {
   if (dotContainer) {
-    const dot = document.querySelector(`.dots__dot[data-slide="${slide}"]`);
+    const dot = document.querySelector(`.dots__dot[data-slide='${slide}']`);
     if (dot) dot.classList.add('dots__dot--active');
   }
 }
@@ -36,7 +36,7 @@ const initializeSlider = async () => {
         if (dotContainer) {
           dotContainer.insertAdjacentHTML(
             'beforeend',
-            `<button class="dots__dot" data-slide="${i}"></button>`
+            `<button class='dots__dot' data-slide='${i}'></button>`
           );
         }
       });
