@@ -6,6 +6,7 @@ function showExperiencesMarkup(experience: DatabaseRecord, index: number) {
     <h4 class='experience__company'>${experience.Company}</h4>
     <p class='experience__period'>${experience.Duration}</p>
     <ul class='experience__contributions'>${experience.Contributions}</ul>
+    <ul class='tech-stack'>${experience.TechStack}</ul>
   </div>`;
 }
 

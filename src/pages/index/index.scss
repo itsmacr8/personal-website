@@ -43,7 +43,7 @@
     }
 }
 
-.skill-icons {
+.skill-icons, .tech-stack {
     @include flexWrap(var(--space-3));
 }
 
