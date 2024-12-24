@@ -5,7 +5,7 @@
         @include flexColumn(var(--space-3));
         justify-content: space-between;
         align-items: center;
-        @include respond(tab-port) {
+        @include respond(tab-land) {
             flex-direction: row;
         }
     }
