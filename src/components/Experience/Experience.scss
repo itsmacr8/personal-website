@@ -1,4 +1,4 @@
-@import '../../sass/abstracts/mixins';
+@use '../../sass/abstracts/mixins';
 
 .experiences {
   position: relative;
@@ -7,7 +7,7 @@
     position: absolute;
     border-right: 3px solid var(--black);
     height: 100%;
-    @include respond(tab-land) {
+    @include mixins.respond(tab-land) {
       left: 48%;
     }
   }
@@ -17,23 +17,22 @@
   --work-type-duration-position-right: -55%;
   --circle: 15px;
   --circle-position: -12.5%;
-  @include custom-respond(1500) {
+  position: relative;
+  margin-left: var(--space-4);
+  @include mixins.custom-respond(1500) {
     --work-type-duration-position: -47%;
     --work-type-duration-position-right: -43%;
   }
-  @include custom-respond(400) {
+  @include mixins.custom-respond(400) {
     --circle-position: -11%;
   }
-  @include respond(tab-port) {
+  @include mixins.respond(tab-port) {
     --circle-position: -5.2%;
   }
-  @include respond(tab-land) {
+  @include mixins.respond(tab-land) {
     --circle-position: 103.3%;
   }
-
-  position: relative;
-  margin-left: var(--space-4);
-  @include respond(tab-land) {
+  @include mixins.respond(tab-land) {
     margin-left: 0;
     max-width: 46%;
   }
@@ -52,21 +51,21 @@
   }
 
   &__company {
-    @include respond(tab-land) {
+    @include mixins.respond(tab-land) {
       top: -1%;
     }
   }
 
   &__company,
   &__period {
-    @include respond(tab-land) {
+    @include mixins.respond(tab-land) {
       position: absolute;
     }
   }
 
   &--left &__company,
   &--left &__period {
-    @include respond(tab-land) {
+    @include mixins.respond(tab-land) {
       right: var(--work-type-duration-position);
     }
   }
@@ -78,13 +77,13 @@
   }
 
   &--order {
-    @include respond(tab-land) {
+    @include mixins.respond(tab-land) {
       margin-left: var(--fifty);
       --circle-position: -5.3%;
     }
     .experience__company,
     .experience__period {
-      @include respond(tab-land) {
+      @include mixins.respond(tab-land) {
         left: var(--work-type-duration-position-right);
       }
     }

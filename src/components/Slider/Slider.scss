@@ -1,4 +1,4 @@
-@import '../../sass/abstracts/mixins';
+@use '../../sass/abstracts/mixins';
 
 .slider {
   position: relative;
@@ -6,10 +6,10 @@
   justify-content: center;
   overflow-x: hidden;
   min-height: 200px;
-  @include respond(tab-port) {
+  @include mixins.respond(tab-port) {
     min-height: 400px;
   }
-  @include respond(tab-land) {
+  @include mixins.respond(tab-land) {
     min-height: 500px;
   }
 }

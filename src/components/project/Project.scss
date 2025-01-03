@@ -1,63 +1,64 @@
-@import '../../sass/abstracts/mixins';
-@import '../../sass/layout/flex';
+@use '../../sass/abstracts/mixins';
+@use '../../sass/layout/flex';
 
 .projects {
-    @include flexColumn(var(--space-4));
-    @include respond(tab-port) {
-        gap: var(--space-6);
-    }
+  @include flex.flexColumn(var(--space-4));
+  @include mixins.respond(tab-port) {
+    gap: var(--space-6);
+  }
 }
 
 .project {
-    @include flexWrap(var(--space-2));
-    justify-content: space-between;
+  @include flex.flexWrap(var(--space-2));
+  justify-content: space-between;
 
-    .btn--outline {
-        --color-btn: var(--black);
-        &:hover {
-            --color-btn: var(--white);
-        }
+  .btn--outline {
+    --color-btn: var(--black);
+    &:hover {
+      --color-btn: var(--white);
     }
+  }
 
-    &__details {
-        @include flexColumn(var(--space-2));
+  &__details {
+    @include flex.flexColumn(var(--space-2));
 
-        &--order {
-            --color: var(--secondary-400);
-            --background: var(--secondary-500);
-            --border: 1px solid var(--secondary-500);
+    &--order {
+      --color: var(--secondary-400);
+      --background: var(--secondary-500);
+      --border: 1px solid var(--secondary-500);
 
-            & .btn:hover, & .btn--outline:hover {
-                --background: var(--secondary-400);
-            }
-            @include respond(tab-port) {
-                order: 1;
-            }
-        }
+      & .btn:hover,
+      & .btn--outline:hover {
+        --background: var(--secondary-400);
+      }
+      @include mixins.respond(tab-port) {
+        order: 1;
+      }
     }
+  }
 
-    &__name {
-        color: var(--color, var(--primary-400));
+  &__name {
+    color: var(--color, var(--primary-400));
+  }
+
+  &__tag {
+    padding: 0.4rem 0.8rem;
+    background-color: var(--accent-500);
+    border-radius: 3px;
+
+    &-list {
+      @include flex.flexWrap(var(--space-2));
     }
+  }
 
-    &__tag {
-        padding: 0.4rem 0.8rem;
-        background-color: var(--accent-500);
-        border-radius: 3px;
+  &__cta-btn {
+    @include flex.flexWrap(var(--space-1));
+  }
 
-        &-list {
-            @include flexWrap(var(--space-2));
-        }
+  &__details,
+  &__thumbnail {
+    @include mixins.respond(tab-port) {
+      flex-basis: 49%;
     }
-
-    &__cta-btn {
-        @include flexWrap(var(--space-1));
-    }
-
-    &__details,
-    &__thumbnail {
-        @include respond(tab-port) {
-            flex-basis: 49%;
-        }
-    }
+  }
 }

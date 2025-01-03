@@ -1,31 +1,33 @@
+@use 'sass:meta';
+
 @mixin flex($gap) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    @if type-of($gap) != 'null' {
-        gap: $gap;
-    }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  @if meta.type-of($gap) != 'null' {
+    gap: $gap;
+  }
 }
 
 @mixin flexCenter {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @mixin flexColumn($gap) {
-    display: flex;
-    flex-direction: column;
-    @if type-of($gap) != 'null' {
-        gap: $gap;
-    }
+  display: flex;
+  flex-direction: column;
+  @if meta.type-of($gap) != 'null' {
+    gap: $gap;
+  }
 }
 
 @mixin flexWrap($gap) {
-    display: flex;
-    flex-wrap: wrap;
-    @if type-of($gap) != 'null' {
-        gap: $gap;
-    }
+  display: flex;
+  flex-wrap: wrap;
+  @if meta.type-of($gap) != 'null' {
+    gap: $gap;
+  }
 }

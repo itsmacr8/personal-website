@@ -1,52 +1,59 @@
-@import '../../sass/layout/flex';
-@import '../../sass/abstracts/mixins';
+@use '../../sass/layout/flex';
+@use '../../sass/abstracts/mixins';
 
 #hero-section {
-    // Image will not display if you use solid color.
-    // You must use color with alpha value.
-    background: linear-gradient(45deg, var(--gradient-100) 45%, var(--gradient-300) 100%), linear-gradient(90deg, var(--gradient-300) 50%, var(--gradient-100) 100%), url("../../../assets/hero.jpg") no-repeat center/cover;
+  // Image will not display if you use solid color.
+  // You must use color with alpha value.
+  background: linear-gradient(
+      45deg,
+      var(--gradient-100) 45%,
+      var(--gradient-300) 100%
+    ),
+    linear-gradient(90deg, var(--gradient-300) 50%, var(--gradient-100) 100%),
+    url('../../../assets/hero.jpg') no-repeat center/cover;
 }
 
 .hero {
-    min-height: calc(100dvh - ((var(--space-4) * 2) + 68px));
-    @include flexColumn(var(--space-3));
-    justify-content: center;
+  min-height: calc(100dvh - ((var(--space-4) * 2) + 68px));
+  @include flex.flexColumn(var(--space-3));
+  justify-content: center;
 }
 
 .about {
-    @include flexColumn(var(--space-5));
-    align-items: center;
-    @include respond(tab-port) {
-        flex-direction: row;
-        justify-content: space-between;
-    }
+  @include flex.flexColumn(var(--space-5));
+  align-items: center;
+  @include mixins.respond(tab-port) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 
-    & > div {
-        @include respond(tab-port) {
-            flex-basis: 47%;
-        }
+  & > div {
+    @include mixins.respond(tab-port) {
+      flex-basis: 47%;
     }
+  }
 
-    &__description {
-        order: 1;
-        @include respond(tab-port) {
-            order: 0;
-        }
+  &__description {
+    order: 1;
+    @include mixins.respond(tab-port) {
+      order: 0;
     }
+  }
 
-    &__avatar {
-        height: 350px;
-        width: 350px;
-        border-radius: 50%;
-        object-fit: cover;
-        object-position: top;
-    }
+  &__avatar {
+    height: 350px;
+    width: 350px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+  }
 }
 
-.skill-icons, .tech-stack {
-    @include flexWrap(var(--space-3));
+.skill-icons,
+.tech-stack {
+  @include flex.flexWrap(var(--space-3));
 }
 
 .skill-icon {
-    @include flex(null);
+  @include flex.flex(null);
 }

@@ -1,51 +1,54 @@
+@use '../abstracts/mixins';
+@use '../layout/flex';
+
 .btn {
-    display: block;
-    width: fit-content;
-    padding: var(--padding);
-    background-color: var(--background, var(--primary-500));
+  display: block;
+  width: fit-content;
+  padding: var(--padding);
+  background-color: var(--background, var(--primary-500));
+  color: var(--color-btn, var(--white));
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  @include mixins.transitionEaseInOut(background-color);
+
+  &-group {
+    @include flex.flexWrap(var(--space-1));
+  }
+
+  &:hover {
+    background-color: var(--background, var(--primary-400));
+  }
+
+  &:active {
+    background-color: var(--primary-400);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &[disabled] {
+    cursor: default;
+  }
+
+  &--submit {
+    margin-top: var(--space-3);
+    width: var(--hundred);
+  }
+
+  &--submit[disabled] {
+    background-color: var(--grey-400);
+  }
+
+  &--outline {
+    background-color: transparent;
     color: var(--color-btn, var(--white));
-    border: none;
-    text-decoration: none;
-    cursor: pointer;
-    @include transitionEaseInOut(background-color);
-
-    &-group {
-        @include flexWrap(var(--space-1));
-    }
-
+    border: var(--border, 1px solid var(--black));
     &:hover {
-        background-color: var(--background, var(--primary-400));
+      border: var(--border, 1px solid var(--primary-400));
+      background-color: var(--background, var(--primary-400));
+      color: var(--color-btn, var(--white));
     }
-
-    &:active {
-        background-color: var(--primary-400);
-    }
-
-    &:focus {
-        outline: none;
-    }
-
-    &[disabled] {
-        cursor: default;
-    }
-
-    &--submit {
-        margin-top: var(--space-3);
-        width: var(--hundred);
-    }
-
-    &--submit[disabled] {
-        background-color: var(--grey-400);
-    }
-
-    &--outline {
-        background-color: transparent;
-        color: var(--color-btn, var(--white));
-        border: var(--border, 1px solid var(--black));
-        &:hover {
-            border: var(--border, 1px solid var(--primary-400));
-            background-color: var(--background, var(--primary-400));
-            color: var(--color-btn, var(--white));
-        }
-    }
+  }
 }

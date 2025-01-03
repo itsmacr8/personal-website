@@ -1,59 +1,61 @@
+@use 'mixins';
+
 // 400 is the base color. After that it depends on the lightness of hsl.
 :root {
-    --primary-400: hsl(262, 82%, 45%);
-    --primary-500: hsl(262, 82%, 55%);
-    --secondary-400: hsl(235, 80%, 50%);
-    --secondary-500: hsl(235, 80%, 60%);
-    --accent-400: hsl(50, 100%, 50%);
-    --accent-500: hsl(50, 100%, 60%);
+  --primary-400: hsl(262, 82%, 45%);
+  --primary-500: hsl(262, 82%, 55%);
+  --secondary-400: hsl(235, 80%, 50%);
+  --secondary-500: hsl(235, 80%, 60%);
+  --accent-400: hsl(50, 100%, 50%);
+  --accent-500: hsl(50, 100%, 60%);
 
-    --success-400: hsl(134, 61%, 30%);
-    --success-500: hsl(134, 61%, 90%);
-    --warning-400: hsl(355, 70%, 50%);
-    --warning-500: hsl(355, 70%, 90%);
+  --success-400: hsl(134, 61%, 30%);
+  --success-500: hsl(134, 61%, 90%);
+  --warning-400: hsl(355, 70%, 50%);
+  --warning-500: hsl(355, 70%, 90%);
 
-    --gradient-100: hsla(0, 0%, 0%, 0.50);
-    --gradient-300: hsla(260, 73%, 48%, 0.35);
-    --gradient-400: hsla(243, 76%, 59%, 0.35);
-    --gradient-500: hsla(205, 100%, 72%, 0.75);
+  --gradient-100: hsla(0, 0%, 0%, 0.5);
+  --gradient-300: hsla(260, 73%, 48%, 0.35);
+  --gradient-400: hsla(243, 76%, 59%, 0.35);
+  --gradient-500: hsla(205, 100%, 72%, 0.75);
 
-    --white: hsl(0, 0%, 100%);
-    --grey-300: hsl(0, 0%, 96%);
-    --grey-400: hsl(0, 0%, 94%);
-    --grey-800: hsl(0, 0%, 50%);
-    --black: hsl(0, 0%, 0%);
+  --white: hsl(0, 0%, 100%);
+  --grey-300: hsl(0, 0%, 96%);
+  --grey-400: hsl(0, 0%, 94%);
+  --grey-800: hsl(0, 0%, 50%);
+  --black: hsl(0, 0%, 0%);
 
-    --fs-1: clamp(2rem, 3vw + 1rem, 3rem);
-    --fs-2: clamp(1.5rem, 2vw + 1rem, 2.5rem);
-    --fs-3: clamp(1.3125rem, 1vw + 1rem, 2rem);
-    --fs-4: clamp(1.125rem, 1vw + .85rem, 1.625rem);
-    --fs-p: clamp(1rem, 0.625rem + 1.1vw, 1.3125rem);
-    --fs-s: clamp(.875rem, 1.5vw + .8rem, 1rem);
-    --fs-fix-1: 1.5rem;
-    --fs-fix-2: 2rem;
+  --fs-1: clamp(2rem, 3vw + 1rem, 3rem);
+  --fs-2: clamp(1.5rem, 2vw + 1rem, 2.5rem);
+  --fs-3: clamp(1.3125rem, 1vw + 1rem, 2rem);
+  --fs-4: clamp(1.125rem, 1vw + 0.85rem, 1.625rem);
+  --fs-p: clamp(1rem, 0.625rem + 1.1vw, 1.3125rem);
+  --fs-s: clamp(0.875rem, 1.5vw + 0.8rem, 1rem);
+  --fs-fix-1: 1.5rem;
+  --fs-fix-2: 2rem;
 
-    --space-1: 0.3125rem;
-    --space-2: 0.625rem;
-    --space-3: 1rem;
-    --space-4: 2rem;
-    --space-5: 3rem;
-    --space-6: 4rem;
-    --space-7: 5rem;
+  --space-1: 0.3125rem;
+  --space-2: 0.625rem;
+  --space-3: 1rem;
+  --space-4: 2rem;
+  --space-5: 3rem;
+  --space-6: 4rem;
+  --space-7: 5rem;
 
-    --padding: 0.5em 1em;
-    --animation-duration: 500ms;
-    --animation-delay: 250ms;
+  --padding: 0.5em 1em;
+  --animation-duration: 500ms;
+  --animation-delay: 250ms;
 
-    --fifty: 50%;
-    --hundred: 100%;
-    --minus-hundred: -100%;
-    --minus-two-hundred: -200%;
+  --fifty: 50%;
+  --hundred: 100%;
+  --minus-hundred: -100%;
+  --minus-two-hundred: -200%;
 
-    --card-width: 22rem;
-    @include respond(tab-land) {
-        --card-width: 23rem;
-    }
-    @include respond(big-desktop) {
-        --card-width: 24rem;
-    }
+  --card-width: 22rem;
+  @include mixins.respond(tab-land) {
+    --card-width: 23rem;
+  }
+  @include mixins.respond(big-desktop) {
+    --card-width: 24rem;
+  }
 }

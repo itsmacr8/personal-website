@@ -1,4 +1,4 @@
-@import '../../sass/layout/flex';
+@use '../../sass/layout/flex';
 
 .loader-container {
   position: fixed;
@@ -7,7 +7,7 @@
   z-index: 1;
   overflow-x: hidden;
   background: var(--primary-400);
-  @include flexCenter;
+  @include flex.flexCenter;
 }
 
 .loader {

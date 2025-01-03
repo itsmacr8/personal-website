@@ -1,92 +1,95 @@
+@use '../abstracts/mixins';
+@use '../layout/flex';
+
 section {
-    padding-block: var(--space-4);
-    @include respond(tab-port) {
-        padding-block: var(--space-5);
-    }
-    @include respond(tab-land) {
-        padding-block: var(--space-6);
-    }
+  padding-block: var(--space-4);
+  @include mixins.respond(tab-port) {
+    padding-block: var(--space-5);
+  }
+  @include mixins.respond(tab-land) {
+    padding-block: var(--space-6);
+  }
 }
 
 .bg {
-    background-color: var(--grey-300);
+  background-color: var(--grey-300);
 }
 
 .container {
-    margin-inline: auto;
-    width: 90%;
-    max-width: 1600px;
-    @include respond(tab-port) {
-        width: 95%;
-    }
+  margin-inline: auto;
+  width: 90%;
+  max-width: 1600px;
+  @include mixins.respond(tab-port) {
+    width: 95%;
+  }
 }
 
 .mt-s {
-    margin-top: var(--space-2);
+  margin-top: var(--space-2);
 }
 
 .mt-1 {
-    margin-top: var(--space-3);
+  margin-top: var(--space-3);
 }
 
 .mt-2 {
-    margin-top: var(--space-4);
+  margin-top: var(--space-4);
 }
 
 .mb-s {
-    margin-bottom: var(--space-2);
+  margin-bottom: var(--space-2);
 }
 
 .mb-1 {
-    margin-bottom: var(--space-3);
+  margin-bottom: var(--space-3);
 }
 
 .mb-2 {
-    margin-bottom: var(--space-4);
+  margin-bottom: var(--space-4);
 }
 
 .mb-3 {
-    margin-bottom: var(--space-5);
+  margin-bottom: var(--space-5);
 }
 
 .mb-xs {
-    margin-bottom: var(--space-1);
+  margin-bottom: var(--space-1);
 }
 
 .my-s {
-    margin-block: var(--space-2);
+  margin-block: var(--space-2);
 }
 
 .my-1 {
-    margin-block: var(--space-3);
+  margin-block: var(--space-3);
 }
 
 .my-2 {
-    margin-block: var(--space-4);
+  margin-block: var(--space-4);
 }
 
 .mx-auto {
-    margin-inline: auto;
+  margin-inline: auto;
 }
 
 .page-layout {
-	display: grid;
-	grid-template-rows: max-content auto max-content;
+  display: grid;
+  grid-template-rows: max-content auto max-content;
 }
 
 .cursor-pointer {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .hide {
-    display: none !important;
+  display: none !important;
 }
 
 .no-js-message {
-    @include flexCenter;
-    color: var(--warning-400);
-	min-height: 100vh;
-	background-color: var(--black);
-	font-size: var(--fs-1);
-	text-align: center;
+  @include flex.flexCenter;
+  color: var(--warning-400);
+  min-height: 100vh;
+  background-color: var(--black);
+  font-size: var(--fs-1);
+  text-align: center;
 }

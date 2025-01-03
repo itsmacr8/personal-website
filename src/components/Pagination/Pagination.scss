@@ -1,7 +1,7 @@
-@import '../../sass/layout/flex';
+@use '../../sass/layout/flex';
 
 .pagination {
-  @include flexWrap(var(--space-2));
+  @include flex.flexWrap(var(--space-2));
   justify-content: center;
 
   .btn--pagination {

@@ -1,5 +1,5 @@
-@import '../../sass/abstracts/mixins';
-@import '../../sass/layout/flex';
+@use '../../sass/abstracts/mixins';
+@use '../../sass/layout/flex';
 
 .modal {
   position: fixed;
@@ -10,13 +10,13 @@
   background-color: hsla(0, 0%, 0%, 0.6);
   backdrop-filter: blur(5px);
   opacity: 0;
-  @include transitionEaseInOutWithDelay(opacity, 250ms, 500ms);
-  @include respond(tab-port) {
-    @include flexCenter;
+  @include mixins.transitionEaseInOutWithDelay(opacity, 250ms, 500ms);
+  @include mixins.respond(tab-port) {
+    @include flex.flexCenter;
   }
 
   &--db-mess {
-    @include flexCenter;
+    @include flex.flexCenter;
 
     .modal__close {
       top: 50%;
@@ -25,12 +25,12 @@
     }
 
     .movie-db {
+      background-color: var(--bg, var(--success-500));
+      padding: clamp(1rem, 2vw, 3rem);
       &--error {
         --bg: var(--warning-500);
         --fg: var(--warning-400);
       }
-      background-color: var(--bg, var(--success-500));
-      padding: clamp(1rem, 2vw, 3rem);
 
       p {
         width: 90%;
@@ -57,13 +57,13 @@
     box-shadow: 0 var(--space-5) var(--space-7) rgba(0, 0, 0, 0.3);
     opacity: 0;
     transform: scale(0.5);
-    @include transitionEaseInOutMulWithDelay(transform, opacity, 250ms);
-    @include respond(tab-port) {
+    @include mixins.transitionEaseInOutMulWithDelay(transform, opacity, 250ms);
+    @include mixins.respond(tab-port) {
       margin-block: initial;
       margin-inline: initial;
     }
 
-    @include respond(tab-port) {
+    @include mixins.respond(tab-port) {
       padding: clamp(1rem, 2vw, 3rem);
       display: flex;
       justify-content: space-between;
@@ -71,14 +71,14 @@
 
     .movie-text {
       margin-top: var(--space-2);
-      @include respond(tab-port) {
+      @include mixins.respond(tab-port) {
         margin-top: 0;
       }
     }
 
     :is(.modal__primary-details :is(h2, p), .modal__secondary-details) {
       padding-inline: var(--space-3);
-      @include respond(tab-port) {
+      @include mixins.respond(tab-port) {
         padding-inline: initial;
       }
     }
@@ -106,7 +106,7 @@
   /* JS CLASSES TO MAKE MODAL WORK */
   &--show {
     opacity: 1;
-    @include transitionEaseInOut(opacity);
+    @include mixins.transitionEaseInOut(opacity);
   }
 
   &--show &__content {
