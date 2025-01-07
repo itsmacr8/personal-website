@@ -106,9 +106,21 @@ function handleMovieAdd(target: HTMLElement) {
   const recommendMoviesBtn = document.getElementById('recommend-movies');
   recommendMoviesBtn?.addEventListener('click', (event: Event) => {
     event.preventDefault();
+    const [name, contact] = getRecommenderInfo();
+    if (isRecommenderInfoEmpty(name, contact)) return;
     const movieID = target.dataset.imdbid;
-    movieID && addMovie(movieID);
+    movieID && addMovie(movieID, name, contact);
   })
+}
+
+function getRecommenderInfo() {
+  const nameEl = document.getElementById('name') as HTMLInputElement;
+  const contactEl = document.getElementById('contact') as HTMLInputElement;
+  return [nameEl.value.trim(), contactEl.value.trim()];
+}
+
+function isRecommenderInfoEmpty(name: string, contact: string) {
+  return name === '' || contact === '';
 }
 
 function showMovieRecommendForm() {
@@ -187,9 +199,11 @@ function renderMoviesCardHeading(message: string) {
   moviesCardHeading.innerHTML = message;
 }
 
-async function addMovie(movieID: string) {
+async function addMovie(movieID: string, name: string, contact: string) {
   removeClassFrom(loader);
   const movieDetails = await getMovieDetails(movieID);
+  movieDetails.recommenderName = name;
+  movieDetails.recommenderContact = contact;
   const country: string = movieDetails.Country.split(',').shift()?.trim();
   const countries = await AirTableDB.getCountries();
   if (countries.includes(country)) {
