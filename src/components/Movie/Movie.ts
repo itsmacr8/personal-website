@@ -10,6 +10,7 @@ import {
   searchMoviesMarkup,
   showMoviesMarkup,
   detailsMovieMarkup,
+  recommendMoviesMarkup,
 } from './_movie_markup';
 import { offset } from '../utilities/LoadMore';
 
@@ -96,11 +97,26 @@ movieCards.addEventListener('click', async (event) => {
     movieID && renderMovie(await getMovieDetails(movieID));
     return;
   } else if (target.classList.contains('btn--movie-add')) {
-    const movieID = target.dataset.imdbid;
-    movieID && addMovie(movieID);
-    return;
+    showMovieRecommendForm();
+    handleMovieAdd(target);
   }
 });
+
+function handleMovieAdd(target: HTMLElement) {
+  const recommendMoviesBtn = document.getElementById('recommend-movies');
+  recommendMoviesBtn?.addEventListener('click', (event: Event) => {
+    event.preventDefault();
+    const movieID = target.dataset.imdbid;
+    movieID && addMovie(movieID);
+  })
+}
+
+function showMovieRecommendForm() {
+  modal.innerHTML = '';
+  modal.insertAdjacentHTML('beforeend', recommendMoviesMarkup());
+  addClassTo(modal, 'modal--db-mess');
+  showModal(modal);
+}
 
 moviesCardHeading.addEventListener('click', (event) => {
   const target = event.target as HTMLElement;

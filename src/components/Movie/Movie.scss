@@ -1,3 +1,13 @@
 .poster {
   max-height: 525px;
 }
+
+.form--recommend {
+  background-color: var(--grey-400);
+  position: relative;
+  padding: 2rem 2rem 1rem 2rem;
+
+  & .form__close {
+    top: 10%;
+  }
+}
