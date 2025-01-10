@@ -80,9 +80,25 @@ function movieSaveMessage(message: string, isErr: boolean) {
     </div>`;
 }
 
+function recommendMoviesMarkup() {
+  return `<form class='form form--recommend container'>
+    <button class="modal__close form__close">×</button>
+    <div class='form__group'>
+      <label for='name'>Name</label>
+      <input type='text' id='name' placeholder='Enter your name'>
+    </div>
+    <div class='form__group'>
+      <label for='contact'>LinkedIn/Facebook/Email</label>
+      <input type='text' id='contact' placeholder='Enter your contact'>
+    </div>
+      <button type="submit" id='recommend-movies' class='btn btn--submit'>Lights, Camera, Suggest!</button>
+  </form>`;
+}
+
 export {
   searchMoviesMarkup,
   showMoviesMarkup,
   detailsMovieMarkup,
   movieSaveMessage,
+  recommendMoviesMarkup,
 };

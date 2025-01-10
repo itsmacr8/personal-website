@@ -68,6 +68,7 @@ class AirTable {
   }
 
   async addRecord(tableName: string, movie: MovieDetails) {
+    console.log(movie);
     const url = `${this.url}/${this.mpBase}/${tableName}`;
     try {
       await axios.post(
@@ -87,6 +88,8 @@ class AirTable {
             Country: movie.Country,
             Language: movie.Language,
             BoxOffice: movie.BoxOffice,
+            RecommenderName: movie.recommenderName,
+            RecommenderContact: movie.recommenderContact,
           },
         },
         {

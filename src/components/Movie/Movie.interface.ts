@@ -16,6 +16,8 @@ interface MovieDetails {
   Country: string;
   Language: string;
   BoxOffice?: string;
+  recommenderName: string;
+  recommenderContact: string;
 }
 
 interface SearchMovies {
