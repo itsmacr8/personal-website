@@ -81,17 +81,17 @@ function movieSaveMessage(message: string, isErr: boolean) {
 }
 
 function recommendMoviesMarkup() {
-  return `<form class='form form--recommend container'>
-    <button class="modal__close form__close">×</button>
+  return `<form id='recommend-form' class='form form--recommend container'>
+    <button class='modal__close form__close'>×</button>
     <div class='form__group'>
       <label for='name'>Name</label>
-      <input type='text' id='name' placeholder='Enter your name'>
+      <input type='text' id='name' placeholder='Enter your name' required>
     </div>
     <div class='form__group'>
       <label for='contact'>LinkedIn/Facebook/Email</label>
-      <input type='text' id='contact' placeholder='Enter your contact'>
+      <input type='text' id='contact' placeholder='Enter your contact' required>
     </div>
-      <button type="submit" id='recommend-movies' class='btn btn--submit'>Lights, Camera, Suggest!</button>
+      <button type='submit' class='btn btn--submit'>Lights, Camera, Suggest!</button>
   </form>`;
 }
 

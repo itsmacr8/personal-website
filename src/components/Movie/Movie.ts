@@ -103,11 +103,10 @@ movieCards.addEventListener('click', async (event) => {
 });
 
 function handleMovieAdd(target: HTMLElement) {
-  const recommendMoviesBtn = document.getElementById('recommend-movies');
-  recommendMoviesBtn?.addEventListener('click', (event: Event) => {
+  const form = document.getElementById('recommend-form') as HTMLFormElement;
+  form.addEventListener('submit', (event: Event) => {
     event.preventDefault();
     const [name, contact] = getRecommenderInfo();
-    if (isRecommenderInfoEmpty(name, contact)) return;
     const movieID = target.dataset.imdbid;
     movieID && addMovie(movieID, name, contact);
   })
@@ -117,10 +116,6 @@ function getRecommenderInfo() {
   const nameEl = document.getElementById('name') as HTMLInputElement;
   const contactEl = document.getElementById('contact') as HTMLInputElement;
   return [nameEl.value.trim(), contactEl.value.trim()];
-}
-
-function isRecommenderInfoEmpty(name: string, contact: string) {
-  return name === '' || contact === '';
 }
 
 function showMovieRecommendForm() {
