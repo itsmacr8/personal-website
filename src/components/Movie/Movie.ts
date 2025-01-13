@@ -20,7 +20,7 @@ const searchMovie = document.getElementById('search-movie') as HTMLInputElement;
 const delay = 1500;
 const movieCards = document.querySelector('#movie-cards') as HTMLDivElement;
 const OMDB_KEY = import.meta.env.VITE_OMDB_KEY;
-const airTableRecord = import.meta.env.VITE_AIRTABLE_RECORD;
+const airTableRecord: string = import.meta.env.VITE_AIRTABLE_RECORD;
 const moviesButton = document.getElementById('btn-movies') as HTMLDivElement;
 const topMoviesText =
   "Want to have a look at my <span class='text-secondary cursor-pointer' data-top-movies='Top'>top watched movies!</span>";
@@ -78,7 +78,7 @@ function renderMovies(
   });
 }
 
-async function getMovieDetails(movieID: string) {
+async function getMovieDetails(movieID: string): Promise<MovieDetails> {
   return (await axios.get(`${BASE_URL}&i=${movieID}&plot=full`)).data;
 }
 
@@ -204,7 +204,7 @@ async function addMovie(movieID: string, name: string, contact: string) {
   const movieDetails = await getMovieDetails(movieID);
   movieDetails.recommenderName = name;
   movieDetails.recommenderContact = contact;
-  const country: string = movieDetails.Country.split(',').shift()?.trim();
+  const country: string = movieDetails.Country.split(',').shift()?.trim()!;
   const countries = await AirTableDB.getCountries();
   if (countries.includes(country)) {
     AirTableDB.addRecord(country, movieDetails);
