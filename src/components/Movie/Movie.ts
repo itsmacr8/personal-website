@@ -20,7 +20,7 @@ const searchMovie = document.getElementById('search-movie') as HTMLInputElement;
 const delay = 1500;
 const movieCards = document.querySelector('#movie-cards') as HTMLDivElement;
 const OMDB_KEY = import.meta.env.VITE_OMDB_KEY;
-const airTableRecord = import.meta.env.VITE_AIRTABLE_RECORD;
+const airTableRecord: string = import.meta.env.VITE_AIRTABLE_RECORD;
 const moviesButton = document.getElementById('btn-movies') as HTMLDivElement;
 const topMoviesText =
   "Want to have a look at my <span class='text-secondary cursor-pointer' data-top-movies='Top'>top watched movies!</span>";
@@ -78,7 +78,7 @@ function renderMovies(
   });
 }
 
-async function getMovieDetails(movieID: string) {
+async function getMovieDetails(movieID: string): Promise<MovieDetails> {
   return (await axios.get(`${BASE_URL}&i=${movieID}&plot=full`)).data;
 }
 
@@ -103,11 +103,10 @@ movieCards.addEventListener('click', async (event) => {
 });
 
 function handleMovieAdd(target: HTMLElement) {
-  const recommendMoviesBtn = document.getElementById('recommend-movies');
-  recommendMoviesBtn?.addEventListener('click', (event: Event) => {
+  const form = document.getElementById('recommend-form') as HTMLFormElement;
+  form.addEventListener('submit', (event: Event) => {
     event.preventDefault();
     const [name, contact] = getRecommenderInfo();
-    if (isRecommenderInfoEmpty(name, contact)) return;
     const movieID = target.dataset.imdbid;
     movieID && addMovie(movieID, name, contact);
   })
@@ -117,10 +116,6 @@ function getRecommenderInfo() {
   const nameEl = document.getElementById('name') as HTMLInputElement;
   const contactEl = document.getElementById('contact') as HTMLInputElement;
   return [nameEl.value.trim(), contactEl.value.trim()];
-}
-
-function isRecommenderInfoEmpty(name: string, contact: string) {
-  return name === '' || contact === '';
 }
 
 function showMovieRecommendForm() {
@@ -204,7 +199,7 @@ async function addMovie(movieID: string, name: string, contact: string) {
   const movieDetails = await getMovieDetails(movieID);
   movieDetails.recommenderName = name;
   movieDetails.recommenderContact = contact;
-  const country: string = movieDetails.Country.split(',').shift()?.trim();
+  const country: string = movieDetails.Country.split(',').shift()?.trim()!;
   const countries = await AirTableDB.getCountries();
   if (countries.includes(country)) {
     AirTableDB.addRecord(country, movieDetails);
