@@ -2,31 +2,34 @@
 
 @mixin flex($gap) {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   @if meta.type-of($gap) != 'null' {
     gap: $gap;
   }
 }
 
-@mixin flexCenter {
+@mixin flex-center {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
-@mixin flexColumn($gap) {
+@mixin flex-column($gap) {
   display: flex;
   flex-direction: column;
+
   @if meta.type-of($gap) != 'null' {
     gap: $gap;
   }
 }
 
-@mixin flexWrap($gap) {
+@mixin flex-wrap($gap) {
   display: flex;
   flex-wrap: wrap;
+
   @if meta.type-of($gap) != 'null' {
     gap: $gap;
   }
