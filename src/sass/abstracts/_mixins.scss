@@ -38,11 +38,11 @@
   }
 }
 
-@mixin transitionEaseInOut($property: transform) {
+@mixin transition-ease-in-out($property: transform) {
   transition: $property var(--animation-duration) ease-in-out;
 }
 
-@mixin transitionEaseInOutWithDelay(
+@mixin transition-ease-in-out-with-delay(
   $property: transform,
   $duration: var(--animation-duration),
   $delay: var(--animation-delay)
@@ -50,12 +50,12 @@
   transition: $property $duration $delay ease-in-out;
 }
 
-@mixin transitionEaseInOutMul($property1: transform, $property2: color) {
+@mixin transition-ease-in-out-mul($property1: transform, $property2: color) {
   transition: $property1 var(--animation-duration) ease-in-out,
     $property2 var(--animation-duration) ease-in-out;
 }
 
-@mixin transitionEaseInOutMulWithDelay(
+@mixin transition-ease-in-out-mul-with-delay(
   $property1: transform,
   $property2: color,
   $duration: var(--animation-duration),
@@ -65,7 +65,7 @@
     $property2 $duration $delay ease-in-out;
 }
 
-@mixin linkStyle {
+@mixin link-style {
   text-decoration: none;
   text-transform: uppercase;
 }
