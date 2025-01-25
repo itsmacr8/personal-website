@@ -5,15 +5,16 @@
   display: block;
   width: fit-content;
   padding: var(--padding);
-  background-color: var(--background, var(--primary-500));
   color: var(--color-btn, var(--white));
-  border: none;
   text-decoration: none;
   cursor: pointer;
-  @include mixins.transitionEaseInOut(background-color);
+  background-color: var(--background, var(--primary-500));
+  border: none;
+
+  @include mixins.transition-ease-in-out(background-color);
 
   &-group {
-    @include flex.flexWrap(var(--space-1));
+    @include flex.flex-wrap(var(--space-1));
   }
 
   &:hover {
@@ -33,8 +34,8 @@
   }
 
   &--submit {
-    margin-top: var(--space-3);
     width: var(--hundred);
+    margin-top: var(--space-3);
   }
 
   &--submit[disabled] {
@@ -42,13 +43,14 @@
   }
 
   &--outline {
-    background-color: transparent;
     color: var(--color-btn, var(--white));
+    background-color: transparent;
     border: var(--border, 1px solid var(--black));
+
     &:hover {
-      border: var(--border, 1px solid var(--primary-400));
-      background-color: var(--background, var(--primary-400));
       color: var(--color-btn, var(--white));
+      background-color: var(--background, var(--primary-400));
+      border: var(--border, 1px solid var(--primary-400));
     }
   }
 }
