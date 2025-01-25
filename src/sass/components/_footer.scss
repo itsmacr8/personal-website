@@ -3,26 +3,36 @@
 
 .footer {
   background-color: var(--grey-400);
+
   &__content {
-    padding-block: var(--space-3);
-    @include flex.flexColumn(var(--space-3));
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    padding-block: var(--space-3);
+
+    @include flex.flex-column(var(--space-3));
+
     @include mixins.respond(tab-land) {
       flex-direction: row;
     }
   }
 }
+
 .developer-link {
-  @include mixins.linkStyle;
+  @include mixins.link-style;
+
   color: var(--secondary-400);
-  @include mixins.transitionEaseInOut(color);
+
+  @include mixins.transition-ease-in-out(color);
 }
+
 .social {
-  @include flex.flexWrap(var(--space-2));
+  @include flex.flex-wrap(var(--space-2));
+
   &__icon {
     color: var(--black);
-    @include mixins.transitionEaseInOut(color);
+
+    @include mixins.transition-ease-in-out(color);
+
     &:hover {
       color: var(--primary-500);
     }

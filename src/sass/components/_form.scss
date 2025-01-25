@@ -2,6 +2,7 @@
 
 .form {
   max-width: 43rem;
+
   @include mixins.respond(tab-port) {
     margin-inline: auto;
   }
