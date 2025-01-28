@@ -4,11 +4,13 @@
   position: relative;
   display: flex;
   justify-content: center;
-  overflow-x: hidden;
   min-height: 200px;
+  overflow-x: hidden;
+
   @include mixins.respond(tab-port) {
     min-height: 400px;
   }
+
   @include mixins.respond(tab-land) {
     min-height: 500px;
   }
@@ -21,22 +23,22 @@
 }
 
 .dots {
-  display: flex;
   position: absolute;
   bottom: 0;
   left: 50%;
-  transform: translateX(-50%);
   z-index: 1;
+  display: flex;
+  transform: translateX(-50%);
 
   &__dot {
-    border: none;
-    background-color: var(--grey-800);
-    opacity: 0.7;
-    height: 1rem;
     width: 1rem;
-    border-radius: 50%;
+    height: 1rem;
     margin-right: 1.5rem;
     cursor: pointer;
+    background-color: var(--grey-800);
+    border: none;
+    border-radius: 50%;
+    opacity: 0.7;
     transition: transform 0.5s;
 
     &--active {
