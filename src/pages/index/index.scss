@@ -14,14 +14,17 @@
 }
 
 .hero {
-  min-height: calc(100dvh - ((var(--space-4) * 2) + 68px));
-  @include flex.flexColumn(var(--space-3));
   justify-content: center;
+  min-height: calc(100dvh - ((var(--space-4) * 2) + 68px));
+
+  @include flex.flex-column(var(--space-3));
 }
 
 .about {
-  @include flex.flexColumn(var(--space-5));
+  @include flex.flex-column(var(--space-5));
+
   align-items: center;
+
   @include mixins.respond(tab-port) {
     flex-direction: row;
     justify-content: space-between;
@@ -35,23 +38,24 @@
 
   &__description {
     order: 1;
+
     @include mixins.respond(tab-port) {
       order: 0;
     }
   }
 
   &__avatar {
-    height: 350px;
     width: 350px;
-    border-radius: 50%;
+    height: 350px;
     object-fit: cover;
     object-position: top;
+    border-radius: 50%;
   }
 }
 
 .skill-icons,
 .tech-stack {
-  @include flex.flexWrap(var(--space-3));
+  @include flex.flex-wrap(var(--space-3));
 }
 
 .skill-icon {
