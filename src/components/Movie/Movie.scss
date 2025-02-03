@@ -2,12 +2,14 @@
   max-height: 525px;
 }
 
-.form--recommend {
-  background-color: var(--grey-400);
-  position: relative;
-  padding: 2rem 2rem 1rem 2rem;
+.form {
+  &--recommend {
+    position: relative;
+    padding: 2rem 2rem 1rem;
+    background-color: var(--grey-400);
 
-  & .form__close {
-    top: 10%;
+    & &__close {
+      top: 10%;
+    }
   }
 }
