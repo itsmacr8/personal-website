@@ -1,22 +1,25 @@
 @use '../layout/flex';
 
 .cards {
-  @include flex.flexWrap(var(--space-3));
+  @include flex.flex-wrap(var(--space-3));
+
   text-align: left;
 }
 
 .card {
   width: min(100%, var(--card-width));
   background-color: var(--grey-300);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
 
   &__thumbnail {
-    object-fit: cover;
     width: 100%;
+    object-fit: cover;
   }
+
   &__title {
     font-weight: bold;
   }
+
   &__body {
     padding: var(--space-2);
   }

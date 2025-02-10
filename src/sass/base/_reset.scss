@@ -24,17 +24,17 @@ dd {
 
 /* Set core body defaults */
 body {
-  text-rendering: optimizeSpeed;
-  line-height: 1.5;
   min-height: 100vh;
+  line-height: 1.5;
+  text-rendering: optimizespeed;
 }
 
 /* Remove list styles on ul, ol elements if it has a class, which suggests default styling will be removed */
 ul[class],
 ol[class] {
-  list-style: none;
   padding: 0;
   margin: 0;
+  list-style: none;
 }
 
 /* A elements that don't have a class get default styles */
@@ -45,8 +45,8 @@ a:not([class]) {
 /* Make images easier to work with */
 img,
 picture {
-  max-width: 100%;
   display: block;
+  max-width: 100%;
 }
 
 /* Inherit fonts for inputs and buttons */
@@ -66,9 +66,9 @@ select {
   *,
   *::before,
   *::after {
+    transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
 }

@@ -3,9 +3,11 @@
 
 section {
   padding-block: var(--space-4);
+
   @include mixins.respond(tab-port) {
     padding-block: var(--space-5);
   }
+
   @include mixins.respond(tab-land) {
     padding-block: var(--space-6);
   }
@@ -16,9 +18,10 @@ section {
 }
 
 .container {
-  margin-inline: auto;
   width: 90%;
   max-width: 1600px;
+  margin-inline: auto;
+
   @include mixins.respond(tab-port) {
     width: 95%;
   }
@@ -86,10 +89,11 @@ section {
 }
 
 .no-js-message {
-  @include flex.flexCenter;
-  color: var(--warning-400);
+  @include flex.flex-center;
+
   min-height: 100vh;
-  background-color: var(--black);
   font-size: var(--fs-1);
+  color: var(--warning-400);
   text-align: center;
+  background-color: var(--black);
 }

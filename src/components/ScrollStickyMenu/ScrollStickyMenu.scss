@@ -4,14 +4,15 @@
   position: sticky;
   top: 0;
   z-index: 9;
-  @include mixins.transitionEaseInOut;
+
+  @include mixins.transition-ease-in-out;
 
   // Remove below rules if scrolling sticky navigation
   // feature is not needed. Sticky navigation will still
   // work without scrolling sticky effect.
   &.scroll-up,
   &:focus-within {
-    @include mixins.translate();
+    @include mixins.translate;
   }
 
   &.scroll-down {
