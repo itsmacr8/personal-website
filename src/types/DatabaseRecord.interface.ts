@@ -1,17 +1,11 @@
-import { Collaborator, Attachment } from "airtable";
+type RecordDataType = string | number | undefined;
 
-type DatabaseRecordType =
-  | string
-  | number
-  | boolean
-  | Collaborator
-  | readonly Collaborator[]
-  | readonly string[]
-  | readonly Attachment[]
-  | undefined;
-
-interface DatabaseRecord {
-  [key: string]: DatabaseRecordType
+interface FieldSet {
+  [key: string]: RecordDataType;
 }
 
-export type { DatabaseRecordType, DatabaseRecord }
+interface DatabaseRecord {
+  [key: string]: FieldSet;
+}
+
+export type { RecordDataType, FieldSet, DatabaseRecord };

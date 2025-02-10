@@ -1,89 +1,102 @@
-@import '../../sass/abstracts/mixins';
+@use '../../sass/abstracts/mixins';
 
 .experiences {
   position: relative;
+
   &::before {
-    content: '';
     position: absolute;
-    border-right: 3px solid var(--black);
     height: 100%;
-    @include respond(tab-land) {
+    content: '';
+    border-right: 3px solid var(--black);
+
+    @include mixins.respond(tab-land) {
       left: 48%;
     }
   }
 }
+
 .experience {
   --work-type-duration-position: -60%;
   --work-type-duration-position-right: -55%;
   --circle: 15px;
   --circle-position: -12.5%;
-  @include custom-respond(1500) {
-    --work-type-duration-position: -47%;
-    --work-type-duration-position-right: -43%;
-  }
-  @include custom-respond(400) {
-    --circle-position: -11%;
-  }
-  @include respond(tab-port) {
-    --circle-position: -5.2%;
-  }
-  @include respond(tab-land) {
-    --circle-position: 103.3%;
-  }
 
   position: relative;
   margin-left: var(--space-4);
-  @include respond(tab-land) {
-    margin-left: 0;
-    max-width: 46%;
+
+  @include mixins.custom-respond(1500) {
+    --work-type-duration-position: -47%;
+    --work-type-duration-position-right: -43%;
   }
+
+  @include mixins.custom-respond(400) {
+    --circle-position: -11%;
+  }
+
+  @include mixins.respond(tab-port) {
+    --circle-position: -5.2%;
+  }
+
+  @include mixins.respond(tab-land) {
+    --circle-position: 103.3%;
+  }
+
+  @include mixins.respond(tab-land) {
+    max-width: 46%;
+    margin-left: 0;
+  }
+
   &:not(:last-child) {
     margin-bottom: var(--space-4);
   }
 
   &::before {
-    content: '';
-    width: var(--circle);
-    height: var(--circle);
-    border-radius: var(--fifty);
-    background-color: var(--secondary-500);
     position: absolute;
     left: var(--circle-position);
+    width: var(--circle);
+    height: var(--circle);
+    content: '';
+    background-color: var(--secondary-500);
+    border-radius: var(--fifty);
   }
 
   &__company {
-    @include respond(tab-land) {
+    @include mixins.respond(tab-land) {
       top: -1%;
     }
   }
 
-  &__company, &__period {
-    @include respond(tab-land) {
+  &__company,
+  &__period {
+    @include mixins.respond(tab-land) {
       position: absolute;
     }
   }
 
-  &--left &__company, &--left &__period {
-    @include respond(tab-land) {
+  &--left &__company,
+  &--left &__period {
+    @include mixins.respond(tab-land) {
       right: var(--work-type-duration-position);
     }
   }
 
   & &__contributions {
-    list-style: inside;
-    margin-top: var(--space-2);
+    margin-block: var(--space-2);
     font-size: var(--fs-p);
+    list-style: inside;
   }
 
   &--order {
-    @include respond(tab-land) {
+    @include mixins.respond(tab-land) {
       margin-left: var(--fifty);
+
       --circle-position: -5.3%;
     }
-    .experience__company, .experience__period {
-      @include respond(tab-land) {
-        left: var(--work-type-duration-position-right);
-      }
+  }
+
+  &--order :is(&__company, &__period) {
+    @include mixins.respond(tab-land) {
+      left: var(--work-type-duration-position-right);
     }
   }
 }

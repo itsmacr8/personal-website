@@ -1,6 +1,6 @@
 import './Slider.scss';
-import { getSortedRecord, renderDatabaseRecord } from '../_utils';
-import { testimonial, testimonialRecordID } from '../_variables';
+import { renderDatabaseRecord } from '../_utils';
+import { AirTableDB, testimonial, testimonialRecordID } from '../_variables';
 
 const dotContainer = document.querySelector('.dots') as HTMLDivElement;
 
@@ -16,31 +16,25 @@ function removeActiveClass() {
 // Add active class to the slider dot that is currently active
 function addActiveClass(slide: number) {
   if (dotContainer) {
-    const dot = document.querySelector(`.dots__dot[data-slide="${slide}"]`);
-    if (dot) dot.classList.add('dots__dot--active');
+    const dot = document.querySelector(`.dots__dot[data-slide='${slide}']`);
+    dot && dot.classList.add('dots__dot--active');
   }
 }
 
 const initializeSlider = async () => {
-  const record = await getSortedRecord(testimonial, testimonialRecordID);
-  renderDatabaseRecord('.slider', record);
+  const record = await AirTableDB.getRecord(testimonial, testimonialRecordID);
+  renderDatabaseRecord('.slider', record.slice(1));
   let currentSlide = 0;
   let maxSlide: number = 0;
   const slides = document.querySelectorAll('.slide') as NodeListOf<HTMLElement>;
   if (slides) maxSlide = slides.length - 1;
 
   // creating the dots for the slider
-  const createDots = () => {
-    if (slides) {
-      slides.forEach((_, i) => {
-        if (dotContainer) {
-          dotContainer.insertAdjacentHTML(
-            'beforeend',
-            `<button class="dots__dot" data-slide="${i}"></button>`
-          );
-        }
-      });
-    }
+  const createDots = () => slides && slides.forEach((_, i) => { dot(i); });
+
+  const dot = (dotNum: number) => {
+    const btn = `<button class='dots__dot' data-slide='${dotNum}'></button>`;
+    dotContainer && dotContainer.insertAdjacentHTML('beforeend', btn);
   };
 
   // moving the slide horizontally accordingly the slide number
@@ -71,6 +65,21 @@ const initializeSlider = async () => {
     activeDot(currentSlide);
   };
 
+  let slideInterval: number;
+  const startSlider = () => (slideInterval = setInterval(nextSlide, 3000));
+  const stopSlider = () => clearInterval(slideInterval);
+
+  // Event listeners to stop the slider on mouse hover & restart on mouse leave
+  // Event delegation relies on event bubbling. Since mouseenter and mouseleave
+  // do not bubble up the DOM tree, unlike click event, we must attach listeners
+  // directly to the target elements.
+  if (slides) {
+    slides.forEach((slide) => {
+      slide.addEventListener('mouseenter', stopSlider);
+      slide.addEventListener('mouseleave', startSlider);
+    });
+  }
+
   document.addEventListener('keydown', function (e) {
     e.key === 'ArrowLeft' && prevSlide();
     e.key === 'ArrowRight' && nextSlide();
@@ -79,21 +88,23 @@ const initializeSlider = async () => {
   if (dotContainer) {
     dotContainer.addEventListener('click', function (e) {
       const target = e.target as HTMLElement;
-      if (target.classList.contains('dots__dot')) {
-        const slide = target.dataset.slide;
-        if (slide) {
-          goToSlide(+slide);
-          activeDot(+slide);
-        }
-      }
+      target.classList.contains('dots__dot') && handleSliderDotClick(target);
     });
   }
+
+  const handleSliderDotClick = (target: HTMLElement) => {
+    const slide = target.dataset.slide;
+    if (slide) {
+      goToSlide(+slide);
+      activeDot(+slide);
+    }
+  };
 
   // Initializing the slider with the first slide
   createDots();
   activeDot(0);
   goToSlide(0);
-  setInterval(nextSlide, 5000);
+  startSlider();
 };
 
-export { initializeSlider }
+export { initializeSlider };

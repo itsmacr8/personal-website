@@ -1,75 +1,67 @@
-import { MovieDetails } from "./Movie.interface";
-import { DatabaseRecord } from "../../types/DatabaseRecord.interface";
-import { capitalize } from "../_utils";
+import { MovieDetails } from './Movie.interface';
+import { DatabaseRecord } from '../../types/DatabaseRecord.interface';
+import { capitalize } from '../_utils';
 
-const detailBtnClass = 'class="btn btn--movie-details"';
-const addBtnClass = 'class="btn btn--movie-add"';
-const base = 'https://www.imdb.com/title';
-
-
-function searchMoviesMarkup(movie: DatabaseRecord, index: number) {
+function moviesMarkup(
+  movie: DatabaseRecord,
+  index: number,
+  isSearch: boolean = true
+) {
+  const detailBtnClass = "class='btn btn--movie-details'";
+  const addBtnClass = "class='btn btn--movie-add'";
+  const base = 'https://www.imdb.com/title';
   const capitalized = typeof movie.Type === 'string' && capitalize(movie.Type);
   const imdbID = movie.imdbID || movie.IMDB_ID;
+  const type = isSearch
+    ? `Type: ${capitalized}`
+    : `${capitalized} - ${movie.Runtime} | Ratings: ${movie.IMDBRatings}`;
+  const recBtn = isSearch
+    ? `<button ${addBtnClass} data-imdbid=${imdbID}>Recommend</button>`
+    : '';
   return `
-    <div class="movie-card" id=${index}>
+    <div class='card' id=${index}>
       <div>
-        <img class="poster" src="${movie.Poster}"
-        alt="${movie.Title} (${movie.Year}) ${capitalized} Poster"
-        title="${movie.Title} (${movie.Year}) ${capitalized} Poster">
+        <img class='card__thumbnail poster' src='${movie.Poster}'
+        alt='${movie.Title} (${movie.Year}) ${capitalized} Poster'
+        title='${movie.Title} (${movie.Year}) ${capitalized} Poster'>
       </div>
-      <div class="movie-card__body">
+      <div class='card__body'>
         <h4>${movie.Title} (${movie.Year})</h4>
-        <p class="mb-xs">Type: ${capitalized}</p>
-        <div class="btn-group">
+        <p class='mb-xs'>${type}</p>
+        <div class='btn-group'>
           <button ${detailBtnClass} data-imdbid=${imdbID}>Details</button>
-          <button ${addBtnClass} data-imdbid=${imdbID}>Recommend</button>
-          <a href="${base}/${imdbID}/" class="btn" target="_blank"
-          rel="noopener noreferrer">Visit IMDB</a>
+          ${recBtn}
+          <a href='${base}/${imdbID}/' class='btn' target='_blank'
+          rel='noopener noreferrer'>Visit IMDB</a>
         </div>
       </div>
     </div>`;
+}
+
+function searchMoviesMarkup(movie: DatabaseRecord, index: number) {
+  return moviesMarkup(movie, index);
 }
 
 function showMoviesMarkup(movie: DatabaseRecord, index: number) {
-  const capitalized = typeof movie.Type === 'string' && capitalize(movie.Type);
-  const imdbID = movie.imdbID || movie.IMDB_ID;
-  return `
-    <div class="movie-card" id=${index}>
-      <div>
-        <img class="poster" src="${movie.Poster}"
-        alt="${movie.Title} (${movie.Year}) ${capitalized} Poster"
-        title="${movie.Title} (${movie.Year}) ${capitalized} Poster">
-      </div>
-      <div class="movie-card__body">
-        <h4>${movie.Title} (${movie.Year})</h4>
-        <p class="mb-xs">
-          ${capitalized} - ${movie.Runtime} | Ratings: ${movie.IMDBRatings}
-        </p>
-        <div class="btn-group">
-          <button ${detailBtnClass} data-imdbid=${imdbID}>Details</button>
-          <a href="${base}/${imdbID}/" class="btn" target="_blank"
-          rel="noopener noreferrer">Visit IMDB</a>
-        </div>
-      </div>
-    </div>`;
+  return moviesMarkup(movie, index, false);
 }
 
 function detailsMovieMarkup(movie: MovieDetails) {
-  const capitalized = capitalize(movie.Type)
+  const capitalized = capitalize(movie.Type);
   return `
-    <div class="modal__content">
-      <button class="modal__close">&times;</button>
-      <div class="modal__primary-details">
+    <div class='modal__content'>
+      <button class='modal__close'>&times;</button>
+      <div class='modal__primary-details'>
         <div>
-          <img class="poster" src="${movie.Poster}"
-          alt="${movie.Title} (${movie.Year}) ${capitalized} Poster"
-          title="${movie.Title} (${movie.Year}) ${capitalized} Poster">
+          <img class='card__thumbnail poster' src='${movie.Poster}'
+          alt='${movie.Title} (${movie.Year}) ${capitalized} Poster'
+          title='${movie.Title} (${movie.Year}) ${capitalized} Poster'>
         </div>
-        <h2 class="mt-s">${movie.Title} (${movie.Year})</h2>
+        <h2 class='mt-s'>${movie.Title} (${movie.Year})</h2>
         <p>${capitalized} - ${movie.Runtime}</p>
       </div>
-      <div class="modal__secondary-details">
-          <p class="mb-s">${movie.Plot}</p>
+      <div class='modal__secondary-details'>
+          <p class='mb-s'>${movie.Plot}</p>
           <p>Genre: ${movie.Genre}</p>
           <p>IMDB: ${movie.Ratings[0]?.Value || 'N/A'} |
           Rotten: ${movie.Ratings[1]?.Value || 'N/A'}</p>
@@ -80,26 +72,33 @@ function detailsMovieMarkup(movie: MovieDetails) {
     </div>`;
 }
 
-function movieDBSaveMarkup(movieName: string, countryName: string) {
+function movieSaveMessage(message: string, isErr: boolean) {
   return `
-    <div class="modal__content movie-db">
-        <p><strong>${movieName}</strong> saved to the <strong>${countryName}</strong> movies database successfully!</p>
-        <button class="modal__close" aria-label="Close">&times;</button>
+    <div class='modal__content movie-db ${isErr && 'movie-db--error'}'>
+      <p>${message}</p>
+      <button class='modal__close' aria-label='Close'>&times;</button>
     </div>`;
 }
 
-function movieDBErrorMarkup(movieName: string, errMess: string) {
-  return `
-    <div class="modal__content movie-db movie-db--error">
-        <p>Error! Could not save <strong>${movieName}</strong> to the database. ${errMess}.</p>
-        <button class="modal__close" aria-label="Close">&times;</button>
-    </div>`;
+function recommendMoviesMarkup() {
+  return `<form id='recommend-form' class='form form--recommend container'>
+    <button class='modal__close form__close'>×</button>
+    <div class='form__group'>
+      <label for='name'>Name</label>
+      <input type='text' id='name' placeholder='Enter your name' required>
+    </div>
+    <div class='form__group'>
+      <label for='contact'>LinkedIn/Facebook/Email</label>
+      <input type='text' id='contact' placeholder='Enter your contact' required>
+    </div>
+      <button type='submit' class='btn btn--submit'>Lights, Camera, Suggest!</button>
+  </form>`;
 }
 
 export {
   searchMoviesMarkup,
   showMoviesMarkup,
   detailsMovieMarkup,
-  movieDBSaveMarkup,
-  movieDBErrorMarkup,
+  movieSaveMessage,
+  recommendMoviesMarkup,
 };

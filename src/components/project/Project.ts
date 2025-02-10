@@ -1,23 +1,15 @@
 import './Project.scss';
 import { showProjectsMarkup } from './_project_markup';
-import { projectDescriptionTable, AirTableDB } from '../_variables';
-import { renderDatabaseRecords } from '../_utils';
-import { addClassTo, removeClassFrom } from '../_utils';
-import { projectsContainer, loader, totalProject } from '../_variables';
+import { projectTable, projectsContainer } from '../_variables';
+import { offset, loadMore } from '../utilities/LoadMore';
 
 const load = document.getElementById('load-more-projects') as HTMLButtonElement;
-
-load.addEventListener('click', async () => {
-  removeClassFrom(loader);
-  const projects = await AirTableDB.getRecords(
-    projectDescriptionTable,
-    totalProject
-  );
-  renderDatabaseRecords(
-    projects.slice(3),
+load.addEventListener('click', () => {
+  loadMore(
+    projectTable,
+    offset[projectTable],
     projectsContainer,
-    showProjectsMarkup
+    showProjectsMarkup,
+    load
   );
-  addClassTo(loader);
-  addClassTo(load);
 });

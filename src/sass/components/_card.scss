@@ -1,26 +1,26 @@
+@use '../layout/flex';
+
 .cards {
-  display: flex;
-  flex-wrap: wrap;
+  @include flex.flex-wrap(var(--space-3));
+
   text-align: left;
-  gap: var(--space-3);
 }
 
 .card {
-  width: 100%;
-  max-width: var(--card-width);
+  width: min(100%, var(--card-width));
   background-color: var(--grey-300);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
 
   &__thumbnail {
-    object-fit: cover;
     width: 100%;
+    object-fit: cover;
   }
+
   &__title {
     font-weight: bold;
   }
+
   &__body {
     padding: var(--space-2);
   }
 }
-
-

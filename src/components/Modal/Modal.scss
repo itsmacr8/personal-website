@@ -1,42 +1,39 @@
-@import "../../sass/abstracts/mixins";
-@import "../../sass/layout/flex";
+@use '../../sass/abstracts/mixins';
+@use '../../sass/layout/flex';
 
 .modal {
   position: fixed;
+  z-index: 1;
   width: 100%;
   height: 100%;
-  z-index: 1;
   overflow-x: hidden;
-  background-color: hsla(0, 0%, 0%, 0.6);
-  backdrop-filter: blur(5px);
+  background-color: hsl(0deg 0% 0% / 60%);
   opacity: 0;
-  @include transitionEaseInOutWithDelay(opacity, 250ms, 500ms);
-  @include respond(tab-port) {
-    @include flexCenter;
+  backdrop-filter: blur(5px);
+
+  @include mixins.transition-ease-in-out-with-delay(opacity, 250ms, 500ms);
+
+  @include mixins.respond(tab-port) {
+    @include flex.flex-center;
   }
 
   &--db-mess {
-    @include flexCenter;
-
-    .modal__close {
-      top: 50%;
-      transform: translateY(-50%);
-      bottom: initial;
-    }
+    @include flex.flex-center;
 
     .movie-db {
+      padding: clamp(1rem, 2vw, 3rem);
+      background-color: var(--bg, var(--success-500));
+
       &--error {
         --bg: var(--warning-500);
         --fg: var(--warning-400);
       }
-      background-color: var(--bg, var(--success-500));
-      padding: clamp(1rem, 2vw, 3rem);
 
       p {
         width: 90%;
-        text-align: center;
         font-size: var(--fs-p);
         color: var(--fg, var(--success-400));
+        text-align: center;
       }
 
       button {
@@ -48,65 +45,76 @@
   &__content {
     width: calc(100% - 2.5rem);
     max-width: 60rem;
-    margin-inline: auto;
-    margin-block: var(--space-4);
     padding-bottom: var(--space-3);
-    border-radius: 5px;
+    margin-block: var(--space-4);
+    margin-inline: auto;
     overflow: hidden;
     background-color: var(--white);
-    box-shadow: 0 var(--space-5) var(--space-7) rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    box-shadow: 0 var(--space-5) var(--space-7) rgb(0 0 0 / 30%);
     opacity: 0;
     transform: scale(0.5);
-    @include transitionEaseInOutMulWithDelay(transform, opacity, 250ms);
-    @include respond(tab-port) {
+
+    @include mixins.transition-ease-in-out-mul-with-delay(transform, opacity, 250ms);
+
+    @include mixins.respond(tab-port) {
       margin-block: initial;
       margin-inline: initial;
     }
 
-    @include respond(tab-port) {
-      padding: clamp(1rem, 2vw, 3rem);
+    @include mixins.respond(tab-port) {
       display: flex;
       justify-content: space-between;
+      padding: clamp(1rem, 2vw, 3rem);
     }
 
     .movie-text {
       margin-top: var(--space-2);
-      @include respond(tab-port) {
+
+      @include mixins.respond(tab-port) {
         margin-top: 0;
       }
     }
+  }
 
-    :is(.modal__primary-details :is(h2, p), .modal__secondary-details) {
-      padding-inline: var(--space-3);
-      @include respond(tab-port) {
-        padding-inline: initial;
-      }
-    }
+  &__content :is(&__primary-details :is(h2, p), &__secondary-details) {
+    padding-inline: var(--space-3);
 
-    .modal__primary-details {
-      flex-basis: 40%;
+    @include mixins.respond(tab-port) {
+      padding-inline: initial;
     }
+  }
 
-    .modal__secondary-details {
-      flex-basis: 56%;
-    }
+  &__content &__primary-details {
+    flex-basis: 40%;
+  }
+
+  &__content &__secondary-details {
+    flex-basis: 56%;
   }
 
   &__close {
     position: absolute;
-    bottom: 5px;
     right: clamp(1rem, 5vw, 1.5rem);
+    bottom: 5px;
     font-size: var(--fs-1);
     color: var(--black);
     cursor: pointer;
-    border: none;
     background: none;
+    border: none;
+  }
+
+  &--db-mess &__close {
+    top: 50%;
+    bottom: initial;
+    transform: translateY(-50%);
   }
 
   /* JS CLASSES TO MAKE MODAL WORK */
   &--show {
     opacity: 1;
-    @include transitionEaseInOut(opacity);
+
+    @include mixins.transition-ease-in-out(opacity);
   }
 
   &--show &__content {

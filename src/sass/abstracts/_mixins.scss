@@ -1,62 +1,70 @@
 // Media Query Mixins
 @mixin respond($breakpoint) {
-    @if $breakpoint == tab-port {
-        @media only screen and (min-width: 768px) {
-            @content;
-        }
-    } @else if $breakpoint == tab-land {
-        @media only screen and (min-width: 1200px) {
-            @content;
-        }
-    } @else if $breakpoint == big-desktop {
-        @media only screen and (min-width: 1800px) {
-            @content;
-        }
+  @if $breakpoint == tab-port {
+    @media only screen and (width >= 768px) {
+      @content;
     }
+  } @else if $breakpoint == tab-land {
+    @media only screen and (width >= 1200px) {
+      @content;
+    }
+  } @else if $breakpoint == big-desktop {
+    @media only screen and (width >= 1800px) {
+      @content;
+    }
+  }
 }
 
 @mixin custom-respond($breakpoint) {
-    @if $breakpoint == 400 {
-        @media only screen and (min-width: 400px) {
-            @content;
-        }
+  @if $breakpoint == 400 {
+    @media only screen and (min-width >= 400px) {
+      @content;
     }
-    @if $breakpoint == 1500 {
-        @media only screen and (min-width: 1500px) {
-            @content;
-        }
+  } @else if $breakpoint == 1500 {
+    @media only screen and (min-width >= 1500px) {
+      @content;
     }
+  }
 }
 
 @mixin translate($direction: original, $value: 0) {
-    @if $direction == horizontal {
-        transform: translate3d($value, 0, 0);
-    } @else if $direction == vertical {
-        transform: translate3d(0, $value, 0);
-    } @else if $direction == original {
-        transform: translate3d(0, 0, 0);
-    }
+  @if $direction == horizontal {
+    transform: translate3d($value, 0, 0);
+  } @else if $direction == vertical {
+    transform: translate3d(0, $value, 0);
+  } @else if $direction == original {
+    transform: translate3d(0, 0, 0);
+  }
 }
 
-@mixin transitionEaseInOut($property: transform) {
-    transition: $property var(--animation-duration) ease-in-out;
+@mixin transition-ease-in-out($property: transform) {
+  transition: $property var(--animation-duration) ease-in-out;
 }
 
-@mixin transitionEaseInOutWithDelay($property: transform, $duration: var(--animation-duration), $delay: var(--animation-delay)) {
-    transition: $property $duration $delay ease-in-out;
+@mixin transition-ease-in-out-with-delay(
+  $property: transform,
+  $duration: var(--animation-duration),
+  $delay: var(--animation-delay)
+) {
+  transition: $property $duration $delay ease-in-out;
 }
 
-@mixin transitionEaseInOutMul($property1: transform, $property2: color) {
-    transition: $property1 var(--animation-duration) ease-in-out,
-        $property2 var(--animation-duration) ease-in-out;
+@mixin transition-ease-in-out-mul($property1: transform, $property2: color) {
+  transition: $property1 var(--animation-duration) ease-in-out,
+    $property2 var(--animation-duration) ease-in-out;
 }
 
-@mixin transitionEaseInOutMulWithDelay($property1: transform, $property2: color, $duration: var(--animation-duration), $delay: var(--animation-delay)) {
-    transition: $property1 $duration $delay ease-in-out,
-        $property2 $duration $delay ease-in-out;
+@mixin transition-ease-in-out-mul-with-delay(
+  $property1: transform,
+  $property2: color,
+  $duration: var(--animation-duration),
+  $delay: var(--animation-delay)
+) {
+  transition: $property1 $duration $delay ease-in-out,
+    $property2 $duration $delay ease-in-out;
 }
 
-@mixin linkStyle {
-    text-decoration: none;
-    text-transform: uppercase;
+@mixin link-style {
+  text-transform: uppercase;
+  text-decoration: none;
 }

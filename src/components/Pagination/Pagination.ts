@@ -3,9 +3,11 @@ import './Pagination.scss';
 class Pagination {
   currentPage = 1;
   container = document.getElementById('pagination') as HTMLDivElement;
+  total: number = 1;
 
   show(currentPage: number = 1, totalPages: number) {
-    this.clear()
+    this.clear();
+    if (this.total < 1) return;
     this.container.classList.add('mt-2');
     this.currentPage = currentPage;
     const { start, end } = this.getCurrentNumber(totalPages);
@@ -38,14 +40,14 @@ class Pagination {
   button(text: string, value: number) {
     this.container.insertAdjacentHTML(
       'beforeend',
-      `<button class="btn" data-pagination='${value}'>${text}</button>`
+      `<button class='btn' data-pagination='${value}'>${text}</button>`
     );
   }
 
   buttons(number: number) {
     this.container.insertAdjacentHTML(
       'beforeend',
-      `<button class="btn btn--pagination" data-pagination="${number}"
+      `<button class='btn btn--pagination' data-pagination='${number}'
       ${number === this.currentPage ? 'disabled' : ''}>${number}</button>`
     );
   }

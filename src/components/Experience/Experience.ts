@@ -1,1 +1,1 @@
-import './Experience.scss'
+import './Experience.scss';

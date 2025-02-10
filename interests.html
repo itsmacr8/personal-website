@@ -57,7 +57,6 @@
 					<li class="menu__nav__item"><a href="./#portfolio-section" class="menu__nav__link">Portfolio</a></li>
 					<li class="menu__nav__item"><a href="./#testimonials" class="menu__nav__link">Testimonials</a></li>
 					<li class="menu__nav__item"><a href="./#articles-section" class="menu__nav__link">Articles</a></li>
-					<li class="menu__nav__item"><a href="./#tools-section" class="menu__nav__link">Tools</a></li>
 					<li class="menu__nav__item"><a href="./#contact-section" class="menu__nav__link">Contact</a></li>
 				</ul>
 			</div>
@@ -83,7 +82,8 @@
 					<input type="text" id="search-movie" name="search-movie" placeholder="Search ...">
 				</div>
 				<h3 id="movies-card-heading" class="text-center custom-line-height mb-2">Top</h3>
-				<div class="movie-cards" id="movie-cards"></div>
+				<div class="cards" id="movie-cards"></div>
+				<button id="load-movies" class="btn mx-auto my-2">Load More</button>
 				<div class="pagination" id="pagination"></div>
 				<div class="btn-group mt-2" id="btn-movies"></div>
 			</div>
@@ -91,7 +91,10 @@
 	</main>
 	<footer class="footer">
 		<div class="container footer__content">
-			<p>Copyright &copy; 2023-<script>document.write(new Date().getFullYear())</script> <a class="developer-link" href="/">its mac</a> - Front-end and React Developer</p>
+			<p>Copyright &copy; 2023-
+				<script>document.write(new Date().getFullYear())</script>. All Rights Reserved. <a class="developer-link" href="/">its mac</a> - Frontend
+				Web Developer
+			</p>
 			<ul class="social">
 				<li><a class="social__icon" href="https://t.me/itsmacr8/" aria-label="Click here to get in touch with me via telegram"><i class="fab fa-telegram fa-2x"></i></a></li>
 				<li><a class="social__icon" href="https://www.linkedin.com/in/itsmacr8/" aria-label="Click here to get in touch with me via LinkedIn"><i class="fab fa-linkedin fa-2x"></i></a></li>
@@ -100,8 +103,7 @@
 			</ul>
 		</div>
 	</footer>
-	<script type="module" src="/src/main.ts"></script>
-	<script type="module" src="/src/ts/pages/interests.ts"></script>
+	<script type="module" src="/src/pages/interests/interests.ts"></script>
 </body>
 
 </html>

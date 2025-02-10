@@ -1,68 +1,133 @@
-import Airtable, { Base } from "airtable";
-
-import { pwKey, pwBase } from '../_variables';
+import axios from 'axios';
+import { MovieDetails } from '../Movie/Movie.interface';
+import { movieSaveMessage } from '../Movie/_movie_markup';
 import { DatabaseRecord } from '../../types/DatabaseRecord.interface';
+import {
+  sortFieldsByNumericOrder,
+  sortedArray,
+  addClassTo,
+  capitalize,
+} from '../_utils';
+import { modal, showModal, autoCloseModal } from '../Modal/Modal';
+import { loader, countriesTable, countriesRecordID } from '../_variables';
 
 class AirTable {
-  private apiKey: string = import.meta.env.VITE_MPK;
-  private apiBase: string = import.meta.env.VITE_MPB;
-  public base: Base = this.getBase(this.apiKey, this.apiBase);
-  private pwBase: Base = this.getBase(pwKey, pwBase);
-  private airTableName: string = import.meta.env.VITE_TABLE_NAME;
-
-  getBase(apiKey: string, apiBase: string): Base {
-    return new Airtable({ apiKey: apiKey }).base(apiBase);
-  }
-
-  async getRecord(
-    tableName: string,
-    recordID: string,
-    base: Base = this.pwBase
-  ) {
-    try {
-      const record = await base(tableName).find(recordID);
-      return record.fields;
-    } catch (err) {
-      console.error(err);
-    }
-  }
+  private url: string = 'https://api.airtable.com/v0';
+  private pwKey: string = import.meta.env.VITE_PWK;
+  private pwBase: string = import.meta.env.VITE_PWB;
+  public mpKey: string = import.meta.env.VITE_MPK;
+  public mpBase: string = import.meta.env.VITE_MPB;
 
   async getRecords(
     tableName: string,
+    offset: string = '',
     maxRecords: number = 3,
-    base: Base = this.pwBase
+    apiKey: string = this.pwKey,
+    baseId: string = this.pwBase
   ) {
-    const dbRecords: DatabaseRecord[] = [];
+    const filter = `pageSize=${maxRecords}&view=Grid%20view`;
     try {
-      const records = await base(tableName)
-        .select({
-          maxRecords: maxRecords,
-          // Returns data in the same order we set in the view
-          view: 'Grid view',
-        })
-        .firstPage();
-      records.forEach((record) => {
-        dbRecords.push(record.fields);
+      let url = `${this.url}/${baseId}/${tableName}?${filter}`;
+      if (offset) url += `&offset=${offset}`;
+
+      const response = await fetch(url, {
+        headers: { Authorization: `Bearer ${apiKey}` },
       });
-      return dbRecords;
+      const data = await response.json();
+      offset = data.offset; // Save the offset for the next fetch
+
+      const records: DatabaseRecord[] = [];
+      data.records.forEach((record: any) => {
+        records.push(record.fields);
+      });
+      return [records, offset] as [DatabaseRecord[], string]; // Type assertion
     } catch (err) {
       console.error(err);
       throw err;
     }
   }
 
-  async getCountryList() {
-    const countries: any[] = [];
+  async getRecord(
+    tableName: string,
+    recordId: string,
+    apiKey: string = this.pwKey,
+    baseId: string = this.pwBase
+  ) {
     try {
-      const records = await this.base(this.airTableName).select().firstPage();
-      records?.forEach((record) => {
-        countries.push(record.get(this.airTableName));
+      const url = `${this.url}/${baseId}/${tableName}/${recordId}`;
+      const response = await fetch(url, {
+        headers: { Authorization: `Bearer ${apiKey}` },
       });
-      return countries;
+      const data = await response.json();
+      const record = data.fields;
+      return sortedArray(sortFieldsByNumericOrder(record), record);
     } catch (err) {
       console.error(err);
-      return [];
+      throw err;
     }
+  }
+
+  async addRecord(tableName: string, movie: MovieDetails) {
+    const url = `${this.url}/${this.mpBase}/${tableName}`;
+    try {
+      await axios.post(
+        url,
+        {
+          fields: {
+            IMDB_ID: movie.imdbID,
+            Poster: movie.Poster,
+            Title: movie.Title,
+            Year: movie.Year,
+            Genre: movie.Genre,
+            Type: capitalize(movie.Type),
+            Runtime: movie.Runtime,
+            Plot: movie.Plot,
+            IMDBRatings: movie.Ratings[0]?.Value || 'N/A',
+            RottenRatings: movie.Ratings[1]?.Value || 'N/A',
+            Country: movie.Country,
+            Language: movie.Language,
+            BoxOffice: movie.BoxOffice,
+            RecommenderName: movie.recommenderName,
+            RecommenderContact: movie.recommenderContact,
+          },
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${this.mpKey}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      this.cleanAndShowModal(
+        `Thank you for your recommendation! <strong>${movie.Title}</strong> \n
+        saved to the database successfully!`,
+        false
+      );
+      autoCloseModal(modal);
+    } catch (error) {
+      this.cleanAndShowModal(
+        `Error! <strong>${movie.Title}</strong> could not save to the database.`,
+        true
+      );
+      return;
+    }
+  }
+
+  private cleanAndShowModal(message: string, isErr: boolean) {
+    modal.innerHTML = '';
+    modal.insertAdjacentHTML('beforeend', movieSaveMessage(message, isErr));
+    addClassTo(modal, 'modal--db-mess');
+    addClassTo(loader);
+    showModal(modal);
+  }
+
+  async getCountries() {
+    return await this.getRecord(
+      countriesTable,
+      countriesRecordID,
+      this.mpKey,
+      this.mpBase
+    );
   }
 }
 

@@ -1,18 +1,15 @@
-.movie-cards {
-    color: var(--black);
-    display: flex;
-    flex-wrap: wrap;
-    text-align: left;
-    gap: var(--space-3);
+.poster {
+  max-height: 525px;
 }
 
-.movie-card {
-    width: 100%;
-    max-width: var(--movie-card-width);
-    background-color: var(--grey-300);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.form {
+  &--recommend {
+    position: relative;
+    padding: 2rem 2rem 1rem;
+    background-color: var(--grey-400);
 
-    &__body {
-        padding: 10px;
+    & &__close {
+      top: 10%;
     }
+  }
 }

@@ -1,31 +1,32 @@
-import { FieldSet } from 'airtable';
-import { DatabaseRecordType, DatabaseRecord } from '../types/DatabaseRecord.interface';
-import { AirTableDB } from './_variables';
-
+import {
+  RecordDataType,
+  FieldSet,
+  DatabaseRecord,
+} from '../types/DatabaseRecord.interface';
 
 function capitalize(string: string) {
   // Capitalize the word, eg. movie to Movie
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function createArray(string:string) {
+function createArray(string: string) {
   // Receive a comma separated string and convert them to an array.
   // For example, 'Hello, World' to ['Hello', 'World']
-  return string.split(',').map(skill => skill.trim());
+  return string.split(',').map((skill) => skill.trim());
 }
 
 function listTags(tags: string[]) {
-  let tagsMarkup = ''
+  let tagsMarkup = '';
   for (const tag of tags) {
-    tagsMarkup += `<li class='project__tag'>${tag}</li>`
+    tagsMarkup += `<li class='project__tag'>${tag}</li>`;
   }
-  return tagsMarkup
+  return tagsMarkup;
 }
 
-async function renderDatabaseRecord(selector: string, records: DatabaseRecordType[]) {
+function renderDatabaseRecord(selector: string, records: RecordDataType[]) {
   const selectElement = document.querySelector(selector) as HTMLDivElement;
   for (const record of records) {
-    record && selectElement.insertAdjacentHTML("beforeend", `${record}`);
+    record && selectElement.insertAdjacentHTML('beforeend', `${record}`);
   }
 }
 
@@ -36,29 +37,29 @@ function renderDatabaseRecords(
 ) {
   databaseRecords.forEach((databaseRecord: DatabaseRecord, index: number) => {
     container.insertAdjacentHTML(
-      "beforeend",
+      'beforeend',
       markupFunction(databaseRecord, index)
     );
   });
 }
 
-function cardMarkup(card: DatabaseRecord, index: number) {
-  const cardName = card.ButtonText === 'Read More' ? "article" : "tool";
-  return `<div class="card" id="${cardName}-${index}">
-    <div><img class="card__thumbnail" src="${card.Thumbnail}" alt="${card.Title} thumbnail" title="${card.Title} thumbnail"></div>
-    <div class="card__body">
-      <h3 class="card__title">${card.Title}</h3>
-      <p class="card__description my-s">${card.Description}</p>
-      <a href="${card.LiveView}" class="btn" target="_blank">${card.ButtonText}</a>
+function cardMarkup(card: FieldSet, index: number) {
+  const cardName = 'article';
+  return `<div class='card' id='${cardName}-${index}'>
+    <div><img class='card__thumbnail' src='${card.Thumbnail}' alt='${card.Title} thumbnail' title='${card.Title} thumbnail'></div>
+    <div class='card__body'>
+      <h3 class='card__title'>${card.Title}</h3>
+      <p class='card__description my-s'>${card.Description}</p>
+      <a href='${card.LiveView}' class='btn' target='_blank'>${card.ButtonText}</a>
     </div>
   </div>`;
 }
 
-function removeClassFrom(element: HTMLElement, className: string = "hide") {
+function removeClassFrom(element: HTMLElement, className: string = 'hide') {
   element.classList.remove(className);
 }
 
-function addClassTo(element: HTMLElement, className: string = "hide") {
+function addClassTo(element: HTMLElement, className: string = 'hide') {
   element.classList.add(className);
 }
 
@@ -78,14 +79,6 @@ function sortedArray(fieldNames: string[], fields: FieldSet) {
   return fieldNames.map((fieldName) => fields[fieldName]);
 }
 
-async function getSortedRecord(tableName: string, recordID: string) {
-  const record = await AirTableDB.getRecord(tableName, recordID);
-  if (record)
-    // .slice(1) removes the first value which is primary key
-    return sortedArray(sortFieldsByNumericOrder(record), record).slice(1);
-  return []
-}
-
 export {
   capitalize,
   createArray,
@@ -97,5 +90,4 @@ export {
   removeClassFrom,
   sortFieldsByNumericOrder,
   sortedArray,
-  getSortedRecord,
 };

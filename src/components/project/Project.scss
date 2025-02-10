@@ -1,64 +1,72 @@
-@import '../../sass/abstracts/mixins';
-@import '../../sass/layout/flex';
-@import '../../sass/abstracts/variables';
+@use '../../sass/abstracts/mixins';
+@use '../../sass/layout/flex';
 
 .projects {
-    @include flexColumn(var(--space-4));
-    @include respond(tab-port) {
-        gap: var(--space-6);
-    }
+  @include flex.flex-column(var(--space-4));
+
+  @include mixins.respond(tab-port) {
+    gap: var(--space-6);
+  }
 }
 
 .project {
-    @include flexWrap(var(--space-2));
-    justify-content: space-between;
+  @include flex.flex-wrap(var(--space-2));
 
-    .btn--outline {
-        --color-btn: var(--black);
-        &:hover {
-            --color-btn: var(--white);
+  justify-content: space-between;
+
+  .btn {
+    &--outline {
+      --color-btn: var(--black);
+
+      &:hover {
+        --color-btn: var(--white);
+      }
+    }
+  }
+
+  &__details {
+    @include flex.flex-column(var(--space-2));
+
+    &--order {
+      --color: var(--secondary-400);
+      --background: var(--secondary-500);
+      --border: 1px solid var(--secondary-500);
+
+      .btn {
+        /* stylelint-disable-next-line max-nesting-depth */
+        :is(&:hover, &--outline:hover) {
+          --background: var(--secondary-400);
         }
+      }
+
+      @include mixins.respond(tab-port) {
+        order: 1;
+      }
     }
+  }
 
-    &__details {
-        @include flexColumn(var(--space-2));
+  &__name {
+    color: var(--color, var(--primary-400));
+  }
 
-        &--order {
-            --color: var(--secondary-400);
-            --background: var(--secondary-500);
-            --border: 1px solid var(--secondary-500);
+  &__tag {
+    padding: 0.4rem 0.8rem;
+    background-color: var(--accent-500);
+    border-radius: 3px;
 
-            & .btn:hover, & .btn--outline:hover {
-                --background: var(--secondary-400);
-            }
-            @include respond(tab-port) {
-                order: 1;
-            }
-        }
+    &-list {
+      @include flex.flex-wrap(var(--space-2));
     }
+  }
 
-    &__name {
-        color: var(--color, var(--primary-400));
+  &__cta-btn {
+    @include flex.flex-wrap(var(--space-1));
+  }
+
+  &__details,
+  &__thumbnail {
+    @include mixins.respond(tab-port) {
+      flex-basis: 49%;
     }
-
-    &__tag {
-        padding: 0.4rem 0.8rem;
-        background-color: var(--accent-500);
-        border-radius: 3px;
-
-        &-list {
-            @include flexWrap(var(--space-2));
-        }
-    }
-
-    &__cta-btn {
-        @include flexWrap(var(--space-1));
-    }
-
-    &__details,
-    &__thumbnail {
-        @include respond(tab-port) {
-            flex-basis: 49%;
-        }
-    }
+  }
 }
