@@ -95,7 +95,6 @@ movieCards.addEventListener('click', async (event) => {
   if (target.classList.contains('btn--movie-details')) {
     const movieID = target.dataset.imdbid;
     movieID && renderMovie(await getMovieDetails(movieID));
-    return;
   } else if (target.classList.contains('btn--movie-add')) {
     showMovieRecommendForm();
     handleMovieAdd(target);
@@ -158,7 +157,6 @@ moviesButton.addEventListener('click', async (event) => {
   if (target.classList.contains('btn')) {
     const country = target.dataset.country;
     country && showMovies(country);
-    return;
   }
 });
 
