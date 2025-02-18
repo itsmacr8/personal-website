@@ -17,7 +17,7 @@ function removeActiveClass() {
 function addActiveClass(slide: number) {
   if (dotContainer) {
     const dot = document.querySelector(`.dots__dot[data-slide='${slide}']`);
-    dot && dot.classList.add('dots__dot--active');
+    dot?.classList.add('dots__dot--active');
   }
 }
 
