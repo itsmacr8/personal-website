@@ -5,7 +5,7 @@ class Pagination {
   container = document.getElementById('pagination') as HTMLDivElement;
   total: number = 1;
 
-  show(currentPage: number = 1, totalPages: number) {
+  show(totalPages: number, currentPage: number = 1) {
     this.clear();
     if (this.total < 1) return;
     this.container.classList.add('mt-2');

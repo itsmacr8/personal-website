@@ -61,7 +61,7 @@ async function searchMovies() {
   renderMovies(movies, searchMoviesMarkup);
   const maxResultPerPage: number = 10;
   pagination.total = Math.ceil(totalFoundMovies / maxResultPerPage);
-  pagination.show(1, pagination.total);
+  pagination.show(pagination.total);
 }
 
 function renderMovies(
@@ -145,7 +145,7 @@ pagination.container.addEventListener('click', async (event) => {
   if (target.tagName === 'BUTTON') {
     const currPage = Number(target.dataset.pagination);
     removeClassFrom(loader);
-    pagination.show(currPage, pagination.total);
+    pagination.show(pagination.total, currPage);
     const { movies } = await getSearchMoviesResults(currPage);
     renderMovies(movies, searchMoviesMarkup);
     addClassTo(loader);
