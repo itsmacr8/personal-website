@@ -30,8 +30,12 @@ async function autoCloseModal(modal: HTMLDivElement) {
 // Optional chaining will handle the homepage error
 modal?.addEventListener('click', function (e) {
   const target = e.target as HTMLElement;
-  if (target.classList.contains('modal__close')) closeModal(modal);
-  else if (target.classList.contains('modal--show')) closeModal(modal);
+  if (
+    target.classList.contains('modal__close') ||
+    target.classList.contains('modal--show')
+  ) {
+    closeModal(modal);
+  }
 });
 
 // close modal window with keyboard (Escape key)
