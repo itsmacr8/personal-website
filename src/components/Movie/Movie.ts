@@ -90,16 +90,28 @@ function renderMovie(movie: MovieDetails) {
   showModal(modal);
 }
 
-movieCards.addEventListener('click', async (event) => {
+movieCards.addEventListener('click', (event) => {
   const target = event.target as HTMLElement;
   if (target.classList.contains('btn--movie-details')) {
     const movieID = target.dataset.imdbid;
-    movieID && renderMovie(await getMovieDetails(movieID));
+    movieID && renderMovieDetails(movieID);
   } else if (target.classList.contains('btn--movie-add')) {
     showMovieRecommendForm();
     handleMovieAdd(target);
   }
 });
+
+/*
+ * Instead of adding an `async` keyword to the event listener and using
+  `renderMovie(await getMovieDetails(movieID))`, we separate the async logic
+  into this function for the following reasons:
+ * Extracted async logic to avoid using `async` directly in the event listener.
+ * Event listeners expect `void`, but `async` functions return a `Promise`.
+ * This separation keeps the event listener clean and avoids unhandled promises.
+*/
+async function renderMovieDetails(movieID: string) {
+  renderMovie(await getMovieDetails(movieID));
+}
 
 function handleMovieAdd(target: HTMLElement) {
   const form = document.getElementById('recommend-form') as HTMLFormElement;
