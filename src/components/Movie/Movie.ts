@@ -173,7 +173,7 @@ async function handlePagination(target: HTMLElement) {
   }
 }
 
-moviesButton.addEventListener('click', async (event) => {
+moviesButton.addEventListener('click', (event) => {
   const target = event.target as HTMLElement;
   if (target.classList.contains('btn')) {
     const country = target.dataset.country;
