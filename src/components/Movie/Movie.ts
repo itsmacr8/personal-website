@@ -152,17 +152,26 @@ async function createCountryButtons() {
   }
 }
 
-pagination.container.addEventListener('click', async (event) => {
+pagination.container.addEventListener('click', (event) => {
   const target = event.target as HTMLElement;
   if (target.tagName === 'BUTTON') {
-    const currPage = Number(target.dataset.pagination);
-    removeClassFrom(loader);
-    pagination.show(pagination.total, currPage);
-    const { movies } = await getSearchMoviesResults(currPage);
-    renderMovies(movies, searchMoviesMarkup);
-    addClassTo(loader);
+    handlePagination(target);
   }
 });
+
+async function handlePagination(target: HTMLElement) {
+  const currPage = Number(target.dataset.pagination);
+  removeClassFrom(loader);
+  pagination.show(pagination.total, currPage);
+  try {
+    const { movies } = await getSearchMoviesResults(currPage);
+    renderMovies(movies, searchMoviesMarkup);
+  } catch (error) {
+    console.error('Failed to fetch movies:', error);
+  } finally {
+    addClassTo(loader);
+  }
+}
 
 moviesButton.addEventListener('click', async (event) => {
   const target = event.target as HTMLElement;
